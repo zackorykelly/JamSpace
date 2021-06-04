@@ -1,25 +1,36 @@
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import useApplicationData from "../../hooks/useApplicationData";
 
 const App = () => {
-  const {
-    state,
-    // eslint-disable-next-line
-    dispatch
-  } = useApplicationData();
-  const userList = state.users.map((user) => (
-    <li key={user.id}>
-      {" "}
-      {user.first_name} {user.last_name} {user.email}{" "}
-    </li>
-  ));
   return (
-    <div className="App">
-      <h1> Users </h1>
-
-      <ul> {userList} </ul>
-    </div>
+    <Router>
+      <div className="App">
+        <nav>
+          <Link to="/projects">PROJECTS</Link>
+          <Link to="/users">USERS</Link>
+          <Link to="/login">LOGIN</Link>
+          <Link to="/register">REGISTER</Link>
+          <Link to="/">HOME</Link>
+        </nav>
+        <Switch>
+          <Route path="/" exact>
+            <h1>I AM HOME</h1>
+          </Route>
+          <Route path="/projects" exact>
+            <h1>I AM PROJECTS</h1>
+          </Route>
+          <Route path="/users" exact>
+            <h1>I AM USERS</h1>
+          </Route>
+          <Route path="/login" exact>
+            <h1>I AM LOGIN</h1>
+          </Route>
+          <Route path="/register" exact>
+            <h1>I AM REGISTER</h1>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 };
-
 export default App;
