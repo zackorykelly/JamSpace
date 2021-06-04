@@ -1,3 +1,5 @@
+## Users
+
 CREATE TABLE "users" (
 "id" SERIAL PRIMARY KEY,
 "full_name" varchar,
@@ -16,6 +18,8 @@ created_at: timestamp
 }
 ]
 
+## Projects
+
 CREATE TABLE "projects" (
 "id" SERIAL PRIMARY KEY,
 "name" varchar,
@@ -31,6 +35,8 @@ description: "John joe singing a song doe",
 created_at: timestamp
 }
 ]
+
+## Users_projects
 
 CREATE TABLE "users_projects" (
 "id" SERIAL PRIMARY KEY,
@@ -48,6 +54,8 @@ project_id: 1
 created_at: timestamp
 }
 ]
+
+## Files
 
 CREATE TABLE "files" (
 "id" SERIAL PRIMARY KEY,
@@ -67,6 +75,8 @@ description: "a cool song I made",
 created_at: timestamp
 }
 ]
+
+## Comments
 
 CREATE TABLE "comments_stretch" (
 "id" SERIAL PRIMARY KEY,
