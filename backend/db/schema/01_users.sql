@@ -31,7 +31,7 @@ CREATE TABLE "files" (
   "id" SERIAL PRIMARY KEY NOT NULL,
   "project_id" INTEGER REFERENCES projects(id) ON DELETE CASCADE,
   "name" VARCHAR(255) NOT NULL,
-  "location" VARCHAR(255) NOT NULL,
+  -- "location" VARCHAR(255) NOT NULL,
   "description" text,
   "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -40,6 +40,7 @@ CREATE TABLE "comments_stretch" (
   "id" SERIAL PRIMARY KEY NOT NULL,
   "user_id" INTEGER REFERENCES users(id) ON DELETE CASCADE,
   "file_id" INTEGER REFERENCES files(id) ON DELETE CASCADE,
+  "comment" TEXT NOT NULL,
   "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
