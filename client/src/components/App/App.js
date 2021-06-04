@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ProjectList from "../ProjectList/ProjectList";
 import "./App.css";
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
             <h1>I AM HOME</h1>
           </Route>
           <Route path="/projects" exact>
-            <h1>I AM PROJECTS</h1>
+            <ProjectList />
           </Route>
           <Route path="/users" exact>
             <h1>I AM USERS</h1>
