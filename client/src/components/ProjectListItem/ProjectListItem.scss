@@ -1,0 +1,34 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.project-list {
+  &__item {
+    @include fade;
+
+    color: #8395a7;
+    height: 5rem;
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &:hover {
+      background-color: #888787;
+      cursor: pointer;
+      color: $dark-background;
+    }
+
+    &--selected {
+      background-color: darken($white, 5%);
+      color: $dark-background;
+
+      &:hover {
+        background-color: darken($white, 5%);
+      }
+    }
+
+    &--full {
+      opacity: $inactive-opacity;
+    }
+  }
+}
