@@ -44,7 +44,7 @@ export default function Login(props) {
   value={valueN}
   onChange={(e) => handleNameChange(e.target.value)}
 />
-<label className={ isActiveE ? "Active" : ""} htmlFor="name" >
+<label className={ isActiveN ? "Active" : ""} htmlFor="name" >
   Full Name
   </label>
   </div>
