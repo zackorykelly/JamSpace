@@ -59,11 +59,49 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getProjectsByUser = (userId) => {
+    const query = {
+      text: "SELECT * FROM projects WHERE user_id = $1",
+      values: [userId]
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
+  const addProject = () => {
+    const query = {
+      text: `INSERT INTO projects (name, description) VALUES ($1, $2) RETURNING *`,
+      values: [name, description]
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
+
+  const getFiles = () => {
+    const query = {
+      text: "SELECT * FROM files"
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   return {
     getUsers,
     getUserByEmail,
     addUser,
     getUsersPosts,
-    getProjects
+    getProjects,
+    getProjectsByUser,
+    addProject,
+    getFiles
   };
 };
