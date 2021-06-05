@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS users_projects CASCADE;
+
+CREATE TABLE "users_projects" (
+  "id" SERIAL PRIMARY KEY NOT NULL,
+  "project_id" INTEGER REFERENCES projects(id) ON DELETE CASCADE,
+  "user_id" INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  "owner_stretch" BOOLEAN DEFAULT false,
+  "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
