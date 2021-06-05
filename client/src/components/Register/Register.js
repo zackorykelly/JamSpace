@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-// import classNames from "classnames";
-import "./Login.scss";
+import "./Register.scss";
 
 export default function Login(props) {
   const [isActiveE, setIsActiveE] = useState(false);
   const [isActiveP, setIsActiveP] = useState(false);
+  const [isActiveN, setIsActiveN] = useState(false);
   const [valueE, setValueE] = useState('');
   const [valueP, setValueP] = useState('');
+  const [valueN, setValueN] = useState('');
 
   function handleEmailChange(text) {
     setValueE(text);
@@ -26,8 +27,28 @@ export default function Login(props) {
       setIsActiveP(false);
     }
   }
+  function handleNameChange(text) {
+    setValueN(text);
+  
+    if (text !== '') {
+      setIsActiveN(true);
+    } else {
+      setIsActiveN(false);
+    }
+  }
   return  <div className="login-form">
-    <form action="/login" method="POST">
+    <form action="/register" method="POST">
+    <div id="float-full-name">
+  <input
+  type="text"
+  value={valueN}
+  onChange={(e) => handleNameChange(e.target.value)}
+/>
+<label className={ isActiveN ? "Active" : ""} htmlFor="name" >
+  Full Name
+  </label>
+  </div>
+
   <div id="float-email">
   <input
   type="email"
@@ -39,6 +60,7 @@ export default function Login(props) {
   E-mail
   </label>
   </div>
+
   <div id="float-password">
   <input
   type="password"
@@ -50,7 +72,7 @@ export default function Login(props) {
   Password
   </label>
   </div>
-  <button type="submit" className="login-button">Login</button>
+  <button type="submit" className="login-button">Register</button>
 </form>
 </div>
 ;

@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 import "./App.css";
 
 export default function App() {
@@ -28,10 +30,10 @@ export default function App() {
             <h1>I AM USERS</h1>
           </Route>
           <Route path="/login" exact>
-            <h1>I AM LOGIN</h1>
+            <Login />
           </Route>
           <Route path="/register" exact>
-            <h1>I AM REGISTER</h1>
+            <Register />
           </Route>
         </Switch>
       </div>
