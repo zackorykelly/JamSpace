@@ -5,7 +5,6 @@ const { getPostsByUsers } = require("../helpers/dataHelpers");
 module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
-    console.log("calling api");
     getUsers()
       .then((users) => {
         console.log(users);

@@ -13,8 +13,8 @@ export default function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
-      axios.get(`/api/users`)
-      // axios.get(`/api/projects`),
+      axios.get(`/api/users`),
+      axios.get(`/api/projects`)
       // axios.get(`/api/files`)
       //axios.get(`/api/remarks`)
     ])
