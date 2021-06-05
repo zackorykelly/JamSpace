@@ -15,7 +15,7 @@ const App = () => {
         </nav>
         <Switch>
           <Route path="/" exact>
-            <h1>I AM HOME</h1>
+            <h1>JamSpace - Home</h1>
           </Route>
           <Route path="/projects" exact>
             <ProjectList />
