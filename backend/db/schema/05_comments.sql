@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS comments_stretch CASCADE;
+
+CREATE TABLE "comments_stretch" (
+  "id" SERIAL PRIMARY KEY NOT NULL,
+  "user_id" INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  "file_id" INTEGER REFERENCES files(id) ON DELETE CASCADE,
+  "comment" TEXT NOT NULL,
+  "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
