@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ProjectList from "../ProjectList/ProjectList";
 import Login from "../Login/Login"
+import Register from "../Register/Register"
 import "./App.css";
 
 const App = () => {
@@ -28,7 +29,7 @@ const App = () => {
             <Login />
           </Route>
           <Route path="/register" exact>
-            <h1>I AM REGISTER</h1>
+           <Register />
           </Route>
         </Switch>
       </div>
