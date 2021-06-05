@@ -14,12 +14,12 @@ export default function useApplicationData() {
   useEffect(() => {
     Promise.all([
       axios.get(`/api/users`),
-      axios.get(`/api/projects`)
-      // axios.get(`/api/files`)
+      axios.get(`/api/projects`),
+      axios.get(`/api/files`)
       //axios.get(`/api/remarks`)
     ])
       .then((response) => {
-        console.log("inside useEffect: ", response[0].data);
+        console.log("inside useEffect: ", response);
         dispatch({
           type: SET_DATA,
           response

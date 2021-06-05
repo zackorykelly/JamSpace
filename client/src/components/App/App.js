@@ -21,7 +21,7 @@ export default function App() {
         <Switch>
           <Route path="/" exact>
             <h1>JamSpace - Home</h1>
-            <pre>{JSON.stringify(state)}</pre>
+            <pre>{JSON.stringify(state, null, "\t")}</pre>
           </Route>
           <Route path="/projects" exact>
             <ProjectList />

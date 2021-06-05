@@ -7,6 +7,7 @@ const dataReducer = (state, action) => {
         ...state,
         users: action.response[0].data,
         projects: action.response[1].data,
+        files: action.response[2].data,
         loading: false
       };
     default:
