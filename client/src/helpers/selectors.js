@@ -1,6 +1,6 @@
 export function getProjectsForUser(state, user) {
   const projectsForUser = [];
-  const userFound = state.users.find((el) => el.name === user.name);
+  const userFound = state.users.find((el) => el.id === user.id);
 
   if (!userFound) {
     return [];
@@ -28,6 +28,8 @@ export function getFilesForProject(state, project) {
   return filesForProject;
 }
 
+// example from scheduler
+//
 // export function getInterview(state, interview) {
 //   if (!interview) {
 //     return null;

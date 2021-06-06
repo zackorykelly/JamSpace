@@ -21,7 +21,7 @@ module.exports = ({ getProjects, getProjectsByUser, addProject }) => {
 
     getProjectsByUser(user.id)
       .then((project) => {
-        if (project) {
+        if (project.name === name) {
           res.json({
             msg: "A project with this name already exists"
           });

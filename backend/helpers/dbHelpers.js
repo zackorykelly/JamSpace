@@ -94,6 +94,17 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getUsersProjects = () => {
+    const query = {
+      text: "SELECT * FROM users_projects"
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   return {
     getUsers,
     getUserByEmail,
@@ -102,6 +113,7 @@ module.exports = (db) => {
     getProjects,
     getProjectsByUser,
     addProject,
-    getFiles
+    getFiles,
+    getUsersProjects
   };
 };
