@@ -29,13 +29,18 @@ export default function Media(props) {
           lastModified: Date.now(),
         });
 
-        const player = new Audio(URL.createObjectURL(file));
-        player.play();
+        const playback = document.querySelector("audio");
+        playback.src = URL.createObjectURL(file);
+
+        // const player = new Audio(URL.createObjectURL(file));
+        // player.play();
       });
   };
 
   return (
     <div>
+      <audio controls class="playback" type="audio/mp3"></audio>
+      <br></br>
       <button onClick={() => start()}>Start</button>
       <button onClick={() => stop()}>Stop</button>
     </div>
