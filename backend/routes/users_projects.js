@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = ({}) => {
+module.exports = ({ getUsersProjects }) => {
   router.get("/", (req, res) => {
     getUsersProjects()
       .then((usersProjects) => {

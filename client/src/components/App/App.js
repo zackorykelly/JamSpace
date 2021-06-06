@@ -22,7 +22,7 @@ export default function App() {
     created_at: "2021-06-05T15:14:49.379Z"
   };
 
-  const currentUserProjects = getProjectsForUser(state, fakeUser);
+  // const currentUserProjects = getProjectsForUser(state, fakeUser);
 
   return (
     <Router>

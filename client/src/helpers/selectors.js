@@ -1,32 +1,32 @@
-export function getProjectsForUser(state, user) {
-  const projectsForUser = [];
-  const userFound = state.users.find((el) => el.id === user.id);
+// export function getProjectsForUser(state, user) {
+//   const projectsForUser = [];
+//   const userFound = state.users.find((el) => el.id === user.id);
 
-  if (!userFound) {
-    return [];
-  }
+//   if (!userFound) {
+//     return [];
+//   }
 
-  userFound.projects.forEach((proj) => {
-    projectsForUser.push(state.projects[proj]);
-  });
+//   userFound.projects.forEach((proj) => {
+//     projectsForUser.push(state.projects[proj]);
+//   });
 
-  return projectsForUser;
-}
+//   return projectsForUser;
+// }
 
-export function getFilesForProject(state, project) {
-  const filesForProject = [];
-  const projectFound = state.projects.find((el) => el.name === project.name);
+// export function getFilesForProject(state, project) {
+//   const filesForProject = [];
+//   const projectFound = state.projects.find((el) => el.name === project.name);
 
-  if (!projectFound) {
-    return [];
-  }
+//   if (!projectFound) {
+//     return [];
+//   }
 
-  projectFound.files.forEach((file) => {
-    filesForProject.push(state.files[file]);
-  });
+//   projectFound.files.forEach((file) => {
+//     filesForProject.push(state.files[file]);
+//   });
 
-  return filesForProject;
-}
+//   return filesForProject;
+// }
 
 // example from scheduler
 //
