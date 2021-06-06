@@ -1,5 +1,6 @@
 import React from "react";
 import MicRecorder from "mic-recorder-to-mp3";
+import axios from "axios";
 import "./Media.scss";
 
 export default function Media(props) {
@@ -29,11 +30,26 @@ export default function Media(props) {
           lastModified: Date.now(),
         });
 
-        const playback = document.querySelector("audio");
+        const playback = document.getElementsByClassName("playback")[0];
         playback.src = URL.createObjectURL(file);
 
         // const player = new Audio(URL.createObjectURL(file));
         // player.play();
+      });
+  };
+
+  const save = async () => {
+    const playback = document.getElementsByClassName("playback")[0];
+    let blob = await fetch(playback.src).then((res) => res.blob());
+    axios
+      .post("/file", {
+        file: blob,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -43,6 +59,7 @@ export default function Media(props) {
       <br></br>
       <button onClick={() => start()}>Start</button>
       <button onClick={() => stop()}>Stop</button>
+      <button onClick={() => save()}>Save</button>
     </div>
   );
 }
