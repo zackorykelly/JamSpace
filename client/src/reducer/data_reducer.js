@@ -1,16 +1,19 @@
-export const SET_USERS = 'SET_USERS';
+export const SET_DATA = "SET_DATA";
 
 const dataReducer = (state, action) => {
-    switch (action.type) {
-        case SET_USERS:
-            return {
-                ...state,
-                users: action.users,
-                    loading: false,
-            };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case SET_DATA:
+      return {
+        ...state,
+        users: action.response[0].data,
+        projects: action.response[1].data,
+        files: action.response[2].data,
+        //remarks: action.response[3].data,
+        loading: false
+      };
+    default:
+      return state;
+  }
 };
 
 export default dataReducer;

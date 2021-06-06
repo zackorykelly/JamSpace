@@ -1,22 +1,28 @@
 import { useEffect, useReducer } from "react";
-import dataReducer, { SET_USERS } from "../reducer/data_reducer";
+import dataReducer, { SET_DATA } from "../reducer/data_reducer";
 import axios from "axios";
 
 export default function useApplicationData() {
   const [state, dispatch] = useReducer(dataReducer, {
-    users: [],
+    users: {},
+    projects: {},
+    files: {},
+    remarks: {},
     loading: true
   });
+
   useEffect(() => {
-    axios({
-      method: "GET",
-      url: "/api/users"
-    })
-      .then(({ data }) => {
-        console.log(data);
+    Promise.all([
+      axios.get(`/api/users`),
+      axios.get(`/api/projects`),
+      axios.get(`/api/files`)
+      //axios.get(`/api/remarks`)
+    ])
+      .then((response) => {
+        console.log("inside useEffect: ", response);
         dispatch({
-          type: SET_USERS,
-          users: data
+          type: SET_DATA,
+          response
         });
       })
       .catch((err) => console.log(err));
