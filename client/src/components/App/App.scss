@@ -24,6 +24,27 @@
   color: white;
 }
 
+.App-nav {
+  background-color: #898d95;
+  max-height: 200vh;
+  display: flex;
+  flex-direction: row;
+
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.nav-link {
+  display: flex;
+  padding: 1em;
+}
+
+.title {
+  display: flex;
+  align-items: left;
+  padding-left: 0.5em;
+}
+
 .App-link {
   color: #61dafb;
 }

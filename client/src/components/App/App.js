@@ -4,7 +4,7 @@ import useApplicationData from "../../hooks/useApplicationData";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
-import "./App.css";
+import "./App.scss";
 
 export default function App() {
   const { state } = useApplicationData();
@@ -12,13 +12,26 @@ export default function App() {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <Link to="/projects">PROJECTS</Link>
-          <Link to="/users">USERS</Link>
-          <Link to="/login">LOGIN</Link>
-          <Link to="/register">REGISTER</Link>
-          <Link to="/recorder">Recorder</Link>
-          <Link to="/">HOME</Link>
+        <nav className="App-nav">
+          <p className="title">JamSpace</p>
+          <Link className="nav-link" to="/projects">
+            PROJECTS
+          </Link>
+          <Link className="nav-link" to="/users">
+            USERS
+          </Link>
+          <Link className="nav-link" to="/login">
+            LOGIN
+          </Link>
+          <Link className="nav-link" to="/register">
+            REGISTER
+          </Link>
+          <Link className="nav-link" to="/recorder">
+            Recorder
+          </Link>
+          <Link className="nav-link" to="/">
+            HOME
+          </Link>
         </nav>
         <Switch>
           <Route path="/" exact>
