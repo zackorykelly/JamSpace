@@ -9,6 +9,7 @@ import "./App.css";
 export default function App() {
   const { state } = useApplicationData();
 
+
   return (
     <Router>
       <div className="App">
