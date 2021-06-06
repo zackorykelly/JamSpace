@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ProjectList from "../ProjectList/ProjectList";
+import Media from "../Media/Media";
 import "./App.css";
 
 const App = () => {
@@ -14,9 +15,7 @@ const App = () => {
           <Link to="/">HOME</Link>
         </nav>
         <Switch>
-          <Route path="/" exact>
-            <h1>JamSpace - Home</h1>
-          </Route>
+          <Route path="/" exact></Route>
           <Route path="/projects" exact>
             <ProjectList />
           </Route>
