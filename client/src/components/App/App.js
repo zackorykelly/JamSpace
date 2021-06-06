@@ -1,9 +1,13 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ProjectList from "../ProjectList/ProjectList";
-import Media from "../Media/Media";
+import useApplicationData from "../../hooks/useApplicationData";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 import "./App.css";
 
-const App = () => {
+export default function App() {
+  const { state } = useApplicationData();
+
   return (
     <Router>
       <div className="App">
@@ -15,7 +19,10 @@ const App = () => {
           <Link to="/">HOME</Link>
         </nav>
         <Switch>
-          <Route path="/" exact></Route>
+          <Route path="/" exact>
+            <h1>JamSpace - Home</h1>
+            <pre>{JSON.stringify(state, null, "\t")}</pre>
+          </Route>
           <Route path="/projects" exact>
             <ProjectList />
           </Route>
@@ -23,14 +30,13 @@ const App = () => {
             <h1>I AM USERS</h1>
           </Route>
           <Route path="/login" exact>
-            <h1>I AM LOGIN</h1>
+            <Login />
           </Route>
           <Route path="/register" exact>
-            <h1>I AM REGISTER</h1>
+            <Register />
           </Route>
         </Switch>
       </div>
     </Router>
   );
-};
-export default App;
+}

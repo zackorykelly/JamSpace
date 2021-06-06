@@ -3,6 +3,46 @@
   width: 30%;
   margin-top: 30vh;
 }
+#float-full-name {
+  display: flex;
+  flex-direction: column;
+  min-width: 350px;
+  position: relative;
+  margin: 1em;
+  input {
+    width: 100%;
+    height: 56px;
+    padding: 14px 16px 0 10px;
+    outline: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+  }
+  label {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 12px;
+    color: #999;
+    pointer-events: none;
+    position: absolute;
+    transform: translate(0, 26px) scale(1);
+    transform-origin: top left;
+    transition: all 0.2s ease-out;
+  }
+}
+
+#float-full-name:focus-within label {
+  transform: translate(0, 12px) scale(0.75);
+}
+
+#float-full-name .Active {
+  transform: translate(0, 12px) scale(0.75);
+}
+
+
+
 #float-email {
   display: flex;
   flex-direction: column;
