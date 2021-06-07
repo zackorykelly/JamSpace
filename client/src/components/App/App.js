@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState } from 'react';
@@ -8,10 +8,10 @@ import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
-import {
-  getProjectsForUser,
-  getFilesForProject
-} from "../../helpers/selectors";
+// import {
+//   getProjectsForUser,
+//   getFilesForProject
+// } from "../../helpers/selectors";
 
 export default function App() {
   const { state } = useApplicationData();
@@ -21,13 +21,13 @@ export default function App() {
     setIsAuthenticated(boolean);
   }
 
-  const fakeUser = {
-    id: 1,
-    full_name: "Brooklynn Perez",
-    email: "brooklynnp@gmail.com",
-    password: "password",
-    created_at: "2021-06-05T15:14:49.379Z"
-  };
+  // const fakeUser = {
+  //   id: 1,
+  //   full_name: "Brooklynn Perez",
+  //   email: "brooklynnp@gmail.com",
+  //   password: "password",
+  //   created_at: "2021-06-05T15:14:49.379Z"
+  // };
 
   // const currentUserProjects = getProjectsForUser(state, fakeUser);
 
