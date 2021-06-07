@@ -31,7 +31,7 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
   });
 
   router.post("/", (req, res) => {
-    const { first_name, last_name, email, password } = req.body;
+    const { full_name, email, password } = req.body;
 
     getUserByEmail(email)
       .then((user) => {
@@ -40,7 +40,7 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
             msg: "Sorry, a user account with this email already exists"
           });
         } else {
-          return addUser(first_name, last_name, email, password);
+          return addUser(full_name, email, password);
         }
       })
       .then((newUser) => res.json(newUser))

@@ -5,8 +5,7 @@ const getPostsByUsers = (usersPosts) => {
       if (!postsByUsers[post.user_id]) {
           postsByUsers[post.user_id] = {
               userId: post.user_id,
-              firstName: post.first_name,
-              lastName: post.last_name,
+              fullName: post.full_name,
               email: post.email,
               posts: [],
           };
