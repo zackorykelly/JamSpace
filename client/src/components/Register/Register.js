@@ -1,132 +1,56 @@
 import React, { Fragment, useState } from 'react';
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import { ADD_USER } from "../../reducer/data_reducer";
+
 import "./Register.scss";
 
-export default function Login(props) {
-  // const [inputs, setInputs] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: ""
-  // })
-  // const { name, email, password } = inputs
-  // const onChange =(e) => {
-  //   console.log("onChange ", e.target.value)
-  //   setInputs({...inputs, [e.target.name]
-  //    : e.target.value});
-  // };
-  // const {name = inputs
-  
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+export default function Register(props) {
+  let history = useHistory();
 
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => {
+    console.log('data', data)
+    fetch("/api/users", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(async (res) => {
+        if (res.status === 200) {
+          console.log(res)
+          props.dispatch({
+            type: ADD_USER,
+            newUser: await res.json()
+          })
+          history.push("/")
+        } else {
+          alert('user alr exists')
+        }
+      })
 
-  const onSubmitForm = async (e) => {
-    e.preventDefault()
-    try {
-      const body = {name, email, password};
-      const response = await fetch("http://localhost:3002/auth/register", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(body)
-      });
-      const parseRes = await response.json()
-      console.log(parseRes)
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
+      .catch((error) => console.error(error.message))
 
-  const [isActiveE, setIsActiveE] = useState(false);
-  const [isActiveP, setIsActiveP] = useState(false);
-  const [isActiveN, setIsActiveN] = useState(false);
-  const [valueE, setValueE] = useState('');
-  const [valueP, setValueP] = useState('');
-  const [valueN, setValueN] = useState('');
-
-  function handleEmailChange(text) {
-    setValueE(text);
-  
-    if (text !== '') {
-      setIsActiveE(true);
-    } else {
-      setIsActiveE(false);
-    }
-  }
-  function handlePasswordChange(text) {
-    setValueP(text);
-  
-    if (text !== '') {
-      setIsActiveP(true);
-    } else {
-      setIsActiveP(false);
-    }
-  }
-  function handleNameChange(text) {
-    setValueN(text);
-  
-    if (text !== '') {
-      setIsActiveN(true);
-    } else {
-      setIsActiveN(false);
-    }
   }
 
   // --------------------RETURN--------------------------
-  return  <Fragment>
-  <div className="login-form">
-    <form onSubmit={onSubmitForm}>
-    <div id="float-full-name">
-  <input
-  type="text"
-  value={valueN, name}
-  onChange={ e => {
-      setName(e.target.value)
-      handleNameChange(e.target.value)
-    }
-  }
-
-/>
-<label className={ isActiveN ? "Active" : ""} htmlFor="name" >
-  Full Name
-  </label>
-  </div>
-
-  <div id="float-email">
-  <input
-  type="email"
-  value={valueE, email}
-  onChange = {e => {
-    setEmail(e.target.value)
-    handleEmailChange(e.target.value)
-  }
-  }
-
-/>
-
-<label className={ isActiveE ? "Active" : ""} htmlFor="email" >
-  E-mail
-  </label>
-  </div>  
-
-  <div id="float-password">
-  <input
-  type="password"
-  value={valueP, password}
-  onChange = {e => {
-    setPassword(e.target.value)
-    handlePasswordChange(e.target.value)
-  }
-  }
-
-/>
-
-<label className={ isActiveP ? "Active" : ""} htmlFor="password" >
-  Password
-  </label>
-  </div>
-  <button className="login-button">Register</button>
-</form>
-</div>
-</Fragment>
-;
+  return <>
+    <div className="login-form">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div id="float-full-name">
+          <input {...register("name")} type="text" />
+          <label className="Active">Full Name</label>
+        </div>
+        <div id="float-email">
+          <input {...register("email")} type="email" />
+          <label className="Active">E-mail</label>
+        </div>
+        <div id="float-password">
+          <input {...register("password")} type="password" />
+          <label className="Active">Password</label>
+        </div>
+        <input type="submit" className="login-button" />
+      </form>
+    </div>
+  </>;
 }
