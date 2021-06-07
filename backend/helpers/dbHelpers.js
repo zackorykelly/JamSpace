@@ -22,7 +22,7 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const addUser = (full_Name, email, password) => {
+  const addUser = (full_name, email, password) => {
     const query = {
       text: `INSERT INTO users (full_name, email, password) VALUES ($1, $2, $3) RETURNING *`,
       values: [full_name, email, password]
@@ -31,8 +31,9 @@ module.exports = (db) => {
     return db
       .query(query)
       .then((result) => result.rows[0])
-      .catch((err) => err);
-  };
+      .catch((err) => console.error('--------------------', err))
+      };
+
 
   const getUsersPosts = () => {
     const query = {

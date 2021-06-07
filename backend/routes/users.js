@@ -31,25 +31,31 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
   });
 
   router.post("/", (req, res) => {
-    const { full_name, email, password } = req.body;
+    const { name, email, password } = req.body;
+    console.log("WAHT IS REQBODY", req.body)
+    console.log({ name, email, password });
 
     getUserByEmail(email)
-      .then((user) => {
+      .then(async (user) => {
+        console.log('WHAT IS USER', user)
         if (user) {
           res.json({
             msg: "Sorry, a user account with this email already exists"
           });
         } else {
-          return addUser(full_name, email, password);
+          return await addUser(name, email, password);
         }
       })
       .then((newUser) => res.json(newUser))
-      .catch((err) =>
-        res.json({
+      .catch((err) => {
+        console.error('________________________________', err)
+        res.status(501).json({
           error: err.message
         })
+      }
       );
   });
+
 
   return router;
 };
