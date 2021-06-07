@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { getCookie } from "../../helpers/cookie";
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
@@ -12,7 +13,8 @@ import { getProjectsForUser } from "../../helpers/selectors";
 
 export default function App() {
   const { state, dispatch } = useApplicationData();
-  console.log(state);
+  const history = useHistory();
+  const handleClick = () => history.push("/projects");
 
   const loggedInUser = getCookie("userAuth");
 
@@ -25,15 +27,7 @@ export default function App() {
 
   console.log(user);
 
-  const fakeUser = {
-    id: 1,
-    full_name: "Brooklynn Perez",
-    email: "brooklynnp@gmail.com",
-    password: "password",
-    created_at: "2021-06-05T15:14:49.379Z"
-  };
-
-  const currentUserProjects = getProjectsForUser(state, fakeUser);
+  const currentUserProjects = getProjectsForUser(state, state.users[1]);
 
   return (
     <Router>
@@ -65,8 +59,8 @@ export default function App() {
             <pre>{JSON.stringify(state, null, "\t")}</pre>
           </Route>
           <Route path="/projects" exact>
+            <p>User: {JSON.stringify(state.users[1].full_name, null, "\t")}</p>
             <ProjectList projects={currentUserProjects} />
-            <p>User: {JSON.stringify(fakeUser, null, "\t")}</p>
           </Route>
           <Route path="/users" exact>
             <pre>{JSON.stringify(state.users, null, "\t")}</pre>
