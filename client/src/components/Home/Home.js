@@ -1,11 +1,11 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from "react";
 
 const Home = () => {
   return (
     <Fragment>
-      <h1>Home</h1>
+      <h1>JamSpace - Home</h1>
     </Fragment>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
