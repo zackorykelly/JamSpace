@@ -9,6 +9,7 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const projectsRouter = require("./routes/projects");
 const filesRouter = require("./routes/files");
+const usersProjectsRouter = require("./routes/users_projects");
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use("/users", usersRouter);
 app.use("/api/users", usersRouter(dbHelpers));
 app.use("/api/projects", projectsRouter(dbHelpers));
 app.use("/api/files", filesRouter(dbHelpers));
+app.use("/api/users_projects", usersProjectsRouter(dbHelpers));
 
 module.exports = app;

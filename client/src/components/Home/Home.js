@@ -1,12 +1,11 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from "react";
 
 const Home = ({ setAuth }) => {
   return (
     <Fragment>
-      <h1>Home</h1>
-      <button onClick={() => setAuth(true)}>logout</button>
+      <h1>JamSpace - Home</h1>
     </Fragment>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

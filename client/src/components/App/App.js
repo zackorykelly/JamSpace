@@ -1,3 +1,5 @@
+import React from "react";
+import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState } from 'react';
 import ProjectList from "../ProjectList/ProjectList";
@@ -6,7 +8,10 @@ import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
-import "./App.scss";
+import {
+  getProjectsForUser,
+  getFilesForProject
+} from "../../helpers/selectors";
 
 export default function App() {
   const { state } = useApplicationData();
@@ -15,6 +20,16 @@ export default function App() {
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   }
+
+  const fakeUser = {
+    id: 1,
+    full_name: "Brooklynn Perez",
+    email: "brooklynnp@gmail.com",
+    password: "password",
+    created_at: "2021-06-05T15:14:49.379Z"
+  };
+
+  // const currentUserProjects = getProjectsForUser(state, fakeUser);
 
   return (
     <Router>
@@ -41,9 +56,9 @@ export default function App() {
           </Link>
         </nav>
         <Switch>
-          <Route exact path="/" render={props => !isAuthenticated ? <Home {...props} setAuth={setAuth}/> : <Link to="/login" />} >
-            {/* <h1>JamSpace - Home</h1>
-            <pre>{JSON.stringify(state, null, "\t")}</pre> */}
+          <Route path="/" exact>
+            <Home />
+            <pre>{JSON.stringify(state, null, "\t")}</pre>
           </Route>
           <Route path="/projects" exact>
             <ProjectList />

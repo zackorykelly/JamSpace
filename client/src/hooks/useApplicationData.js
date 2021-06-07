@@ -15,7 +15,8 @@ export default function useApplicationData() {
     Promise.all([
       axios.get(`/api/users`),
       axios.get(`/api/projects`),
-      axios.get(`/api/files`)
+      axios.get(`/api/files`),
+      axios.get(`/api/users_projects`)
       //axios.get(`/api/remarks`)
     ])
       .then((response) => {
