@@ -6,8 +6,6 @@ export default function ProjectList(props) {
     <>
       <h1>Projects List</h1>
       <ProjectListItem />
-      <ProjectListItem />
-      <ProjectListItem />
     </>
   );
 }
