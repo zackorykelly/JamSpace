@@ -1,13 +1,29 @@
+import React from "react";
+import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
+import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
-import "./App.scss";
+import {
+  getProjectsForUser,
+  getFilesForProject
+} from "../../helpers/selectors";
 
 export default function App() {
   const { state } = useApplicationData();
+
+  const fakeUser = {
+    id: 1,
+    full_name: "Brooklynn Perez",
+    email: "brooklynnp@gmail.com",
+    password: "password",
+    created_at: "2021-06-05T15:14:49.379Z"
+  };
+
+  // const currentUserProjects = getProjectsForUser(state, fakeUser);
 
   return (
     <Router>
@@ -35,7 +51,7 @@ export default function App() {
         </nav>
         <Switch>
           <Route path="/" exact>
-            <h1>JamSpace - Home</h1>
+            <Home />
             <pre>{JSON.stringify(state, null, "\t")}</pre>
           </Route>
           <Route path="/projects" exact>
@@ -44,10 +60,14 @@ export default function App() {
           <Route path="/users" exact>
             <h1>I AM USERS</h1>
           </Route>
-          <Route path="/login" exact>
+          <Route exact path="/login" render={(props) => <Login {...props} />}>
             <Login />
           </Route>
-          <Route path="/register" exact>
+          <Route
+            exact
+            path="/register"
+            render={(props) => <Login {...props} />}
+          >
             <Register />
           </Route>
           <Route path="/recorder" exact>
