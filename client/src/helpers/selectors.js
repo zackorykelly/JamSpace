@@ -1,17 +1,19 @@
-// export function getProjectsForUser(state, user) {
-//   const projectsForUser = [];
-//   const userFound = state.users.find((el) => el.id === user.id);
+export function getProjectsForUser(state, user) {
+  let projectsForUser = [];
+  const userFound = state.users.find((el) => el.id === user.id);
 
-//   if (!userFound) {
-//     return [];
-//   }
+  if (!userFound) {
+    return [];
+  }
 
-//   userFound.projects.forEach((proj) => {
-//     projectsForUser.push(state.projects[proj]);
-//   });
+  state.users_projects.forEach((el) => {
+    if (el.user_id === user.id) {
+      projectsForUser.push(state.projects[el.project_id]);
+    }
+  });
 
-//   return projectsForUser;
-// }
+  return projectsForUser;
+}
 
 // export function getFilesForProject(state, project) {
 //   const filesForProject = [];

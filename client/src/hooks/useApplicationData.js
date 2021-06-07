@@ -4,10 +4,10 @@ import axios from "axios";
 
 export default function useApplicationData() {
   const [state, dispatch] = useReducer(dataReducer, {
-    users: {},
-    projects: {},
-    files: {},
-    remarks: {},
+    users: [],
+    projects: [],
+    files: [],
+    remarks: [],
     loading: true
   });
 
@@ -20,7 +20,6 @@ export default function useApplicationData() {
       //axios.get(`/api/remarks`)
     ])
       .then((response) => {
-        console.log("inside useEffect: ", response);
         dispatch({
           type: SET_DATA,
           response

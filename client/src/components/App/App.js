@@ -1,17 +1,13 @@
-// import React from "react";
+import React, { useState } from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import React, { useState } from 'react';
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
 import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
-// import {
-//   getProjectsForUser,
-//   getFilesForProject
-// } from "../../helpers/selectors";
+import { getProjectsForUser } from "../../helpers/selectors";
 
 export default function App() {
   const { state } = useApplicationData();
@@ -19,17 +15,17 @@ export default function App() {
 
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
-  }
+  };
 
-  // const fakeUser = {
-  //   id: 1,
-  //   full_name: "Brooklynn Perez",
-  //   email: "brooklynnp@gmail.com",
-  //   password: "password",
-  //   created_at: "2021-06-05T15:14:49.379Z"
-  // };
+  const fakeUser = {
+    id: 1,
+    full_name: "Brooklynn Perez",
+    email: "brooklynnp@gmail.com",
+    password: "password",
+    created_at: "2021-06-05T15:14:49.379Z"
+  };
 
-  // const currentUserProjects = getProjectsForUser(state, fakeUser);
+  const currentUserProjects = getProjectsForUser(state, fakeUser);
 
   return (
     <Router>
@@ -61,15 +57,34 @@ export default function App() {
             <pre>{JSON.stringify(state, null, "\t")}</pre>
           </Route>
           <Route path="/projects" exact>
-            <ProjectList />
+            <ProjectList projects={currentUserProjects} />
+            <p>User: {JSON.stringify(fakeUser, null, "\t")}</p>
           </Route>
           <Route path="/users" exact>
             <h1>I AM USERS</h1>
           </Route>
-          <Route exact path="/login" render={props => !isAuthenticated ? <Login {...props} setAuth={setAuth}/> : <Link to="/" />} >
-          </Route>
-          <Route exact path="/register" render={props => !isAuthenticated ? <Register {...props} setAuth={setAuth}/> : <Link to ="/login" />} >
-          </Route>
+          <Route
+            exact
+            path="/login"
+            render={(props) =>
+              !isAuthenticated ? (
+                <Login {...props} setAuth={setAuth} />
+              ) : (
+                <Link to="/" />
+              )
+            }
+          ></Route>
+          <Route
+            exact
+            path="/register"
+            render={(props) =>
+              !isAuthenticated ? (
+                <Register {...props} setAuth={setAuth} />
+              ) : (
+                <Link to="/login" />
+              )
+            }
+          ></Route>
           <Route path="/recorder" exact>
             <Media />
           </Route>
