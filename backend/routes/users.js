@@ -7,7 +7,6 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
   router.get("/", (req, res) => {
     getUsers()
       .then((users) => {
-        console.log(users);
         res.json(users);
       })
       .catch((err) =>
@@ -31,25 +30,28 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
   });
 
   router.post("/", (req, res) => {
-    const { first_name, last_name, email, password } = req.body;
+    const { name, email, password } = req.body;
 
     getUserByEmail(email)
-      .then((user) => {
+      .then(async (user) => {
+        console.log('WHAT IS USER', user)
         if (user) {
-          res.json({
+          res.status(501).json({
             msg: "Sorry, a user account with this email already exists"
           });
         } else {
-          return addUser(first_name, last_name, email, password);
+          return await addUser(name, email, password);
         }
       })
       .then((newUser) => res.json(newUser))
-      .catch((err) =>
-        res.json({
+      .catch((err) => {
+        res.status(501).json({
           error: err.message
         })
+      }
       );
   });
+
 
   return router;
 };

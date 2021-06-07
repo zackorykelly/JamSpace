@@ -1,4 +1,5 @@
 export const SET_DATA = "SET_DATA";
+export const ADD_USER = "ADD_USER";
 
 const dataReducer = (state, action) => {
   switch (action.type) {
@@ -12,6 +13,11 @@ const dataReducer = (state, action) => {
         //remarks: action.response[3].data,
         loading: false
       };
+    case ADD_USER:
+      return {
+        ...state,
+        users: [...state.users, action.newUser]
+      }
     default:
       return state;
   }
