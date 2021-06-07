@@ -15,20 +15,22 @@ export function getProjectsForUser(state, user) {
   return projectsForUser;
 }
 
-// export function getFilesForProject(state, project) {
-//   const filesForProject = [];
-//   const projectFound = state.projects.find((el) => el.name === project.name);
+export function getFilesForProject(state, project) {
+  const filesForProject = [];
+  const projectFound = state.projects.find((el) => el.id === project.id);
 
-//   if (!projectFound) {
-//     return [];
-//   }
+  if (!projectFound) {
+    return [];
+  }
 
-//   projectFound.files.forEach((file) => {
-//     filesForProject.push(state.files[file]);
-//   });
-
-//   return filesForProject;
-// }
+  state.files.forEach((file) => {
+    if (file.project_id === project.id) {
+      filesForProject.push(state.files[file]);
+    }
+  });
+  console.log(filesForProject);
+  return filesForProject;
+}
 
 // // example from scheduler
 

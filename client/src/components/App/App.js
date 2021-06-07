@@ -61,7 +61,7 @@ export default function App() {
             <p>User: {JSON.stringify(fakeUser, null, "\t")}</p>
           </Route>
           <Route path="/users" exact>
-            <h1>I AM USERS</h1>
+            <pre>{JSON.stringify(state.users, null, "\t")}</pre>
           </Route>
           <Route
             exact
