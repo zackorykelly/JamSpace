@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
+import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
@@ -23,8 +24,9 @@ export default function App() {
         </nav>
         <Switch>
           <Route path="/" exact>
-            <h1>JamSpace - Home</h1>
-            <pre>{JSON.stringify(state, null, "\t")}</pre>
+            <Home/>
+            {/* <h1>JamSpace - Home</h1>
+            <pre>{JSON.stringify(state, null, "\t")}</pre> */}
           </Route>
           <Route path="/projects" exact>
             <ProjectList />
@@ -32,10 +34,10 @@ export default function App() {
           <Route path="/users" exact>
             <h1>I AM USERS</h1>
           </Route>
-          <Route path="/login" exact>
+          <Route exact path="/login" render={props => <Login {...props}/>}>
             <Login />
           </Route>
-          <Route path="/register" exact>
+          <Route exact path="/register" render={props => <Login {...props}/>}>
             <Register />
           </Route>
           <Route path="/recorder" exact>
