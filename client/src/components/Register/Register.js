@@ -1,9 +1,11 @@
 import React, { Fragment, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import { ADD_USER } from "../../reducer/data_reducer";
+
 import "./Register.scss";
 
-export default function Login(props) {
+export default function Register(props) {
   let history = useHistory();
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -14,9 +16,21 @@ export default function Login(props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     })
-      .then((res) => console.log(res))
+      .then(async (res) => {
+        if (res.status === 200) {
+          console.log(res)
+          props.dispatch({
+            type: ADD_USER,
+            newUser: await res.json()
+          })
+          history.push("/")
+        } else {
+          alert('user alr exists')
+        }
+      })
+
       .catch((error) => console.error(error.message))
-    history.push("/")
+
   }
 
   // --------------------RETURN--------------------------

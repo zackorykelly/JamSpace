@@ -2,6 +2,7 @@
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState } from 'react';
+import { getCookie } from '../../helpers/cookie'
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
 import Home from "../Home/Home";
@@ -14,12 +15,16 @@ import Media from "../Media/Media";
 // } from "../../helpers/selectors";
 
 export default function App() {
-  const { state } = useApplicationData();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { state, dispatch } = useApplicationData();
+  console.log(state)
 
-  const setAuth = (boolean) => {
-    setIsAuthenticated(boolean);
-  }
+  const loggedInUser = getCookie('userAuth') 
+
+  const user = state.users && state.users.length && state.users.find(user => {
+    return user.email === loggedInUser
+  })
+
+  console.log(user)
 
   // const fakeUser = {
   //   id: 1,
@@ -66,9 +71,9 @@ export default function App() {
           <Route path="/users" exact>
             <h1>I AM USERS</h1>
           </Route>
-          <Route exact path="/login" render={props => !isAuthenticated ? <Login {...props} setAuth={setAuth}/> : <Link to="/" />} >
+          <Route exact path="/login" render={props => <Login {...props} users={state.users} />} >
           </Route>
-          <Route exact path="/register" render={props => !isAuthenticated ? <Register {...props} setAuth={setAuth}/> : <Link to ="/login" />} >
+          <Route exact path="/register" render={props => <Register {...props} users={state.users} dispatch={dispatch} />} >
           </Route>
           <Route path="/recorder" exact>
             <Media />
