@@ -32,9 +32,6 @@ export default function Media(props) {
 
         const playback = document.getElementsByClassName("playback")[0];
         playback.src = URL.createObjectURL(file);
-
-        // const player = new Audio(URL.createObjectURL(file));
-        // player.play();
       });
   };
 
@@ -44,23 +41,23 @@ export default function Media(props) {
     let data = new FormData();
     data.append("file", blob);
     axios
-      .post(
-        "/api/files",
-        {
-          data: data,
-        },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data; boundary=abcde",
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .post("/api/files", data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const onSubmit = (ev) => {
+    ev.preventDefault();
+    const file = document.getElementById("fileInput");
+    const formData = new FormData();
+    formData.append("file", file.files[0]);
+    formData.append("userId", 1);
+    formData.append("projectId", 1);
+    formData.append("description", "Funky fresh.com");
+    axios
+      .post("/api/files", formData)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -70,17 +67,11 @@ export default function Media(props) {
       <button onClick={() => start()}>Start</button>
       <button onClick={() => stop()}>Stop</button>
       <button onClick={() => save()}>Save</button>
+      <br></br>
+      <form encType="multipart/form-data" onSubmit={(ev) => onSubmit(ev)}>
+        <input id="fileInput" type="file"></input>
+        <button type="submit">Save2</button>
+      </form>
     </div>
   );
 }
-// export default function Media(props) {
-//   return (
-//     <section>
-//       <div>
-//         <button id="start">Start Recording</button>
-//         <button id="stop">Stop Recording</button>
-//       </div>
-//       <audio id="playback"></audio>
-//     </section>
-//   );
-// }
