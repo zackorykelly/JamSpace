@@ -20,7 +20,7 @@ module.exports = ({ getFiles }) => {
 
   router.post("/", upload.single("file"), (req, res) => {
     console.log(req.file);
-    console.log(req.body);
+    console.log(req.body.userId);
   });
 
   return router;

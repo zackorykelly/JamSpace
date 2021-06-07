@@ -40,6 +40,9 @@ export default function Media(props) {
     let blob = await fetch(playback.src).then((res) => res.blob());
     let data = new FormData();
     data.append("file", blob);
+    data.append("userId", 1);
+    data.append("projectId", 1);
+    data.append("description", "Funky fresh.com");
     axios
       .post("/api/files", data)
       .then((res) => console.log(res))
@@ -51,9 +54,6 @@ export default function Media(props) {
     const file = document.getElementById("fileInput");
     const formData = new FormData();
     formData.append("file", file.files[0]);
-    formData.append("userId", 1);
-    formData.append("projectId", 1);
-    formData.append("description", "Funky fresh.com");
     axios
       .post("/api/files", formData)
       .then((res) => console.log(res))
