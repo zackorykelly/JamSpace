@@ -41,10 +41,20 @@ export default function Media(props) {
   const save = async () => {
     const playback = document.getElementsByClassName("playback")[0];
     let blob = await fetch(playback.src).then((res) => res.blob());
+    let data = new FormData();
+    data.append("file", blob);
     axios
-      .post("/file", {
-        file: blob,
-      })
+      .post(
+        "/api/files",
+        {
+          data: data,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data; boundary=abcde",
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
       })
@@ -55,7 +65,7 @@ export default function Media(props) {
 
   return (
     <div>
-      <audio controls class="playback" type="audio/mp3"></audio>
+      <audio controls className="playback" type="audio/mp3"></audio>
       <br></br>
       <button onClick={() => start()}>Start</button>
       <button onClick={() => stop()}>Stop</button>
