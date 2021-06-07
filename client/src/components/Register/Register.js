@@ -1,4 +1,6 @@
 import React, { Fragment, useState } from 'react';
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import "./Register.scss";
 
 export default function Login(props) {
@@ -14,119 +16,65 @@ export default function Login(props) {
   //    : e.target.value});
   // };
   // const {name = inputs
-  
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
 
+  let history = useHistory();
 
-  const onSubmitForm = async (e) => {
-    e.preventDefault()
-    try {
-      const body = {name, email, password};
-      const response = await fetch("http://localhost:3002/auth/register", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(body)
-      });
-      const parseRes = await response.json()
-      console.log(parseRes)
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => {
+    console.log('data', data)
+    fetch("/api/users", {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    })
+    .then((res) => console.log(res))
+    .catch((error) => console.error(error.message))
 
-  const [isActiveE, setIsActiveE] = useState(false);
-  const [isActiveP, setIsActiveP] = useState(false);
-  const [isActiveN, setIsActiveN] = useState(false);
-  const [valueE, setValueE] = useState('');
-  const [valueP, setValueP] = useState('');
-  const [valueN, setValueN] = useState('');
-
-  function handleEmailChange(text) {
-    setValueE(text);
-  
-    if (text !== '') {
-      setIsActiveE(true);
-    } else {
-      setIsActiveE(false);
-    }
-  }
-  function handlePasswordChange(text) {
-    setValueP(text);
-  
-    if (text !== '') {
-      setIsActiveP(true);
-    } else {
-      setIsActiveP(false);
-    }
-  }
-  function handleNameChange(text) {
-    setValueN(text);
-  
-    if (text !== '') {
-      setIsActiveN(true);
-    } else {
-      setIsActiveN(false);
-    }
+    history.push("/")
   }
 
   // --------------------RETURN--------------------------
-  return  <Fragment>
-  <div className="login-form">
-    <form onSubmit={onSubmitForm}>
-    <div id="float-full-name">
-  <input
-  type="text"
-  value={valueN, name}
-  onChange={ e => {
-      setName(e.target.value)
-      handleNameChange(e.target.value)
-    }
-  }
+  return <>
+    <div className="login-form">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div id="float-full-name">
+          <input
+            {...register("name")}
+            type="text"
 
-/>
-<label className={ isActiveN ? "Active" : ""} htmlFor="name" >
-  Full Name
+
+          />
+          <label className="Active">
+            Full Name
   </label>
-  </div>
+        </div>
 
-  <div id="float-email">
-  <input
-  type="email"
-  value={valueE, email}
-  onChange = {e => {
-    setEmail(e.target.value)
-    handleEmailChange(e.target.value)
-  }
-  }
+        <div id="float-email">
+          <input
+            {...register("email")}
+            type="email"
 
-/>
+          />
 
-<label className={ isActiveE ? "Active" : ""} htmlFor="email" >
-  E-mail
+          <label className="Active">
+            E-mail
   </label>
-  </div>  
+        </div>
 
-  <div id="float-password">
-  <input
-  type="password"
-  value={valueP, password}
-  onChange = {e => {
-    setPassword(e.target.value)
-    handlePasswordChange(e.target.value)
-  }
-  }
+        <div id="float-password">
+          <input
+            {...register("password")}
+            type="password"
 
-/>
+          />
 
-<label className={ isActiveP ? "Active" : ""} htmlFor="password" >
-  Password
+          <label className="Active">
+            Password
   </label>
-  </div>
-  <button className="login-button">Register</button>
-</form>
-</div>
-</Fragment>
-;
-}
+        </div>
+        <input type="submit" className="login-button" />
+      </form>
+    </div>
+  </>
+    ;
+  }
