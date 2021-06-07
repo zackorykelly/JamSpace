@@ -1,9 +1,10 @@
 const router = require('express').Router();
-const pool = require('../db')
-const bcrypt = require('bcrypt')
+const pool = require('../db');
+// const bcrypt = require('bcrypt');
 const jwtGenerator = require('../utils/jwtGenerator')
-const validInfo = require('../utils/validInfo')
-const authroization = require('../utils/authroization')
+const validInfo = require('../middleware/validInfo')
+const authorization = require('../middleware/authorization')
+
 router.post("/register", validInfo, async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -15,14 +16,14 @@ router.post("/register", validInfo, async (req, res) => {
       return res.statis(401).send("User already exists")
     }
 
-    const saltRounds = 10;
-    const Salt = await bcrypt.genSalt(saltRounds);
+    // const saltRounds = 10;
+    // const Salt = await bcrypt.genSalt(saltRounds);
 
-    const bcryptPassword =bcrypt.hash(password, salt);
+    // const bcryptPassword =bcrypt.hash(password, salt);
 
     const newUser = await pool.query(
       "INSERT INTO users(full_name, email, password) VALUES($1, $2, $3) RETURNING * ",
-      [full_name, email, bcryptPassword]
+      [full_name, email, password]
     );
     res.json({token});
 
