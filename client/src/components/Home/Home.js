@@ -1,9 +1,10 @@
 import React, {Fragment} from 'react';
 
-const Home = () => {
+const Home = ({ setAuth }) => {
   return (
     <Fragment>
       <h1>Home</h1>
+      <button onClick={() => setAuth(true)}>logout</button>
     </Fragment>
   )
 }

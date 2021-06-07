@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 // import classNames from "classnames";
 import "./Login.scss";
 
-export default function Login(props) {
+export default function Login({setAuth}) {
   const [isActiveE, setIsActiveE] = useState(false);
   const [isActiveP, setIsActiveP] = useState(false);
   const [valueE, setValueE] = useState('');
@@ -26,8 +26,9 @@ export default function Login(props) {
       setIsActiveP(false);
     }
   }
-  return  <div className="login-form">
-    <form action="/login" method="POST">
+  return  <Fragment>
+  <div className="login-form">
+    <form>
   <div id="float-email">
   <input
   type="email"
@@ -50,8 +51,9 @@ export default function Login(props) {
   Password
   </label>
   </div>
-  <button type="submit" className="login-button">Login</button>
 </form>
+  <button type="submit" className="login-button" onClick={() => setAuth(true)}>Login</button>
 </div>
+</Fragment>
 ;
 }

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useState } from 'react';
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
 import Home from "../Home/Home";
@@ -9,6 +10,11 @@ import "./App.scss";
 
 export default function App() {
   const { state } = useApplicationData();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const setAuth = (boolean) => {
+    setIsAuthenticated(boolean);
+  }
 
   return (
     <Router>
@@ -35,8 +41,7 @@ export default function App() {
           </Link>
         </nav>
         <Switch>
-          <Route path="/" exact>
-            <Home/>
+          <Route exact path="/" render={props => !isAuthenticated ? <Home {...props} setAuth={setAuth}/> : <Link to="/login" />} >
             {/* <h1>JamSpace - Home</h1>
             <pre>{JSON.stringify(state, null, "\t")}</pre> */}
           </Route>
@@ -46,11 +51,9 @@ export default function App() {
           <Route path="/users" exact>
             <h1>I AM USERS</h1>
           </Route>
-          <Route exact path="/login" render={props => <Login {...props}/>}>
-            <Login />
+          <Route exact path="/login" render={props => !isAuthenticated ? <Login {...props} setAuth={setAuth}/> : <Link to="/" />} >
           </Route>
-          <Route exact path="/register" render={props => <Login {...props}/>}>
-            <Register />
+          <Route exact path="/register" render={props => !isAuthenticated ? <Register {...props} setAuth={setAuth}/> : <Link to ="/login" />} >
           </Route>
           <Route path="/recorder" exact>
             <Media />
