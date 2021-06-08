@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { getCookie, eraseCookie } from "../../helpers/cookie";
 import { getProject, getProjectsForUser } from "../../helpers/selectors";
 import { SET_PROJECT, CLOSE_PROJECT } from "../../reducer/data_reducer";
+import Project from "../Project/Project";
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
 import Home from "../Home/Home";
@@ -86,11 +87,14 @@ export default function App() {
           </Route>
           <Route path="/projects" exact>
             {!user && <Login users={state.users} setUser={setUser} />}
-            {user && (
+            {user && !state.project && (
               <ProjectList
                 projects={currentUserProjects}
                 setProject={setProject}
               />
+            )}
+            {user && state.project && (
+              <Project project={state.project} closeProject={closeProject} />
             )}
           </Route>
           <Route path="/users" exact>
