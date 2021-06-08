@@ -1,10 +1,8 @@
-import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import { getCookie, eraseCookie } from '../../helpers/cookie'
 import { useHistory } from "react-router-dom";
-import { getCookie } from "../../helpers/cookie";
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
 import Home from "../Home/Home";
