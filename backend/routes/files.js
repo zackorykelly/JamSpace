@@ -1,11 +1,8 @@
 const express = require("express");
 const router = express.Router();
-<<<<<<< HEAD
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const { getPostsByUsers } = require("../helpers/dataHelpers");
-=======
->>>>>>> master
 
 module.exports = ({ getFiles, addFile }) => {
   router.get("/", (req, res) => {
@@ -25,12 +22,12 @@ module.exports = ({ getFiles, addFile }) => {
     console.log(req.file);
     console.log(req.body);
     const { userID, projectID, name, description } = req.body;
-    async () => {
-      await addFile(projectID, name, description).then((response) => {
-        res.status = 200;
+    addFile(projectID, name, description)
+      .then((response) => {
+        res.status(200);
         res.json(response);
-      });
-    };
+      })
+      .catch((err) => res.status(500).json(err));
   });
 
   return router;

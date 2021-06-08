@@ -56,7 +56,7 @@ export default function App() {
         <Switch>
           <Route path="/" exact>
             <Home />
-            <pre>{JSON.stringify(state.users, null, "\t")}</pre>
+            <pre>{JSON.stringify(state, null, "\t")}</pre>
           </Route>
           <Route path="/projects" exact>
             <p>User: {JSON.stringify(state.users[1], null, "\t")}</p>
@@ -79,7 +79,7 @@ export default function App() {
             )}
           ></Route>
           <Route path="/recorder" exact>
-            <Media />
+            <Media dispatch={dispatch} />
           </Route>
         </Switch>
       </div>

@@ -11,15 +11,13 @@ const dataReducer = (state, action) => {
         projects: action.response[1].data,
         files: action.response[2].data,
         users_projects: action.response[3].data,
-        //remarks: action.response[3].data,
+        //remarks: action.response[4].data,
         loading: false,
       };
     case ADD_FILE:
       return {
         ...state,
         files: [...state.files, action.newFile],
-        //remarks: action.response[4].data,
-        loading: false,
       };
     case ADD_USER:
       console.log(action);

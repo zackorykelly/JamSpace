@@ -100,10 +100,7 @@ module.exports = (db) => {
       values: [projectID, name, description],
     };
 
-    return db
-      .query(query)
-      .then((res) => res.rows[0])
-      .catch((err) => err);
+    return db.query(query).then((res) => res.rows[0]);
   };
 
   const getUsersProjects = () => {
