@@ -4,7 +4,7 @@ import "./Media.scss";
 
 export default function Media(props) {
   const recorder = new MicRecorder({
-    bitRate: 128,
+    bitRate: 128
   });
 
   const start = () => {
@@ -26,7 +26,7 @@ export default function Media(props) {
         console.log("recording stopped");
         const file = new File(buffer, "my-recording.mp3", {
           type: blob.type,
-          lastModified: Date.now(),
+          lastModified: Date.now()
         });
 
         const playback = document.querySelector("audio");
@@ -39,7 +39,7 @@ export default function Media(props) {
 
   return (
     <div>
-      <audio controls class="playback" type="audio/mp3"></audio>
+      <audio controls className="playback" type="audio/mp3"></audio>
       <br></br>
       <button onClick={() => start()}>Start</button>
       <button onClick={() => stop()}>Stop</button>

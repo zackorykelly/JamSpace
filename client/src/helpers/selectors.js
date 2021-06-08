@@ -1,32 +1,36 @@
-// export function getProjectsForUser(state, user) {
-//   const projectsForUser = [];
-//   const userFound = state.users.find((el) => el.id === user.id);
+export function getProjectsForUser(state, user) {
+  let projectsForUser = [];
+  const userFound = state.users.find((el) => el.id === user.id);
 
-//   if (!userFound) {
-//     return [];
-//   }
+  if (!userFound) {
+    return [];
+  }
 
-//   userFound.projects.forEach((proj) => {
-//     projectsForUser.push(state.projects[proj]);
-//   });
+  state.users_projects.forEach((el) => {
+    if (el.user_id === user.id) {
+      projectsForUser.push(state.projects[el.project_id]);
+    }
+  });
 
-//   return projectsForUser;
-// }
+  return projectsForUser;
+}
 
-// export function getFilesForProject(state, project) {
-//   const filesForProject = [];
-//   const projectFound = state.projects.find((el) => el.name === project.name);
+export function getFilesForProject(state, project) {
+  const filesForProject = [];
+  const projectFound = state.projects.find((el) => el.id === project.id);
 
-//   if (!projectFound) {
-//     return [];
-//   }
+  if (!projectFound) {
+    return [];
+  }
 
-//   projectFound.files.forEach((file) => {
-//     filesForProject.push(state.files[file]);
-//   });
-
-//   return filesForProject;
-// }
+  state.files.forEach((file) => {
+    if (file.project_id === project.id) {
+      filesForProject.push(state.files[file]);
+    }
+  });
+  console.log(filesForProject);
+  return filesForProject;
+}
 
 // // example from scheduler
 
