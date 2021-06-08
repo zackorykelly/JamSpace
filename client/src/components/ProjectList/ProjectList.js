@@ -5,8 +5,10 @@ export default function ProjectList(props) {
   const listProjects = props.projects.map((proj) => (
     <ProjectListItem
       key={proj.id}
+      projectId={proj.id}
       name={proj.name}
       description={proj.description}
+      setProject={props.setProject}
     ></ProjectListItem>
   ));
 
