@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-const Home = () => {
+const Home = ({ setAuth }) => {
   return (
     <Fragment>
       <h1>JamSpace - Home</h1>

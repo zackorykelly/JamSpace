@@ -5,13 +5,12 @@
   &__item {
     @include fade;
 
-    color: #8395a7;
+    color: #373c41;
     height: 5rem;
-    padding-left: 2rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
-
     &:hover {
       background-color: #888787;
       cursor: pointer;
@@ -30,5 +29,10 @@
     &--full {
       opacity: $inactive-opacity;
     }
+  }
+
+  &__description {
+    display: flex;
+    font-size: 14px;
   }
 }

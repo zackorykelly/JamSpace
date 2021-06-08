@@ -6,7 +6,7 @@ import { ADD_FILE } from "../../reducer/data_reducer";
 
 export default function Media(props) {
   const recorder = new MicRecorder({
-    bitRate: 128,
+    bitRate: 128
   });
 
   const start = () => {
@@ -28,7 +28,7 @@ export default function Media(props) {
         console.log("recording stopped");
         const file = new File(buffer, "my-recording.mp3", {
           type: blob.type,
-          lastModified: Date.now(),
+          lastModified: Date.now()
         });
 
         const playback = document.getElementsByClassName("playback")[0];

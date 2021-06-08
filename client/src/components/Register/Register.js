@@ -1,79 +1,62 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import { ADD_USER } from "../../reducer/data_reducer";
+
 import "./Register.scss";
 
-export default function Login(props) {
-  const [isActiveE, setIsActiveE] = useState(false);
-  const [isActiveP, setIsActiveP] = useState(false);
-  const [isActiveN, setIsActiveN] = useState(false);
-  const [valueE, setValueE] = useState('');
-  const [valueP, setValueP] = useState('');
-  const [valueN, setValueN] = useState('');
+export default function Register(props) {
+  let history = useHistory();
 
-  function handleEmailChange(text) {
-    setValueE(text);
-  
-    if (text !== '') {
-      setIsActiveE(true);
-    } else {
-      setIsActiveE(false);
-    }
-  }
-  function handlePasswordChange(text) {
-    setValueP(text);
-  
-    if (text !== '') {
-      setIsActiveP(true);
-    } else {
-      setIsActiveP(false);
-    }
-  }
-  function handleNameChange(text) {
-    setValueN(text);
-  
-    if (text !== '') {
-      setIsActiveN(true);
-    } else {
-      setIsActiveN(false);
-    }
-  }
-  return  <div className="login-form">
-    <form action="/register" method="POST">
-    <div id="float-full-name">
-  <input
-  type="text"
-  value={valueN}
-  onChange={(e) => handleNameChange(e.target.value)}
-/>
-<label className={ isActiveN ? "Active" : ""} htmlFor="name" >
-  Full Name
-  </label>
-  </div>
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors }
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log("data", data);
+    fetch("/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+      .then(async (res) => {
+        if (res.status === 200) {
+          console.log(res);
+          props.dispatch({
+            type: ADD_USER,
+            newUser: await res.json()
+          });
+          history.push("/");
+        } else {
+          alert("user alr exists");
+        }
+      })
 
-  <div id="float-email">
-  <input
-  type="email"
-  value={valueE}
-  onChange={(e) => handleEmailChange(e.target.value)}
-/>
+      .catch((error) => console.error(error.message));
+  };
 
-<label className={ isActiveE ? "Active" : ""} htmlFor="email" >
-  E-mail
-  </label>
-  </div>
-
-  <div id="float-password">
-  <input
-  type="password"
-  value={valueP}
-  onChange={(e) => handlePasswordChange(e.target.value)}
-/>
-
-<label className={ isActiveP ? "Active" : ""} htmlFor="password" >
-  Password
-  </label>
-  </div>
-  <button type="submit" className="login-button">Register</button>
-</form>
-</div>
-;
+  // --------------------RETURN--------------------------
+  return (
+    <>
+      <div className="login-form">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div id="float-full-name">
+            <input {...register("name")} type="text" />
+            <label className="Active">Full Name</label>
+          </div>
+          <div id="float-email">
+            <input {...register("email")} type="email" />
+            <label className="Active">E-mail</label>
+          </div>
+          <div id="float-password">
+            <input {...register("password")} type="password" />
+            <label className="Active">Password</label>
+          </div>
+          <input type="submit" className="login-button" />
+        </form>
+      </div>
+    </>
+  );
 }

@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
+<<<<<<< HEAD
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const { getPostsByUsers } = require("../helpers/dataHelpers");
+=======
+>>>>>>> master
 
 module.exports = ({ getFiles, addFile }) => {
   router.get("/", (req, res) => {

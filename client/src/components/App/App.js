@@ -1,29 +1,33 @@
 import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { getCookie } from "../../helpers/cookie";
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
 import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
-import {
-  getProjectsForUser,
-  getFilesForProject
-} from "../../helpers/selectors";
+import { getProjectsForUser } from "../../helpers/selectors";
 
 export default function App() {
-  const { state } = useApplicationData();
+  const { state, dispatch } = useApplicationData();
+  const history = useHistory();
+  const handleClick = () => history.push("/projects");
 
-  const fakeUser = {
-    id: 1,
-    full_name: "Brooklynn Perez",
-    email: "brooklynnp@gmail.com",
-    password: "password",
-    created_at: "2021-06-05T15:14:49.379Z"
-  };
+  const loggedInUser = getCookie("userAuth");
 
-  // const currentUserProjects = getProjectsForUser(state, fakeUser);
+  const user =
+    state.users &&
+    state.users.length &&
+    state.users.find((user) => {
+      return user.email === loggedInUser;
+    });
+
+  console.log("logged in user: ", user);
+
+  const currentUserProjects = getProjectsForUser(state, state.users[1]);
 
   return (
     <Router>
@@ -52,24 +56,28 @@ export default function App() {
         <Switch>
           <Route path="/" exact>
             <Home />
-            <pre>{JSON.stringify(state, null, "\t")}</pre>
+            <pre>{JSON.stringify(state.users, null, "\t")}</pre>
           </Route>
           <Route path="/projects" exact>
-            <ProjectList />
+            <p>User: {JSON.stringify(state.users[1], null, "\t")}</p>
+            <ProjectList projects={currentUserProjects} />
           </Route>
           <Route path="/users" exact>
-            <h1>I AM USERS</h1>
-          </Route>
-          <Route exact path="/login" render={(props) => <Login {...props} />}>
-            <Login />
+            {console.log("state.user: ", state.user)}
+            <pre>{JSON.stringify(state.users, null, "\t")}</pre>
           </Route>
           <Route
             exact
+            path="/login"
+            render={(props) => <Login {...props} users={state.users} />}
+          ></Route>
+          <Route
+            exact
             path="/register"
-            render={(props) => <Login {...props} />}
-          >
-            <Register />
-          </Route>
+            render={(props) => (
+              <Register {...props} users={state.users} dispatch={dispatch} />
+            )}
+          ></Route>
           <Route path="/recorder" exact>
             <Media />
           </Route>
