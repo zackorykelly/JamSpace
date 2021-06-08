@@ -1,7 +1,7 @@
 module.exports = (db) => {
   const getUsers = () => {
     const query = {
-      text: "SELECT * FROM users"
+      text: "SELECT * FROM users",
     };
 
     return db
@@ -13,7 +13,7 @@ module.exports = (db) => {
   const getUserByEmail = (email) => {
     const query = {
       text: `SELECT * FROM users WHERE email = $1`,
-      values: [email]
+      values: [email],
     };
 
     return db
@@ -25,7 +25,7 @@ module.exports = (db) => {
   const addUser = (firstName, lastName, email, password) => {
     const query = {
       text: `INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *`,
-      values: [firstName, lastName, email, password]
+      values: [firstName, lastName, email, password],
     };
 
     return db
@@ -39,7 +39,7 @@ module.exports = (db) => {
       text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
       FROM users
       INNER JOIN posts
-      ON users.id = posts.user_id`
+      ON users.id = posts.user_id`,
     };
 
     return db
@@ -50,7 +50,7 @@ module.exports = (db) => {
 
   const getProjects = () => {
     const query = {
-      text: "SELECT * FROM projects"
+      text: "SELECT * FROM projects",
     };
 
     return db
@@ -62,7 +62,7 @@ module.exports = (db) => {
   const getProjectsByUser = (userId) => {
     const query = {
       text: "SELECT * FROM projects WHERE user_id = $1",
-      values: [userId]
+      values: [userId],
     };
 
     return db
@@ -74,7 +74,7 @@ module.exports = (db) => {
   const addProject = () => {
     const query = {
       text: `INSERT INTO projects (name, description) VALUES ($1, $2) RETURNING *`,
-      values: [name, description]
+      values: [name, description],
     };
 
     return db
@@ -85,7 +85,7 @@ module.exports = (db) => {
 
   const getFiles = () => {
     const query = {
-      text: "SELECT * FROM files"
+      text: "SELECT * FROM files",
     };
 
     return db
@@ -94,9 +94,21 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const addFile = (projectID, name, description) => {
+    const query = {
+      text: "INSERT INTO files (project_id, name, description) VALUES ($1, $2, $3) RETURNING *",
+      values: [projectID, name, description],
+    };
+
+    return db
+      .query(query)
+      .then((res) => res.rows[0])
+      .catch((err) => err);
+  };
+
   const getUsersProjects = () => {
     const query = {
-      text: "SELECT * FROM users_projects"
+      text: "SELECT * FROM users_projects",
     };
 
     return db
@@ -114,6 +126,7 @@ module.exports = (db) => {
     getProjectsByUser,
     addProject,
     getFiles,
-    getUsersProjects
+    addFile,
+    getUsersProjects,
   };
 };

@@ -2,6 +2,7 @@ import React from "react";
 import MicRecorder from "mic-recorder-to-mp3";
 import axios from "axios";
 import "./Media.scss";
+import { ADD_FILE } from "../../reducer/data_reducer";
 
 export default function Media(props) {
   const recorder = new MicRecorder({
@@ -42,23 +43,46 @@ export default function Media(props) {
     data.append("file", blob);
     data.append("userId", 1);
     data.append("projectId", 1);
+    data.append("name", "Beatz");
     data.append("description", "Funky fresh.com");
     axios
       .post("/api/files", data)
-      .then((res) => console.log(res))
+      .then(async (res) => {
+        console.log(res.status);
+        if (res.status === 200) {
+          props.dispatch({
+            type: ADD_FILE,
+            newFile: await res.json(),
+          });
+          alert("File saved");
+        } else {
+          alert("The file could not be saved");
+        }
+      })
       .catch((err) => console.log(err));
   };
 
-  const onSubmit = (ev) => {
-    ev.preventDefault();
-    const file = document.getElementById("fileInput");
-    const formData = new FormData();
-    formData.append("file", file.files[0]);
-    axios
-      .post("/api/files", formData)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
+  //Test using uploaded file
+  // const onSubmit = (ev) => {
+  //   ev.preventDefault();
+  //   const file = document.getElementById("fileInput");
+  //   const formData = new FormData();
+  //   formData.append("file", file.files[0]);
+  //   axios
+  //     .post("/api/files", formData)
+  //     .then(async (res) => {
+  //       if (res.status === 200) {
+  //         props.dispatch({
+  //           type: ADD_FILE,
+  //           newFile: await res.json(),
+  //         });
+  //         alert("File saved");
+  //       } else {
+  //         alert("The file could not be saved");
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   return (
     <div>
@@ -68,10 +92,10 @@ export default function Media(props) {
       <button onClick={() => stop()}>Stop</button>
       <button onClick={() => save()}>Save</button>
       <br></br>
-      <form encType="multipart/form-data" onSubmit={(ev) => onSubmit(ev)}>
+      {/* <form encType="multipart/form-data" onSubmit={(ev) => onSubmit(ev)}>
         <input id="fileInput" type="file"></input>
         <button type="submit">Save2</button>
-      </form>
+      </form> */}
     </div>
   );
 }

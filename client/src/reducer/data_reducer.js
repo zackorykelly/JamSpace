@@ -1,4 +1,6 @@
 export const SET_DATA = "SET_DATA";
+export const ADD_USER = "ADD_USER";
+export const ADD_FILE = "ADD_FILE";
 
 const dataReducer = (state, action) => {
   switch (action.type) {
@@ -10,7 +12,17 @@ const dataReducer = (state, action) => {
         files: action.response[2].data,
         users_projects: action.response[3].data,
         //remarks: action.response[3].data,
-        loading: false
+        loading: false,
+      };
+    case ADD_USER:
+      return {
+        ...state,
+        users: [...state.users, action.newUser],
+      };
+    case ADD_FILE:
+      return {
+        ...state,
+        files: [...state.files, action.newFile],
       };
     default:
       return state;

@@ -4,7 +4,7 @@ const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const { getPostsByUsers } = require("../helpers/dataHelpers");
 
-module.exports = ({ getFiles }) => {
+module.exports = ({ getFiles, addFile }) => {
   router.get("/", (req, res) => {
     getFiles()
       .then((files) => {
@@ -20,7 +20,14 @@ module.exports = ({ getFiles }) => {
 
   router.post("/", upload.single("file"), (req, res) => {
     console.log(req.file);
-    console.log(req.body.userId);
+    console.log(req.body);
+    const { userID, projectID, name, description } = req.body;
+    async () => {
+      await addFile(projectID, name, description).then((response) => {
+        res.status = 200;
+        res.json(response);
+      });
+    };
   });
 
   return router;
