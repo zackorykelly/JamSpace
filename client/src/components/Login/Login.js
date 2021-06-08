@@ -18,7 +18,8 @@ export default function Login(props) {
       alert('not a user')
       return;
     } 
-    setCookie('userAuth', `${user.email}`, 20 )
+    setCookie('userAuth', `${user.id}`, 20 )
+    props.setUser(user)
     history.push("/")
 
   }

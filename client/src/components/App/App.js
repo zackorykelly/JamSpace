@@ -1,8 +1,8 @@
 // import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import React, { useState } from 'react';
-import { getCookie } from '../../helpers/cookie'
+import React, { useState, useEffect } from 'react';
+import { getCookie, eraseCookie } from '../../helpers/cookie'
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
 import Home from "../Home/Home";
@@ -16,15 +16,32 @@ import Media from "../Media/Media";
 
 export default function App() {
   const { state, dispatch } = useApplicationData();
-  console.log(state)
+  const [user, setUser] = useState(null);
+  console.log('state', state)
+  console.log('state.user', state.users)
 
-  const loggedInUser = getCookie('userAuth') 
+  useEffect (() => {  
+  const loggedInUser = Number(getCookie('userAuth') )
 
-  const user = state.users && state.users.length && state.users.find(user => {
-    return user.email === loggedInUser
+
+  const u = state.users && state.users.length && state.users.find(user => {
+    console.log('finduser', user.id)
+    return user.id === loggedInUser
   })
+  setUser(u)
+}, [state])
 
-  console.log(user)
+
+  console.log('user', user)
+
+
+
+  const handleLogout = () => {
+    eraseCookie('userAuth')
+    setUser(null)
+  }
+
+
 
   // const fakeUser = {
   //   id: 1,
@@ -47,12 +64,22 @@ export default function App() {
           <Link className="nav-link" to="/users">
             USERS
           </Link>
-          <Link className="nav-link" to="/login">
+          {!user ? <Link className="nav-link" to="/login">
             LOGIN
           </Link>
+          :
+          <p>You are logged in as {user.full_name}</p>
+}
+          {!user ?
           <Link className="nav-link" to="/register">
             REGISTER
           </Link>
+          :
+          <Link onClick={handleLogout} className="nav-link" to="/">
+            LOGOUT
+          </Link>
+}
+
           <Link className="nav-link" to="/recorder">
             Recorder
           </Link>
@@ -71,9 +98,9 @@ export default function App() {
           <Route path="/users" exact>
             <h1>I AM USERS</h1>
           </Route>
-          <Route exact path="/login" render={props => <Login {...props} users={state.users} />} >
+          <Route exact path="/login" render={props => <Login {...props} users={state.users} setUser={setUser}/>} >
           </Route>
-          <Route exact path="/register" render={props => <Register {...props} users={state.users} dispatch={dispatch} />} >
+          <Route exact path="/register" render={props => <Register {...props} users={state.users} dispatch={dispatch} setUser={setUser}/>} >
           </Route>
           <Route path="/recorder" exact>
             <Media />

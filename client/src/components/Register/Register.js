@@ -2,6 +2,8 @@ import React, { Fragment, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { ADD_USER } from "../../reducer/data_reducer";
+import { setCookie } from '../../helpers/cookie'
+
 
 import "./Register.scss";
 
@@ -16,13 +18,16 @@ export default function Register(props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     })
-      .then(async (res) => {
-        if (res.status === 200) {
-          console.log(res)
-          props.dispatch({
-            type: ADD_USER,
-            newUser: await res.json()
-          })
+    .then(async (res) => {
+      if (res.status === 200) {
+        console.log(res)
+        const user = await res.json();
+        props.dispatch({
+          type: ADD_USER,
+          newUser: user
+        })
+        setCookie('userAuth', `${user.id}`, 20)
+        props.setUser(user)
           history.push("/")
         } else {
           alert('user alr exists')
