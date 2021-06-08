@@ -27,7 +27,9 @@ export default function App() {
 
   console.log("logged in user: ", user);
 
-  const currentUserProjects = getProjectsForUser(state, state.users[1]);
+  const currentUserProjects = user
+    ? getProjectsForUser(state, user)
+    : state.projects;
 
   return (
     <Router>
@@ -56,10 +58,10 @@ export default function App() {
         <Switch>
           <Route path="/" exact>
             <Home />
-            <pre>{JSON.stringify(state.users, null, "\t")}</pre>
+            <pre>{JSON.stringify(state, null, "\t")}</pre>
           </Route>
           <Route path="/projects" exact>
-            <p>User: {JSON.stringify(state.users[1], null, "\t")}</p>
+            <p>User: {JSON.stringify(user.full_name, null, "\t")}</p>
             <ProjectList projects={currentUserProjects} />
           </Route>
           <Route path="/users" exact>
