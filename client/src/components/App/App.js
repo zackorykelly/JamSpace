@@ -12,7 +12,6 @@ import { getProjectsForUser } from "../../helpers/selectors";
 
 export default function App() {
   const { state, dispatch } = useApplicationData();
-  console.log(state);
 
   const loggedInUser = getCookie("userAuth");
 
@@ -23,7 +22,7 @@ export default function App() {
       return user.email === loggedInUser;
     });
 
-  console.log(user);
+  console.log("logged in user: ", user);
 
   const fakeUser = {
     id: 1,
