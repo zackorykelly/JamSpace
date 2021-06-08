@@ -4,6 +4,7 @@ import axios from "axios";
 
 export default function useApplicationData() {
   const [state, dispatch] = useReducer(dataReducer, {
+    user: 0,
     users: [],
     projects: [],
     files: [],
