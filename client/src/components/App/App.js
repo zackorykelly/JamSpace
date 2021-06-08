@@ -1,33 +1,48 @@
-import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { getCookie } from "../../helpers/cookie";
+import React, { useState, useEffect } from "react";
+import { getCookie, eraseCookie } from "../../helpers/cookie";
+import { getProject, getProjectsForUser } from "../../helpers/selectors";
+import { SET_PROJECT, CLOSE_PROJECT } from "../../reducer/data_reducer";
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
 import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
-import { getProjectsForUser } from "../../helpers/selectors";
 
 export default function App() {
   const { state, dispatch } = useApplicationData();
-  const history = useHistory();
-  const handleClick = () => history.push("/projects");
+  const [user, setUser] = useState(null);
 
-  const loggedInUser = getCookie("userAuth");
+  useEffect(() => {
+    const loggedInUser = Number(getCookie("userAuth"));
 
-  const user =
-    state.users &&
-    state.users.length &&
-    state.users.find((user) => {
-      return user.email === loggedInUser;
+    const u =
+      state.users &&
+      state.users.length &&
+      state.users.find((user) => {
+        return user.id === loggedInUser;
+      });
+    setUser(u);
+  }, [state]);
+
+  const handleLogout = () => {
+    eraseCookie("userAuth");
+    setUser(null);
+  };
+
+  const setProject = (projectId) => {
+    const project = getProject(state, projectId);
+    dispatch({
+      type: SET_PROJECT,
+      project,
     });
+  };
 
-  console.log("logged in user: ", user);
+  const closeProject = () => dispatch({ type: CLOSE_PROJECT });
 
-  const currentUserProjects = getProjectsForUser(state, state.users[1]);
+  const currentUserProjects = user ? getProjectsForUser(state, user) : [];
 
   return (
     <Router>
@@ -40,12 +55,23 @@ export default function App() {
           <Link className="nav-link" to="/users">
             USERS
           </Link>
-          <Link className="nav-link" to="/login">
-            LOGIN
-          </Link>
-          <Link className="nav-link" to="/register">
-            REGISTER
-          </Link>
+          {!user ? (
+            <Link className="nav-link" to="/login">
+              LOGIN
+            </Link>
+          ) : (
+            <p>You are logged in as {user.full_name}</p>
+          )}
+          {!user ? (
+            <Link className="nav-link" to="/register">
+              REGISTER
+            </Link>
+          ) : (
+            <Link onClick={handleLogout} className="nav-link" to="/">
+              LOGOUT
+            </Link>
+          )}
+
           <Link className="nav-link" to="/recorder">
             Recorder
           </Link>
@@ -59,13 +85,36 @@ export default function App() {
             <pre>{JSON.stringify(state, null, "\t")}</pre>
           </Route>
           <Route path="/projects" exact>
-            <p>User: {JSON.stringify(state.users[1], null, "\t")}</p>
-            <ProjectList projects={currentUserProjects} />
+            {!user && <Login users={state.users} setUser={setUser} />}
+            {user && (
+              <ProjectList
+                projects={currentUserProjects}
+                setProject={setProject}
+              />
+            )}
           </Route>
           <Route path="/users" exact>
-            {console.log("state.user: ", state.user)}
-            <pre>{JSON.stringify(state.users, null, "\t")}</pre>
+            <h1>I AM USERS</h1>
           </Route>
+          <Route
+            exact
+            path="/login"
+            render={(props) => (
+              <Login {...props} users={state.users} setUser={setUser} />
+            )}
+          ></Route>
+          <Route
+            exact
+            path="/register"
+            render={(props) => (
+              <Register
+                {...props}
+                users={state.users}
+                dispatch={dispatch}
+                setUser={setUser}
+              />
+            )}
+          ></Route>
           <Route
             exact
             path="/login"
@@ -79,7 +128,8 @@ export default function App() {
             )}
           ></Route>
           <Route path="/recorder" exact>
-            <Media dispatch={dispatch} />
+            {!user && <Login users={state.users} setUser={setUser} />}
+            {user && <Media dispatch={dispatch} />}
           </Route>
         </Switch>
       </div>

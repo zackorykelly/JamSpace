@@ -1,3 +1,7 @@
+export function getProject(state, projectId) {
+  return state.projects.find((proj) => proj.id === projectId);
+}
+
 export function getProjectsForUser(state, user) {
   let projectsForUser = [];
   const userFound = state.users.find((el) => el.id === user.id);
@@ -31,14 +35,3 @@ export function getFilesForProject(state, project) {
   console.log(filesForProject);
   return filesForProject;
 }
-
-// // example from scheduler
-
-// export function getInterview(state, interview) {
-//   if (!interview) {
-//     return null;
-//   }
-//   const interviewer = state.interviewers[interview.interviewer];
-
-//   return { ...interview, interviewer };
-// }

@@ -1,4 +1,6 @@
 export const SET_DATA = "SET_DATA";
+export const SET_PROJECT = "SET_PROJECT";
+export const CLOSE_PROJECT = "CLOSE_PROJECT";
 export const ADD_USER = "ADD_USER";
 export const ADD_FILE = "ADD_FILE";
 
@@ -20,11 +22,21 @@ const dataReducer = (state, action) => {
         files: [...state.files, action.newFile],
       };
     case ADD_USER:
-      console.log(action);
       return {
         ...state,
         users: [...state.users, action.newUser],
         user: action.newUser.id,
+      };
+    case SET_PROJECT:
+      console.log(action);
+      return {
+        ...state,
+        project: action.project
+      };
+    case CLOSE_PROJECT:
+      return {
+        ...state,
+        project: 0
       };
     default:
       return state;
