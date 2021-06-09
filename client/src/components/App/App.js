@@ -6,12 +6,8 @@ import {
   getProject,
   getFile,
   getProjectsForUser,
-<<<<<<< HEAD
   getUsersForProject,
   getFilesForProject
-=======
-  getFilesForProject,
->>>>>>> master
 } from "../../helpers/selectors";
 import {
   SET_PROJECT,
@@ -53,7 +49,7 @@ export default function App() {
     const project = getProject(state, projectId);
     dispatch({
       type: SET_PROJECT,
-      project,
+      project
     });
   };
 
