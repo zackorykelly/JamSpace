@@ -27,6 +27,7 @@ export default function App() {
       state.users &&
       state.users.length &&
       state.users.find((user) => {
+        console.log("finduser", user.id);
         return user.id === loggedInUser;
       });
     setUser(u);
@@ -56,38 +57,57 @@ export default function App() {
     <Router>
       <div className="App">
         <nav className="App-nav">
-          <p className="title">JamSpace</p>
-          <Link className="nav-link" to="/projects">
-            PROJECTS
-          </Link>
-          {!user ? (
-            <Link className="nav-link" to="/login">
-              LOGIN
+          <div className="directional-links">
+            <Link className="nav-logo" to="/">
+              JamSpace
             </Link>
-          ) : (
-            <p>You are logged in as {user.full_name}</p>
-          )}
-          {!user ? (
-            <Link className="nav-link" to="/register">
-              REGISTER
-            </Link>
-          ) : (
-            <Link onClick={handleLogout} className="nav-link" to="/">
-              LOGOUT
-            </Link>
-          )}
+            {!user ? (
+              <Link className="nav-link" to="/login">
+                LOGIN
+              </Link>
+            ) : (
+              <p>You are logged in as {user.full_name}</p>
+            )}
+            {!user ? (
+              <Link className="nav-link" to="/register">
+                REGISTER
+              </Link>
+            ) : (
+              <Link onClick={handleLogout} className="nav-link" to="/">
+                LOGOUT
+              </Link>
+            )}
 
-          <Link className="nav-link" to="/recorder">
-            Recorder
-          </Link>
-          <Link className="nav-link" to="/">
-            HOME
-          </Link>
+            <Link className="nav-link" to="/recorder">
+              Recorder
+            </Link>
+            <Link className="nav-link" to="/">
+              Home
+            </Link>
+          </div>
+          <div className="user-auth">
+            {!user ? (
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
+            ) : (
+              <p>You are logged in as {user.full_name}</p>
+            )}
+            {!user ? (
+              <Link className="nav-link" to="/register">
+                Register
+              </Link>
+            ) : (
+              <Link onClick={handleLogout} className="nav-link" to="/">
+                Logout
+              </Link>
+            )}
+          </div>
         </nav>
         <Switch>
           <Route path="/" exact>
             <Home />
-            <pre>{JSON.stringify(state, null, "\t")}</pre>
+            {/* <pre>{JSON.stringify(state.users, null, "\t")}</pre> */}
           </Route>
           <Route path="/projects" exact>
             {!user && <Login users={state.users} setUser={setUser} />}
@@ -138,7 +158,13 @@ export default function App() {
           ></Route>
           <Route path="/recorder" exact>
             {!user && <Login users={state.users} setUser={setUser} />}
-            {user && <Media />}
+            {user && (
+              <Media
+                currentProject={1}
+                currentUser={user}
+                dispatch={dispatch}
+              />
+            )}
           </Route>
         </Switch>
       </div>

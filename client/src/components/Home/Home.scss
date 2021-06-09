@@ -1,0 +1,67 @@
+.home-page {
+  background-image: url('/background.jpeg');
+  overflow: hidden;
+  // background-repeat: no-repeat;
+  background-size: 100%;
+  text-align: left;
+  h1 {
+    padding-left: 1em;
+  }
+  p {
+    font-size: 1.5em;
+    color: #a6a6a6;
+    width: 30vw;
+    margin: 5em 0 10em 2.5em;
+    padding: 1em;
+    border-radius: 10px;
+    background-color:#1a1a1a;
+
+  }
+}
+#title {
+  color: #e6e6e6;
+}
+#drum {
+  height: 80vh;
+  filter: brightness(.8) contrast(1.2);
+}
+#audio {
+  border-radius: 10px;
+  height: 30vw;
+  float: right;
+  margin: 2.5em 2.5em 1em 0.5em;
+  filter: brightness(.8) contrast(1.2);
+}
+#intro {
+  margin: 5em 0 5em 2.5em;
+  padding: 1em;
+  border-radius: 10px;
+  background-color:#1a1a1a;
+}
+#guitar {
+  border-radius: 10px;
+  height: 30vw;
+  margin: 2.5em 2.5em 1em 0.5em;
+  filter: brightness(.8) contrast(1.2);
+}
+#simplicity {
+  margin: 5em 0 5em 2.5em;
+  padding: 1em;
+  border-radius: 10px;
+  background-color:#1a1a1a;
+}
+#sing {
+  border-radius: 10px;
+  float: right;
+  height: 25vw;
+  margin: 2.5em 2.5em 1em 0.5em;
+  filter: brightness(.8) contrast(1.2);
+}
+#instructions {
+  margin: 5em 5em 5em 2.5em;
+  padding: 1em;
+  width: 60vw;
+  border-radius: 10px;
+  background-color:#1a1a1a;
+  align-self: flex-end;
+}
