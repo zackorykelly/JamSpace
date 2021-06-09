@@ -22,7 +22,6 @@ const dataReducer = (state, action) => {
         user: action.newUser.id
       };
     case SET_PROJECT:
-      console.log(action);
       return {
         ...state,
         project: action.project
