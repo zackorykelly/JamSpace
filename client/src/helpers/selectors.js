@@ -22,16 +22,15 @@ export function getProjectsForUser(state, user) {
 export function getFilesForProject(state, project) {
   const filesForProject = [];
   const projectFound = state.projects.find((el) => el.id === project.id);
-
   if (!projectFound) {
     return [];
   }
 
   state.files.forEach((file) => {
-    if (file.project_id === project.id) {
-      filesForProject.push(state.files[file]);
+    if (file.project_id === projectFound.id) {
+      filesForProject.push(file);
     }
   });
-  console.log(filesForProject);
+
   return filesForProject;
 }

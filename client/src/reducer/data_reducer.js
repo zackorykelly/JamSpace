@@ -28,7 +28,6 @@ const dataReducer = (state, action) => {
         user: action.newUser.id,
       };
     case SET_PROJECT:
-      console.log(action);
       return {
         ...state,
         project: action.project
@@ -36,7 +35,7 @@ const dataReducer = (state, action) => {
     case CLOSE_PROJECT:
       return {
         ...state,
-        project: 0
+        project: null
       };
     default:
       return state;

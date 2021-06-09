@@ -2,8 +2,13 @@ import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { getCookie, eraseCookie } from "../../helpers/cookie";
-import { getProject, getProjectsForUser } from "../../helpers/selectors";
+import {
+  getProject,
+  getProjectsForUser,
+  getFilesForProject
+} from "../../helpers/selectors";
 import { SET_PROJECT, CLOSE_PROJECT } from "../../reducer/data_reducer";
+import Project from "../Project/Project";
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
 import Home from "../Home/Home";
@@ -16,14 +21,17 @@ export default function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const loggedInUser = Number(getCookie('userAuth'))
+    const loggedInUser = Number(getCookie("userAuth"));
 
-    const u = state.users && state.users.length && state.users.find(user => {
-      console.log('finduser', user.id)
-      return user.id === loggedInUser
-    })
-    setUser(u)
-  }, [state])
+    const u =
+      state.users &&
+      state.users.length &&
+      state.users.find((user) => {
+        console.log("finduser", user.id);
+        return user.id === loggedInUser;
+      });
+    setUser(u);
+  }, [state]);
 
   const handleLogout = () => {
     eraseCookie("userAuth");
@@ -34,48 +42,70 @@ export default function App() {
     const project = getProject(state, projectId);
     dispatch({
       type: SET_PROJECT,
-      project,
+      project
     });
   };
 
   const closeProject = () => dispatch({ type: CLOSE_PROJECT });
 
   const currentUserProjects = user ? getProjectsForUser(state, user) : [];
+  const currentProjectFiles = state.project
+    ? getFilesForProject(state, state.project)
+    : [];
 
   return (
     <Router>
       <div className="App">
         <nav className="App-nav">
           <div className="directional-links">
-          <Link className="nav-logo" to="/">
-            JamSpace
-          </Link>
-          <Link className="nav-link" to="/projects">
-            Projects
-          </Link>
-          <Link className="nav-link" to="/recorder">
-            Recorder
-          </Link>
-          <Link className="nav-link" to="/">
-            Home
-          </Link>
+            <Link className="nav-logo" to="/">
+              JamSpace
+            </Link>
+            {user && (
+              <Link className="nav-link" to="/projects">
+                Projects
+              </Link>
+            )}
+            {/* {!user ? (
+              <Link className="nav-link" to="/login">
+                LOGIN
+              </Link>
+            ) : (
+              <p>You are logged in as {user.full_name}</p>
+            )}
+            {!user ? (
+              <Link className="nav-link" to="/register">
+                REGISTER
+              </Link>
+            ) : (
+              <Link onClick={handleLogout} className="nav-link" to="/">
+                LOGOUT
+              </Link>
+            )} */}
+
+            {user && (
+              <Link className="nav-link" to="/recorder">
+                Record
+              </Link>
+            )}
           </div>
           <div className="user-auth">
-          {!user ? <Link className="nav-link" to="/login">
-            Login
-          </Link>
-            :
-            <p>You are logged in as {user.full_name}</p>
-          }
-          {!user ?
-            <Link className="nav-link" to="/register">
-              Register
-          </Link>
-            :
-            <Link onClick={handleLogout} className="nav-link" to="/">
-              Logout
-          </Link>
-          }
+            {!user ? (
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
+            ) : (
+              <p>You are logged in as {user.full_name}</p>
+            )}
+            {!user ? (
+              <Link className="nav-link" to="/register">
+                Register
+              </Link>
+            ) : (
+              <Link onClick={handleLogout} className="nav-link" to="/">
+                Logout
+              </Link>
+            )}
           </div>
         </nav>
         <Switch>
@@ -85,20 +115,39 @@ export default function App() {
           </Route>
           <Route path="/projects" exact>
             {!user && <Login users={state.users} setUser={setUser} />}
-            {user && (
+            {user && !state.project && (
               <ProjectList
                 projects={currentUserProjects}
                 setProject={setProject}
               />
             )}
+            {user && state.project && (
+              <Project
+                project={state.project}
+                closeProject={closeProject}
+                files={currentProjectFiles}
+              />
+            )}
           </Route>
-          <Route path="/users" exact>
-            <h1>I AM USERS</h1>
-          </Route>
-          <Route exact path="/login" render={props => <Login {...props} users={state.users} setUser={setUser} />} >
-          </Route>
-          <Route exact path="/register" render={props => <Register {...props} users={state.users} dispatch={dispatch} setUser={setUser} />} >
-          </Route>
+          <Route
+            exact
+            path="/login"
+            render={(props) => (
+              <Login {...props} users={state.users} setUser={setUser} />
+            )}
+          ></Route>
+          <Route
+            exact
+            path="/register"
+            render={(props) => (
+              <Register
+                {...props}
+                users={state.users}
+                dispatch={dispatch}
+                setUser={setUser}
+              />
+            )}
+          ></Route>
           <Route
             exact
             path="/login"
