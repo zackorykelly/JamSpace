@@ -41,8 +41,6 @@
   transform: translate(0, 12px) scale(0.75);
 }
 
-
-
 #float-email {
   display: flex;
   flex-direction: column;
@@ -125,7 +123,11 @@
   border: none;
   border-radius: 5px;
   width: 80%;
-  height: 2em;
-  background-color: black;
-  color: white;
+  height: 2.5em;
+  background-color: #0f0f0f;
+  color: #a6a6a6;
+  &:hover{
+    background-color:#1c1c1c;
+    color: #b8b8b8;
+  }
 }

@@ -5,7 +5,7 @@ import { getCookie, eraseCookie } from "../../helpers/cookie";
 import {
   getProject,
   getProjectsForUser,
-  getFilesForProject
+  getFilesForProject,
 } from "../../helpers/selectors";
 import { SET_PROJECT, CLOSE_PROJECT } from "../../reducer/data_reducer";
 import Project from "../Project/Project";
@@ -15,6 +15,7 @@ import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
+import Player from "../Player/Player";
 
 export default function App() {
   const { state, dispatch } = useApplicationData();
@@ -41,7 +42,7 @@ export default function App() {
     const project = getProject(state, projectId);
     dispatch({
       type: SET_PROJECT,
-      project
+      project,
     });
   };
 
