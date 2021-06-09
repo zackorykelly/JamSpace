@@ -1,13 +1,17 @@
 $logo-color: #e6e6e6;
 $primary-text-color: #a6a6a6;
 $hover-primary-text-color: #d9d9d9;
-$main-bg-color: #1a1a1a;
+$main-bg-color: #35363a;
+body {
+  background-color: $main-bg-color;
+
+}
 .App {
   text-align: center;
-  background-color: #35363a;
+  background-color: $main-bg-color;
 }
 .App-nav {
-  background-color: $main-bg-color;
+  background-color: #1a1a1a;
   max-height: 200vh;
   display: flex;
   flex-direction: row;
@@ -37,3 +41,4 @@ $main-bg-color: #1a1a1a;
   color: $hover-primary-text-color;
   }
 }
+

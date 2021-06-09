@@ -2,7 +2,6 @@ import React, { useState, Fragment } from 'react';
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { setCookie } from '../../helpers/cookie'
-// import classNames from "classnames";
 import "./Login.scss";
 
 export default function Login(props) {
