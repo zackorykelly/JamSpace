@@ -8,6 +8,7 @@ export default function useApplicationData() {
     users: [],
     project: null,
     projects: [],
+    file: null,
     files: [],
     remarks: [],
     loading: true

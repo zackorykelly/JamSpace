@@ -6,7 +6,7 @@ export default function File(props) {
   let fileClass = classNames("file__item");
 
   return (
-    <section className={fileClass}>
+    <section className={fileClass} onClick={() => props.setFile(props.fileId)}>
       <h4>{props.name}: </h4>
       <p className={"file__description"}>{props.description}</p>
     </section>

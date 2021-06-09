@@ -2,6 +2,10 @@ export function getProject(state, projectId) {
   return state.projects.find((proj) => proj.id === projectId);
 }
 
+export function getFile(state, fileId) {
+  return state.files.find((file) => file.id === fileId);
+}
+
 export function getProjectsForUser(state, user) {
   let projectsForUser = [];
   const userFound = state.users.find((el) => el.id === user.id);

@@ -4,11 +4,17 @@ import React, { useState, useEffect } from "react";
 import { getCookie, eraseCookie } from "../../helpers/cookie";
 import {
   getProject,
+  getFile,
   getProjectsForUser,
   getUsersForProject,
   getFilesForProject
 } from "../../helpers/selectors";
-import { SET_PROJECT, CLOSE_PROJECT } from "../../reducer/data_reducer";
+import {
+  SET_PROJECT,
+  CLOSE_PROJECT,
+  SET_FILE,
+  CLOSE_FILE
+} from "../../reducer/data_reducer";
 import Project from "../Project/Project";
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
@@ -46,7 +52,18 @@ export default function App() {
     });
   };
 
+  const setFile = (fileId) => {
+    closeFile();
+    const file = getFile(state, fileId);
+    console.log("setFile: ", file);
+    dispatch({
+      type: SET_FILE,
+      file
+    });
+  };
+
   const closeProject = () => dispatch({ type: CLOSE_PROJECT });
+  const closeFile = () => dispatch({ type: CLOSE_FILE });
 
   const currentUserProjects = user ? getProjectsForUser(state, user) : [];
   const currentProjectUsers = state.project
@@ -69,23 +86,6 @@ export default function App() {
                 Projects
               </Link>
             )}
-            {/* {!user ? (
-              <Link className="nav-link" to="/login">
-                LOGIN
-              </Link>
-            ) : (
-              <p>You are logged in as {user.full_name}</p>
-            )}
-            {!user ? (
-              <Link className="nav-link" to="/register">
-                REGISTER
-              </Link>
-            ) : (
-              <Link onClick={handleLogout} className="nav-link" to="/">
-                LOGOUT
-              </Link>
-            )} */}
-
             {user && (
               <Link className="nav-link" to="/recorder">
                 Record
@@ -130,6 +130,7 @@ export default function App() {
                 closeProject={closeProject}
                 files={currentProjectFiles}
                 users={currentProjectUsers}
+                setFile={setFile}
               />
             )}
           </Route>
