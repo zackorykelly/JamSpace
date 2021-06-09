@@ -2,6 +2,7 @@ export const SET_DATA = "SET_DATA";
 export const SET_PROJECT = "SET_PROJECT";
 export const CLOSE_PROJECT = "CLOSE_PROJECT";
 export const ADD_USER = "ADD_USER";
+export const ADD_FILE = "ADD_FILE";
 
 const dataReducer = (state, action) => {
   switch (action.type) {
@@ -13,13 +14,18 @@ const dataReducer = (state, action) => {
         files: action.response[2].data,
         users_projects: action.response[3].data,
         //remarks: action.response[4].data,
-        loading: false
+        loading: false,
+      };
+    case ADD_FILE:
+      return {
+        ...state,
+        files: [...state.files, action.newFile],
       };
     case ADD_USER:
       return {
         ...state,
         users: [...state.users, action.newUser],
-        user: action.newUser.id
+        user: action.newUser.id,
       };
     case SET_PROJECT:
       console.log(action);
