@@ -2,7 +2,11 @@ import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { getCookie, eraseCookie } from "../../helpers/cookie";
-import { getProject, getProjectsForUser } from "../../helpers/selectors";
+import {
+  getProject,
+  getProjectsForUser,
+  getFilesForProject
+} from "../../helpers/selectors";
 import { SET_PROJECT, CLOSE_PROJECT } from "../../reducer/data_reducer";
 import Project from "../Project/Project";
 import ProjectList from "../ProjectList/ProjectList";
@@ -44,6 +48,9 @@ export default function App() {
   const closeProject = () => dispatch({ type: CLOSE_PROJECT });
 
   const currentUserProjects = user ? getProjectsForUser(state, user) : [];
+  const currentProjectFiles = state.project
+    ? getFilesForProject(state, state.project)
+    : [];
 
   return (
     <Router>
@@ -52,9 +59,6 @@ export default function App() {
           <p className="title">JamSpace</p>
           <Link className="nav-link" to="/projects">
             PROJECTS
-          </Link>
-          <Link className="nav-link" to="/users">
-            USERS
           </Link>
           {!user ? (
             <Link className="nav-link" to="/login">
@@ -94,11 +98,12 @@ export default function App() {
               />
             )}
             {user && state.project && (
-              <Project project={state.project} closeProject={closeProject} />
+              <Project
+                project={state.project}
+                closeProject={closeProject}
+                files={currentProjectFiles}
+              />
             )}
-          </Route>
-          <Route path="/users" exact>
-            <h1>I AM USERS</h1>
           </Route>
           <Route
             exact
