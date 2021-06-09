@@ -1,15 +1,15 @@
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
-import { getCookie, eraseCookie } from '../../helpers/cookie'
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { getCookie, eraseCookie } from "../../helpers/cookie";
+import { getProject, getProjectsForUser } from "../../helpers/selectors";
+import { SET_PROJECT, CLOSE_PROJECT } from "../../reducer/data_reducer";
 import ProjectList from "../ProjectList/ProjectList";
 import useApplicationData from "../../hooks/useApplicationData";
 import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
-import { getProjectsForUser } from "../../helpers/selectors";
 
 export default function App() {
   const { state, dispatch } = useApplicationData();
@@ -26,14 +26,21 @@ export default function App() {
   }, [state])
 
   const handleLogout = () => {
-    eraseCookie('userAuth')
-    setUser(null)
-  }
+    eraseCookie("userAuth");
+    setUser(null);
+  };
 
-  const history = useHistory();
-  const handleClick = () => history.push("/projects");
+  const setProject = (projectId) => {
+    const project = getProject(state, projectId);
+    dispatch({
+      type: SET_PROJECT,
+      project,
+    });
+  };
 
-  const currentUserProjects = getProjectsForUser(state, state.users[1]);
+  const closeProject = () => dispatch({ type: CLOSE_PROJECT });
+
+  const currentUserProjects = user ? getProjectsForUser(state, user) : [];
 
   return (
     <Router>
@@ -77,8 +84,13 @@ export default function App() {
             {/* <pre>{JSON.stringify(state.users, null, "\t")}</pre> */}
           </Route>
           <Route path="/projects" exact>
-            <p>User: {JSON.stringify(state.users[1], null, "\t")}</p>
-            <ProjectList projects={currentUserProjects} />
+            {!user && <Login users={state.users} setUser={setUser} />}
+            {user && (
+              <ProjectList
+                projects={currentUserProjects}
+                setProject={setProject}
+              />
+            )}
           </Route>
           <Route path="/users" exact>
             <h1>I AM USERS</h1>
@@ -100,7 +112,14 @@ export default function App() {
             )}
           ></Route>
           <Route path="/recorder" exact>
-            <Media />
+            {!user && <Login users={state.users} setUser={setUser} />}
+            {user && (
+              <Media
+                currentProject={1}
+                currentUser={user}
+                dispatch={dispatch}
+              />
+            )}
           </Route>
         </Switch>
       </div>

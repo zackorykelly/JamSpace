@@ -4,7 +4,7 @@ CREATE TABLE "files" (
   "id" SERIAL PRIMARY KEY NOT NULL,
   "project_id" INTEGER REFERENCES projects(id) ON DELETE CASCADE,
   "name" VARCHAR(255) NOT NULL,
-  -- "location" VARCHAR(255) NOT NULL,
+  "location" VARCHAR(255) NOT NULL,
   "description" text,
   "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
