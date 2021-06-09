@@ -27,7 +27,6 @@ export default function App() {
       state.users &&
       state.users.length &&
       state.users.find((user) => {
-        console.log("finduser", user.id);
         return user.id === loggedInUser;
       });
     setUser(u);

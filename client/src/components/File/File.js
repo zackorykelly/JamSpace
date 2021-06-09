@@ -1,7 +1,14 @@
 import React from "react";
 import classNames from "classnames";
-import "./FileListItem.scss";
+import "./File.scss";
 
-export default function FileListItem(props) {
-  return <h1>I am File List Item</h1>;
+export default function File(props) {
+  let fileClass = classNames("file__item");
+
+  return (
+    <section className={fileClass}>
+      <h4>{props.name}: </h4>
+      <p className={"file__description"}>{props.description}</p>
+    </section>
+  );
 }

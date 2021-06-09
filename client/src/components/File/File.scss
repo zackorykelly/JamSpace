@@ -1,0 +1,38 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.file {
+  &__item {
+    @include fade;
+
+    color: #dce2e9;
+    height: 5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      background-color: #888787;
+      cursor: pointer;
+      color: $dark-background;
+    }
+
+    &--selected {
+      background-color: darken($white, 5%);
+      color: $dark-background;
+
+      &:hover {
+        background-color: darken($white, 5%);
+      }
+    }
+
+    &--full {
+      opacity: $inactive-opacity;
+    }
+  }
+
+  &__description {
+    display: flex;
+    font-size: 14px;
+  }
+}
