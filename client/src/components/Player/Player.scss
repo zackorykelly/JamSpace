@@ -1,9 +1,14 @@
 .file-player {
-  background-color: grey;
-  height: min-content;
+  background-color: blanchedalmond;
+  border: 2px solid black;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   audio {
-    background-color: rgb(0, 255, 0);
-    border: rgb(255, 0, 0) dashed 5px;
+    border: black solid 3px;
+    box-sizing: border-box;
     border-radius: 30px;
   }
 }
