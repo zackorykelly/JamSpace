@@ -19,6 +19,22 @@ export function getProjectsForUser(state, user) {
   return projectsForUser;
 }
 
+export function getUsersForProject(state, project) {
+  let usersForProject = [];
+  const projectFound = state.projects.find((el) => el.id === project.id);
+  if (!projectFound) {
+    return [];
+  }
+
+  state.users_projects.forEach((el) => {
+    if (el.project_id === project.id) {
+      usersForProject.push(state.users[el.user_id]);
+    }
+  });
+
+  return usersForProject;
+}
+
 export function getFilesForProject(state, project) {
   const filesForProject = [];
   const projectFound = state.projects.find((el) => el.id === project.id);

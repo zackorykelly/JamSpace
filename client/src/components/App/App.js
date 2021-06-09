@@ -5,6 +5,7 @@ import { getCookie, eraseCookie } from "../../helpers/cookie";
 import {
   getProject,
   getProjectsForUser,
+  getUsersForProject,
   getFilesForProject
 } from "../../helpers/selectors";
 import { SET_PROJECT, CLOSE_PROJECT } from "../../reducer/data_reducer";
@@ -48,6 +49,9 @@ export default function App() {
   const closeProject = () => dispatch({ type: CLOSE_PROJECT });
 
   const currentUserProjects = user ? getProjectsForUser(state, user) : [];
+  const currentProjectUsers = state.project
+    ? getUsersForProject(state, state.project)
+    : [];
   const currentProjectFiles = state.project
     ? getFilesForProject(state, state.project)
     : [];
@@ -125,6 +129,7 @@ export default function App() {
                 project={state.project}
                 closeProject={closeProject}
                 files={currentProjectFiles}
+                users={currentProjectUsers}
               />
             )}
           </Route>
