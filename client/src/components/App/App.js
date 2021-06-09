@@ -88,9 +88,6 @@ export default function App() {
                 Record
               </Link>
             )}
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
           </div>
           <div className="user-auth">
             {!user ? (
