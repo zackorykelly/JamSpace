@@ -10,6 +10,7 @@ import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
+import Player from "../Player/Player";
 
 export default function App() {
   const { state, dispatch } = useApplicationData();
@@ -79,6 +80,7 @@ export default function App() {
             HOME
           </Link>
         </nav>
+        <Player />
         <Switch>
           <Route path="/" exact>
             <Home />
