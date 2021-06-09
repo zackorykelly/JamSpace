@@ -1,5 +1,6 @@
 import React from "react";
 import MicRecorder from "mic-recorder-to-mp3";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./Media.scss";
 import { ADD_FILE } from "../../reducer/data_reducer";
@@ -9,7 +10,7 @@ export default function Media(props) {
     bitRate: 128,
   });
 
-  const start = () => {
+  const start = (e) => {
     recorder
       .start()
       .then(() => {
@@ -20,7 +21,7 @@ export default function Media(props) {
       });
   };
 
-  const stop = () => {
+  const stop = (e) => {
     recorder
       .stop()
       .getMp3()
@@ -36,17 +37,25 @@ export default function Media(props) {
       });
   };
 
-  const save = async () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const save = async (data) => {
+    const formData = new FormData();
     const playback = document.getElementsByClassName("playback")[0];
     let blob = await fetch(playback.src).then((res) => res.blob());
-    let data = new FormData();
-    data.append("file", blob);
-    data.append("userId", 1);
-    data.append("projectId", 1);
-    data.append("name", "Beatz");
-    data.append("description", "Funky fresh.com");
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("file", blob);
+    formData.append("userID", props.currentUser.id);
+    formData.append("projectID", props.currentProject);
+    console.log(formData);
     axios
-      .post("/api/files", data)
+      .post("/api/files", formData)
       .then((res) => {
         console.log(res.status);
         console.log(res);
@@ -55,9 +64,9 @@ export default function Media(props) {
             type: ADD_FILE,
             newFile: res.data,
           });
-          alert("File saved");
+          alert("File saved successfully.");
         } else {
-          alert("The file could not be saved");
+          alert("Error! The file could not be saved.");
         }
       })
       .catch((err) => console.log(err));
@@ -86,13 +95,38 @@ export default function Media(props) {
   // };
 
   return (
-    <div>
-      <audio controls className="playback" type="audio/mp3"></audio>
-      <br></br>
-      <button onClick={() => start()}>Start</button>
-      <button onClick={() => stop()}>Stop</button>
-      <button onClick={() => save()}>Save</button>
-      <br></br>
+    <div className="submit-file-form">
+      <form onSubmit={handleSubmit(save)}>
+        <div className="recorder-player">
+          <audio controls className="playback" type="audio/mp3"></audio>
+          <br></br>
+          <button type="button" onClick={(e) => start(e)}>
+            Start
+          </button>
+          <button type="button" onClick={(e) => stop(e)}>
+            Stop
+          </button>
+        </div>
+        <label for="title">Title: </label>
+        <input
+          {...register("title")}
+          id="title"
+          name="title"
+          type="text"
+          placeholder="Title"
+        ></input>
+        <label for="description">Description: </label>
+        <input
+          {...register("description")}
+          id="description"
+          name="description"
+          type="text"
+          placeholder="Description"
+        ></input>
+        <button type="submit">Save</button>
+      </form>
+      {/* Below is  */}
+      {/* <br></br> */}
       {/* <form encType="multipart/form-data" onSubmit={(ev) => onSubmit(ev)}>
         <input id="fileInput" type="file"></input>
         <button type="submit">Save2</button>

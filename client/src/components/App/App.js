@@ -129,7 +129,13 @@ export default function App() {
           ></Route>
           <Route path="/recorder" exact>
             {!user && <Login users={state.users} setUser={setUser} />}
-            {user && <Media dispatch={dispatch} />}
+            {user && (
+              <Media
+                currentProject={1}
+                currentUser={user}
+                dispatch={dispatch}
+              />
+            )}
           </Route>
         </Switch>
       </div>
