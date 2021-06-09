@@ -14,8 +14,8 @@ export default function ProjectList(props) {
 
   return (
     <>
-      <h1>Projects List</h1>
-      {listProjects}
+      <h1>Projects</h1>
+      <ul>{listProjects}</ul>
     </>
   );
 }

@@ -6,7 +6,7 @@ export default function useApplicationData() {
   const [state, dispatch] = useReducer(dataReducer, {
     user: 0,
     users: [],
-    project: 0,
+    project: null,
     projects: [],
     files: [],
     remarks: [],

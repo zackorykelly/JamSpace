@@ -1,4 +1,10 @@
+$logo-color: #e6e6e6;
+$primary-text-color: #a6a6a6;
+$hover-primary-text-color: #d9d9d9;
+$main-bg-color: #35363a;
+
 .login-form {
+  background-color: $main-bg-color;
   margin: auto;
   width: 30%;
   margin-top: 30vh;
@@ -72,7 +78,6 @@
     transition: all 0.2s ease-out;
   }
 }
-
 #float-password:focus-within label {
   transform: translate(0, 12px) scale(0.75);
 }
@@ -85,7 +90,11 @@
   border: none;
   border-radius: 5px;
   width: 80%;
-  height: 2em;
-  background-color: black;
-  color: white;
+  height: 2.5em;
+  background-color: #0f0f0f;
+  color: #a6a6a6;
+  &:hover{
+    background-color:#1c1c1c;
+    color: #b8b8b8;
+  }
 }
