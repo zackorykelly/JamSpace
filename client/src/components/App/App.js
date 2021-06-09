@@ -5,7 +5,7 @@ import { getCookie, eraseCookie } from "../../helpers/cookie";
 import {
   getProject,
   getProjectsForUser,
-  getFilesForProject
+  getFilesForProject,
 } from "../../helpers/selectors";
 import { SET_PROJECT, CLOSE_PROJECT } from "../../reducer/data_reducer";
 import Project from "../Project/Project";
@@ -43,7 +43,7 @@ export default function App() {
     const project = getProject(state, projectId);
     dispatch({
       type: SET_PROJECT,
-      project
+      project,
     });
   };
 
@@ -109,7 +109,6 @@ export default function App() {
             )}
           </div>
         </nav>
-        <Player />
         <Switch>
           <Route path="/" exact>
             <Home />
