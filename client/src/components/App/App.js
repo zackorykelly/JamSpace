@@ -61,7 +61,12 @@ export default function App() {
             <Link className="nav-logo" to="/">
               JamSpace
             </Link>
-            {!user ? (
+            {user && (
+              <Link className="nav-link" to="/projects">
+                Projects
+              </Link>
+            )}
+            {/* {!user ? (
               <Link className="nav-link" to="/login">
                 LOGIN
               </Link>
@@ -76,11 +81,13 @@ export default function App() {
               <Link onClick={handleLogout} className="nav-link" to="/">
                 LOGOUT
               </Link>
-            )}
+            )} */}
 
-            <Link className="nav-link" to="/recorder">
-              Recorder
-            </Link>
+            {user && (
+              <Link className="nav-link" to="/recorder">
+                Record
+              </Link>
+            )}
             <Link className="nav-link" to="/">
               Home
             </Link>
