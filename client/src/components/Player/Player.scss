@@ -1,0 +1,14 @@
+.file-player {
+  background-color: blanchedalmond;
+  border: 2px solid black;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  audio {
+    border: black solid 3px;
+    box-sizing: border-box;
+    border-radius: 30px;
+  }
+}

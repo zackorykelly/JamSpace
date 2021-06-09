@@ -1,8 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
 const { getPostsByUsers } = require("../helpers/dataHelpers");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    const randomNumber = Math.floor(Math.random() * (999999 - 100000) + 100000);
+    cb(null, randomNumber + "-" + Date.now() + ".mp3");
+  },
+});
+const upload = multer({ storage: storage });
 
 module.exports = ({ getFiles, addFile }) => {
   router.get("/", (req, res) => {
@@ -20,7 +30,7 @@ module.exports = ({ getFiles, addFile }) => {
 
   router.post("/", upload.single("file"), (req, res) => {
     console.log(req.body);
-    const filePath = req.file.destination + req.file.filename;
+    const filePath = req.file.filename;
     const { userID, projectID, title, description } = req.body;
     addFile(projectID, title, description, filePath)
       .then((response) => {

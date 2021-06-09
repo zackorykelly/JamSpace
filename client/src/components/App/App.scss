@@ -1,10 +1,15 @@
+$logo-color: #e6e6e6;
+$primary-text-color: #a6a6a6;
+$hover-primary-text-color: #d9d9d9;
+$main-bg-color: #35363a;
+body {
+  background-color: $main-bg-color;
 
+}
 .App {
   text-align: center;
-  background-color: #35363a;
+  background-color: $main-bg-color;
 }
-
-
 .App-nav {
   background-color: #1a1a1a;
   max-height: 200vh;
@@ -12,7 +17,7 @@
   flex-direction: row;
   justify-content: space-between;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: $primary-text-color;
 }
 .directional-links {
   display: flex;
@@ -25,54 +30,15 @@
 .nav-logo {
   padding: 1em;
   text-decoration: none;
-  color: #e6e6e6;
+  color: $logo-color;
   font-weight: bold;
 }
 .nav-link {
   padding: 1em;
   text-decoration: none;
-  color: #a6a6a6;
+  color: $primary-text-color;
+  &:hover {
+  color: $hover-primary-text-color;
+  }
 }
-.nav-link:hover {
-color: #d9d9d9;
-}
 
-
-
-
-
-//was here, unsed
-
-// .App-logo {
-//   height: 40vmin;
-//   pointer-events: none;
-// }
-
-// @media (prefers-reduced-motion: no-preference) {
-//   .App-logo {
-//     animation: App-logo-spin infinite 20s linear;
-//   }
-// }
-// .App-header {
-//   background-color: #282c34;
-//   min-height: 100vh;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   font-size: calc(10px + 2vmin);
-//   color: white;
-// }
-// .title {
-//   display: flex;
-//   align-items: left;
-//   padding-left: 0.5em;
-// }
-// @keyframes App-logo-spin {
-//   from {
-//     transform: rotate(0deg);
-//   }
-//   to {
-//     transform: rotate(360deg);
-//   }
-// }

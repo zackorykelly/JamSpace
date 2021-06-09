@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { ADD_USER } from "../../reducer/data_reducer";
 import { setCookie } from '../../helpers/cookie'
-
-
 import "./Register.scss";
 
 export default function Register(props) {
@@ -38,7 +36,6 @@ export default function Register(props) {
           alert("user alr exists");
         }
       })
-
       .catch((error) => console.error(error.message));
   };
 
