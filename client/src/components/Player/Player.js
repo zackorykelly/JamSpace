@@ -9,7 +9,7 @@ export default function Player(props) {
     <div className="file-player">
       <audio
         controls
-        src="/uploads/ba5477ac2ac16ecb257633dbb7b82af9"
+        src="/uploads/ba5477ac2ac16ecb257633dbb7b82af9.mp3"
         type="mp3"
       />
     </div>

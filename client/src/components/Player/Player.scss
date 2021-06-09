@@ -1,0 +1,9 @@
+.file-player {
+  background-color: grey;
+  height: min-content;
+  audio {
+    background-color: rgb(0, 255, 0);
+    border: rgb(255, 0, 0) dashed 5px;
+    border-radius: 30px;
+  }
+}
