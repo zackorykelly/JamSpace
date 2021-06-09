@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import "./Player.scss";
 
 export default function Player(props) {

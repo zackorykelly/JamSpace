@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { ADD_USER } from "../../reducer/data_reducer";
@@ -10,9 +10,7 @@ export default function Register(props) {
 
   const {
     register,
-    handleSubmit,
-    watch,
-    formState: { errors }
+    handleSubmit
   } = useForm();
   const onSubmit = (data) => {
     console.log("data", data);
