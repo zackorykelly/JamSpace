@@ -94,10 +94,10 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const addFile = (projectID, name, description) => {
+  const addFile = (projectID, name, description, filePath) => {
     const query = {
-      text: "INSERT INTO files (project_id, name, description) VALUES ($1, $2, $3) RETURNING *",
-      values: [projectID, name, description],
+      text: "INSERT INTO files (project_id, name, description, location) VALUES ($1, $2, $3, $4) RETURNING *",
+      values: [projectID, name, description, filePath],
     };
 
     return db.query(query).then((res) => res.rows[0]);

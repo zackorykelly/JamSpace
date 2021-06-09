@@ -19,11 +19,10 @@ module.exports = ({ getFiles, addFile }) => {
   });
 
   router.post("/", upload.single("file"), (req, res) => {
-    const filePath = req.file.destination + req.file.filename;
-    console.log(filePath);
     console.log(req.body);
+    const filePath = req.file.destination + req.file.filename;
     const { userID, projectID, title, description } = req.body;
-    addFile(projectID, title, description)
+    addFile(projectID, title, description, filePath)
       .then((response) => {
         res.status(200);
         res.json(response);
