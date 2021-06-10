@@ -12,7 +12,6 @@
 /build
 
 # misc
-client/src/uploads/
 .DS_Store
 .env.local
 .env.development.local
