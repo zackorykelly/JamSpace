@@ -9,14 +9,15 @@ export function getFile(state, fileId) {
 export function getProjectsForUser(state, user) {
   let projectsForUser = [];
   const userFound = state.users.find((el) => el.id === user.id);
-
   if (!userFound) {
     return [];
   }
 
   state.users_projects.forEach((el) => {
     if (el.user_id === user.id) {
-      projectsForUser.push(state.projects[el.project_id]);
+      projectsForUser.push(
+        state.projects.find((proj) => proj.id === el.project_id)
+      );
     }
   });
 
@@ -32,7 +33,7 @@ export function getUsersForProject(state, project) {
 
   state.users_projects.forEach((el) => {
     if (el.project_id === project.id) {
-      usersForProject.push(state.users[el.user_id]);
+      usersForProject.push(state.users.find((user) => user.id === el.user_id));
     }
   });
 
