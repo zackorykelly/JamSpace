@@ -10,6 +10,7 @@ export default function Player(props) {
   return (
     <div className="file-player">
       <span>{props.currentFile.name}</span>
+      <input type="checkbox" />
       <audio controls src={path} type="mp3" />
       <span>{props.currentFile.description}</span>
     </div>

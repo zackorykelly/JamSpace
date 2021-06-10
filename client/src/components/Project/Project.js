@@ -7,13 +7,7 @@ export default function Project(props) {
   let projectClass = classNames("project__item");
 
   const listFiles = props.files.map((file) => (
-    <File
-      key={file.id}
-      fileId={file.id}
-      name={file.name}
-      description={file.description}
-      setFile={props.setFile}
-    ></File>
+    <File key={file.id} file={file} setFile={props.setFile}></File>
   ));
 
   const listUsers = props.users.map((user) => (
