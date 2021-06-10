@@ -1,7 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = ({ getProjects, getProjectsByUser, getProjectByName, addProject, addUserProject }) => {
+module.exports = ({
+  getProjects,
+  getProjectsByUser,
+  getProjectByName,
+  addProject,
+  addUserProject
+}) => {
   router.get("/", (req, res) => {
     getProjects()
       .then((projects) => {
@@ -16,11 +22,11 @@ module.exports = ({ getProjects, getProjectsByUser, getProjectByName, addProject
   });
 
   router.post("/", (req, res) => {
-    const { project_name, project_description, user } = req.body;
+    const { project_name, project_description, user_id } = req.body;
     // const userId = req.cookies.userAuth
     console.log("WHAT IS REQ BODY", req.body);
 
-    getProjectByName(project_name, user)
+    getProjectByName(project_name)
       .then(async (project) => {
         if (project.length !== 0) {
           res.status(501).json({
@@ -30,20 +36,7 @@ module.exports = ({ getProjects, getProjectsByUser, getProjectByName, addProject
           return await addProject(project_name, project_description);
         }
       })
-      .then( async (newProject) => {
-        if (!newProject) {
-          res.status(501).json({
-            msg: 'cant create the users_projects row'
-          });
-        } else {
-          return await addUserProject(newProject.id, user)
-        }
-      })
       .then((newProject) => res.json(newProject))
-      // .then(() => {
-      //   const newProject = getProjectByName(projectName, user);
-      //   return addUserProject(newProject.id, user);
-      // })
       .catch((err) =>
         res.json({
           error: err.message
