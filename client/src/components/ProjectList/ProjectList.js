@@ -15,6 +15,7 @@ export default function ProjectList(props) {
   return (
     <>
       <h1>Projects</h1>
+      <section className="project-list__item">New Project</section>
       <ul>{listProjects}</ul>
     </>
   );
