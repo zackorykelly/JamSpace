@@ -12,7 +12,7 @@
 /build
 
 # misc
-uploads
+/src/uploads
 .DS_Store
 .env.local
 .env.development.local
