@@ -1,7 +1,7 @@
 import React from "react";
-import "./AddUser.scss";
+import "./AddProject.scss";
 
-export default function AddUser(props) {
+export default function AddProject(props) {
   return (
     <>
       <p>HELLO</p>
