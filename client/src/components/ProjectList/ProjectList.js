@@ -17,7 +17,7 @@ export default function ProjectList(props) {
 
   return (
     <>
-      <h1>Projects</h1>
+      <h1>Your Projects</h1>
       {!addProject && (
         <section
           className="project-list__item"

@@ -28,7 +28,9 @@ export default function Project(props) {
   return (
     <>
       <h1>Project: {props.project.name}</h1>
-      <button onClick={props.closeProject}>Close</button>
+      <button className="btn btn-primary" onClick={props.closeProject}>
+        Close
+      </button>
       <div>
         <h4>Files</h4>
         {!recordFile && (
