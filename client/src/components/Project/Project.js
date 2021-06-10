@@ -17,6 +17,7 @@ export default function Project(props) {
   return (
     <>
       <h1>Project: {props.project.name}</h1>
+      <button onClick={props.closeProject}>Close</button>
       <div>
         <h4>Files</h4>
         {listFiles}
@@ -25,7 +26,6 @@ export default function Project(props) {
         <h4>Users</h4>
         {listUsers}
       </div>
-      <button onClick={props.closeProject}>Close</button>
     </>
   );
 }
