@@ -7,13 +7,13 @@ import {
   getFile,
   getProjectsForUser,
   getUsersForProject,
-  getFilesForProject
+  getFilesForProject,
 } from "../../helpers/selectors";
 import {
   SET_PROJECT,
   CLOSE_PROJECT,
   SET_FILE,
-  CLOSE_FILE
+  CLOSE_FILE,
 } from "../../reducer/data_reducer";
 import Project from "../Project/Project";
 import ProjectList from "../ProjectList/ProjectList";
@@ -49,7 +49,7 @@ export default function App() {
     const project = getProject(state, projectId);
     dispatch({
       type: SET_PROJECT,
-      project
+      project,
     });
   };
 
@@ -59,7 +59,7 @@ export default function App() {
     console.log("setFile: ", file);
     dispatch({
       type: SET_FILE,
-      file
+      file,
     });
   };
 

@@ -14,11 +14,21 @@ export default function Project(props) {
     <User key={user.id} name={user.full_name} email={user.email}></User>
   ));
 
+  const playAll = () => {
+    const players = document.getElementsByClassName("file-audio-player");
+    for (const player of players) {
+      player.play();
+    }
+  };
+
   return (
     <>
       <h1>Project: {props.project.name}</h1>
       <div>
         <h4>Files</h4>
+        <button className="btn btn-success" onClick={() => playAll()}>
+          Play All
+        </button>
         {listFiles}
       </div>
       <div>
