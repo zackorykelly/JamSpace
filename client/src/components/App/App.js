@@ -37,6 +37,8 @@ export default function App() {
       state.users.find((user) => {
         return user.id === loggedInUser;
       });
+    console.log("WHAT IS STATE DOT USERS", state.users)
+    console.log("WHAT IS U", u)
     setUser(u);
   }, [state]);
 
@@ -123,6 +125,8 @@ export default function App() {
               <ProjectList
                 projects={currentUserProjects}
                 setProject={setProject}
+                user={state.user}
+                dispatch={dispatch}
               />
             )}
             {user && state.project && (
@@ -131,6 +135,7 @@ export default function App() {
                 closeProject={closeProject}
                 files={currentProjectFiles}
                 users={currentProjectUsers}
+                user={state.user}
                 setFile={setFile}
               />
             )}

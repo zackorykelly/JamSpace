@@ -34,7 +34,7 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
 
     getUserByEmail(email)
       .then(async (user) => {
-        console.log('WHAT IS USER', user)
+        // console.log('WHAT IS USER', user)
         if (user) {
           res.status(501).json({
             msg: "Sorry, a user account with this email already exists"
