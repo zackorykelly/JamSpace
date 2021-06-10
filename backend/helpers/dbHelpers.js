@@ -59,9 +59,26 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getProjectByName = (projectName, userId) => {
+    const query = {
+      text: `SELECT projects.*, users_projects.user_id 
+      FROM projects 
+      INNER JOIN users_projects 
+      ON projects.id = users_projects.project_id 
+      WHERE projects.name = $1
+      AND users_projects.user_id = $2`,
+      values: [projectName, userId]
+    }
+    
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   const getProjectsByUser = (userId) => {
     const query = {
-      text: "SELECT * FROM projects WHERE user_id = $1",
+      text: "SELECT projects.* FROM projects WHERE user_id = $1",
       values: [userId],
     };
 
@@ -71,18 +88,28 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const addProject = () => {
+  const addProject = (projectName, projectDescription) => {
     const query = {
       text: `INSERT INTO projects (name, description) VALUES ($1, $2) RETURNING *`,
-      values: [name, description],
+      values: [projectName, projectDescription],
     };
-
     return db
       .query(query)
       .then((result) => result.rows[0])
-      .catch((err) => err);
+      // .catch((err) => err);
   };
 
+  const addUserProject = (projectId, userId) => {
+    const query = {
+      text: `INSERT INTO users_projects (project_id, user_id) VALUES ($1, $2) RETURNING *`,
+      values: [projectId, userId]
+    }
+    return db
+      .query(query)
+      .then((result) => result.rows)
+  }
+
+  
   const getFiles = () => {
     const query = {
       text: "SELECT * FROM files",
@@ -125,5 +152,7 @@ module.exports = (db) => {
     getFiles,
     addFile,
     getUsersProjects,
+    addUserProject,
+    getProjectByName
   };
 };

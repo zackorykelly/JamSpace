@@ -125,6 +125,8 @@ export default function App() {
               <ProjectList
                 projects={currentUserProjects}
                 setProject={setProject}
+                user={state.user}
+                dispatch={dispatch}
               />
             )}
             {user && state.project && (
@@ -133,6 +135,7 @@ export default function App() {
                 closeProject={closeProject}
                 files={currentProjectFiles}
                 users={currentProjectUsers}
+                user={state.user}
                 setFile={setFile}
               />
             )}

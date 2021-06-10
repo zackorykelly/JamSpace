@@ -1,5 +1,6 @@
 export const SET_DATA = "SET_DATA";
 export const SET_PROJECT = "SET_PROJECT";
+export const ADD_PROJECT = "ADD_PROJECT";
 export const CLOSE_PROJECT = "CLOSE_PROJECT";
 export const ADD_USER = "ADD_USER";
 export const ADD_FILE = "ADD_FILE";
@@ -38,6 +39,11 @@ const dataReducer = (state, action) => {
         ...state,
         users: [...state.users, action.newUser],
         user: action.newUser.id
+      };
+    case ADD_PROJECT:
+      return {
+        ...state,
+        projects: [...state.projects, action.newProject]
       };
     case SET_PROJECT:
       return {

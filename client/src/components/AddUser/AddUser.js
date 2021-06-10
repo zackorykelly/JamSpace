@@ -4,7 +4,7 @@ import "./AddUser.scss";
 export default function AddUser(props) {
   return (
     <>
-      <p>HELLO</p>
+      <p>HELLO test</p>
     </>
   );
 }
