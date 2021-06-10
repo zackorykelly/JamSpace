@@ -66,9 +66,9 @@ export default function Project(props) {
       {addUserSelected && (
         <section
           className="file__item"
-          onClick={() => setAddUserSelected(!addUserSelected)}
+          // onClick={() => setAddUserSelected(!addUserSelected)}
         >
-          <AddUser />
+          <AddUser currentProject={props.project} state={props.state} />
         </section>
       )}
       <button onClick={props.closeProject}>Close</button>

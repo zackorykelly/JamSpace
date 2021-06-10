@@ -6,6 +6,7 @@ export const ADD_USER = "ADD_USER";
 export const ADD_FILE = "ADD_FILE";
 export const SET_FILE = "SET_FILE";
 export const CLOSE_FILE = "CLOSE_FILE";
+export const ADD_USERS_PROJECTS = "ADD_USERS_PROJECTS";
 
 const dataReducer = (state, action) => {
   switch (action.type) {
@@ -17,43 +18,48 @@ const dataReducer = (state, action) => {
         files: action.response[2].data,
         users_projects: action.response[3].data,
         //remarks: action.response[4].data,
-        loading: false
+        loading: false,
       };
     case ADD_FILE:
       return {
         ...state,
-        files: [...state.files, action.newFile]
+        files: [...state.files, action.newFile],
       };
     case SET_FILE:
       return {
         ...state,
-        file: action.file
+        file: action.file,
       };
     case CLOSE_FILE:
       return {
         ...state,
-        file: null
+        file: null,
       };
     case ADD_USER:
       return {
         ...state,
         users: [...state.users, action.newUser],
-        user: action.newUser.id
+        user: action.newUser.id,
       };
     case ADD_PROJECT:
       return {
         ...state,
-        projects: [...state.projects, action.newProject]
+        projects: [...state.projects, action.newProject],
       };
     case SET_PROJECT:
       return {
         ...state,
-        project: action.project
+        project: action.project,
       };
     case CLOSE_PROJECT:
       return {
         ...state,
-        project: null
+        project: null,
+      };
+    case ADD_USERS_PROJECTS:
+      return {
+        ...state,
+        users_projects: [...state.users_projects, action.newUsersProjects],
       };
     default:
       return state;

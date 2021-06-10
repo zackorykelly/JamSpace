@@ -31,7 +31,7 @@ export default function ProjectList(props) {
           className="project-list__item"
           // onClick={() => setAddProject(!addProject)}
         >
-          <AddProject user={props.user} dispatch={props.dispatch}/>
+          <AddProject user={props.user} dispatch={props.dispatch} />
         </section>
       )}
       <ul>{listProjects}</ul>

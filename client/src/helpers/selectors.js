@@ -55,3 +55,13 @@ export function getFilesForProject(state, project) {
 
   return filesForProject;
 }
+
+export function getUserByEmail(state, email) {
+  console.log(email);
+  const foundUser = state.users.find((el) => el.email === email);
+  console.log("FOUNDUSER", foundUser);
+  if (!foundUser) {
+    return null;
+  }
+  return foundUser;
+}
