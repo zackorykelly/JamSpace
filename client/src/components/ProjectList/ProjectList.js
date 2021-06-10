@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import ProjectListItem from "../ProjectListItem/ProjectListItem";
+import AddProject from "../AddProject/AddProject";
 
 export default function ProjectList(props) {
+  let [addProject, setAddProject] = useState(false);
+
   const listProjects = props.projects.map((proj) => (
     <ProjectListItem
       key={proj.id}
@@ -15,6 +18,22 @@ export default function ProjectList(props) {
   return (
     <>
       <h1>Projects</h1>
+      {!addProject && (
+        <section
+          className="project-list__item"
+          onClick={() => setAddProject(!addProject)}
+        >
+          New Project
+        </section>
+      )}
+      {addProject && (
+        <section
+          className="project-list__item"
+          onClick={() => setAddProject(!addProject)}
+        >
+          <AddProject />
+        </section>
+      )}
       <ul>{listProjects}</ul>
     </>
   );

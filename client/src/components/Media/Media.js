@@ -53,6 +53,7 @@ export default function Media(props) {
     formData.append("file", blob);
     formData.append("userID", props.currentUser.id);
     formData.append("projectID", props.currentProject);
+    formData.append("projectID", props.currentProject);
     console.log(formData);
     axios
       .post("/api/files", formData)
