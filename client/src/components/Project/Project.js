@@ -25,19 +25,33 @@ export default function Project(props) {
     }
   };
 
+  const pauseAll = () => {
+    const players = document.getElementsByClassName("file-audio-player");
+    for (const player of players) {
+      player.pause();
+    }
+  };
+
+  const resetAll = () => {
+    const players = document.getElementsByClassName("file-audio-player");
+    for (const player of players) {
+      player.currentTime = 0;
+    }
+  };
+
   return (
     <>
-      <h1>Project: {props.project.name}</h1>
       <button className="btn btn-primary" onClick={props.closeProject}>
         Close
       </button>
+      <h1>Project: {props.project.name}</h1>
       <div>
         <h4>Files</h4>
         {!recordFile && (
           <section
             id="record"
             className="file__item"
-            onClick={() => setRecordFile(!recordFile)}
+            onClick={() => setRecordFile(true)}
           >
             Record File
           </section>
@@ -48,11 +62,26 @@ export default function Project(props) {
               currentProject={props.project.id}
               currentUser={props.user}
               dispatch={props.dispatch}
+              setRecordFile={setRecordFile}
             />
           </section>
         )}
         <section id="play-all" className="file__item" onClick={() => playAll()}>
           Play All
+        </section>
+        <section
+          id="pause-all"
+          className="file__item"
+          onClick={() => pauseAll()}
+        >
+          Pause All
+        </section>
+        <section
+          id="reset-all"
+          className="file__item"
+          onClick={() => resetAll()}
+        >
+          Reset
         </section>
 
         {listFiles}
