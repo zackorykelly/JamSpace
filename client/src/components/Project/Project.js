@@ -100,10 +100,7 @@ export default function Project(props) {
         </section>
       )}
       {addUserSelected && (
-        <section
-          className="file__item"
-          // onClick={() => setAddUserSelected(!addUserSelected)}
-        >
+        <section className="file__item">
           <AddUser
             currentProject={props.project}
             state={props.state}
