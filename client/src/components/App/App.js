@@ -87,11 +87,6 @@ export default function App() {
                 Projects
               </Link>
             )}
-            {user && (
-              <Link className="nav-link" to="/recorder">
-                Record
-              </Link>
-            )}
           </div>
           <div className="user-auth">
             {!user ? (
