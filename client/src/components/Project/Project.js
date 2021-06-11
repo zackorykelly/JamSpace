@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import {
+  IoRecording,
+  IoPlayCircleOutline,
+  IoPauseCircleOutline,
+  IoArrowBackCircleOutline
+} from "react-icons/io5";
 import File from "../File/File";
 import User from "../User/User";
 import AddUser from "../AddUser/AddUser";
@@ -40,19 +46,20 @@ export default function Project(props) {
 
   return (
     <>
-      <button className="btn btn-dark" onClick={props.closeProject}>
-        Close
-      </button>
-      <h1>Project: {props.project.name}</h1>
-      <div>
-        <h4>Files</h4>
+      <div className="container">
+        <button className="btn btn-dark" onClick={props.closeProject}>
+          Close
+        </button>
+        <h1 className="project__title">{props.project.name}</h1>
+
         {!recordFile && (
           <section
             id="record"
             className="file__item"
             onClick={() => setRecordFile(true)}
           >
-            Record File
+            <IoRecording />
+            Record new track
           </section>
         )}
         {recordFile && (
@@ -65,50 +72,57 @@ export default function Project(props) {
             />
           </section>
         )}
-        <section id="play-all" className="file__item" onClick={() => playAll()}>
-          Play All
-        </section>
-        <section
-          id="pause-all"
-          className="file__item"
-          onClick={() => pauseAll()}
-        >
-          Pause All
-        </section>
-        <section
-          id="reset-all"
-          className="file__item"
-          onClick={() => resetAll()}
-        >
-          Reset
-        </section>
+        <h4>Files</h4>
+        <div className="controls">
+          <section
+            id="play-all"
+            className="file__item"
+            onClick={() => playAll()}
+          >
+            <IoPlayCircleOutline />
+          </section>
+          <section
+            id="pause-all"
+            className="file__item"
+            onClick={() => pauseAll()}
+          >
+            <IoPauseCircleOutline />
+          </section>
+          <section
+            id="reset-all"
+            className="file__item"
+            onClick={() => resetAll()}
+          >
+            <IoArrowBackCircleOutline />
+          </section>
+        </div>
 
         {listFiles}
+        <div>
+          <h4 className="users__title">Users in {props.project.name}</h4>
+          {listUsers}
+        </div>
+        {!addUserSelected && (
+          <section
+            id="add-user"
+            className="file__item"
+            onClick={() => setAddUserSelected(true)}
+          >
+            Add User
+          </section>
+        )}
+        {addUserSelected && (
+          <section className="file__item">
+            <AddUser
+              currentProject={props.project}
+              state={props.state}
+              dispatch={props.dispatch}
+              setAddUserSelected={setAddUserSelected}
+            />
+          </section>
+        )}
+        <button onClick={props.closeProject}>Close</button>
       </div>
-      <div>
-        <h4>Users</h4>
-        {listUsers}
-      </div>
-      {!addUserSelected && (
-        <section
-          id="add-user"
-          className="file__item"
-          onClick={() => setAddUserSelected(true)}
-        >
-          Add User
-        </section>
-      )}
-      {addUserSelected && (
-        <section className="file__item">
-          <AddUser
-            currentProject={props.project}
-            state={props.state}
-            dispatch={props.dispatch}
-            setAddUserSelected={setAddUserSelected}
-          />
-        </section>
-      )}
-      <button onClick={props.closeProject}>Close</button>
     </>
   );
 }

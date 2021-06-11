@@ -13,7 +13,7 @@ export default function ProjectListItem(props) {
       }}
     >
       <h4>{props.name}: </h4>
-      <p className={"project-list__description"}>{props.description}</p>
+      <p>{props.description}</p>
     </section>
   );
 }

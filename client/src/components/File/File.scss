@@ -6,11 +6,9 @@
     @include fade;
 
     color: #dce2e9;
-    height: 5rem;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
     &:hover {
       background-color: #888787;
       cursor: pointer;

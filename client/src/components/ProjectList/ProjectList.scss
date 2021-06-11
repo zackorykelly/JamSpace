@@ -1,0 +1,10 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.project-list {
+  &__container {
+    background-color: rgba(46, 46, 46, 0.8);
+    padding: 10%;
+    color: #dce2e9;
+  }
+}
