@@ -54,32 +54,39 @@ export default function Media(props) {
   } = useForm();
 
   const save = async (data) => {
-    const formData = new FormData();
-    const playback = document.getElementsByClassName("playback")[0];
-    let blob = await fetch(playback.src).then((res) => res.blob());
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("file", blob);
-    formData.append("userID", props.currentUser);
-    formData.append("projectID", props.currentProject);
-    console.log(formData);
-    console.log(data);
-    axios
-      .post("/api/files", formData)
-      .then((res) => {
-        console.log(res.status);
-        console.log(res);
-        if (res.status === 200) {
-          props.dispatch({
-            type: ADD_FILE,
-            newFile: res.data,
-          });
-          alert("File saved successfully.");
-        } else {
-          alert("Error! The file could not be saved.");
-        }
-      })
-      .catch((err) => console.log(err));
+    console.log('file data---------', data.title)
+    if (data.title.trim().length === 0) {
+      return alert('Please give the file a name')
+    } else if (data.description.trim().length === 0) {
+      return alert('Please give the file a description')
+    } else {
+      const formData = new FormData();
+      const playback = document.getElementsByClassName("playback")[0];
+      let blob = await fetch(playback.src).then((res) => res.blob());
+      formData.append("title", data.title);
+      formData.append("description", data.description);
+      formData.append("file", blob);
+      formData.append("userID", props.currentUser);
+      formData.append("projectID", props.currentProject);
+      console.log(formData);
+      console.log(data);
+      axios
+        .post("/api/files", formData)
+        .then((res) => {
+          console.log(res.status);
+          console.log(res);
+          if (res.status === 200) {
+            props.dispatch({
+              type: ADD_FILE,
+              newFile: res.data,
+            });
+            alert("File saved successfully.");
+          } else {
+            alert("Error! The file could not be saved.");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   //Test using uploaded file
