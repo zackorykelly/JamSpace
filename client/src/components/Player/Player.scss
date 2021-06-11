@@ -1,7 +1,10 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
 .file-player {
-  background-color: blanchedalmond;
+  background-color: rgb(161, 183, 204);
   border: 2px solid black;
-  height: 100%;
+  max-height: 5rem;
   width: 100%;
   display: flex;
   flex-direction: column;
