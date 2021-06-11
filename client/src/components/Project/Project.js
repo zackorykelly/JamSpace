@@ -43,7 +43,7 @@ export default function Project(props) {
           </section>
         )}
         {recordFile && (
-          <section onClick={() => setRecordFile(!recordFile)}>
+          <section>
             <Media />
           </section>
         )}
