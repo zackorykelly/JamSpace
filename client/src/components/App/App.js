@@ -7,13 +7,13 @@ import {
   getFile,
   getProjectsForUser,
   getUsersForProject,
-  getFilesForProject,
+  getFilesForProject
 } from "../../helpers/selectors";
 import {
   SET_PROJECT,
   CLOSE_PROJECT,
   SET_FILE,
-  CLOSE_FILE,
+  CLOSE_FILE
 } from "../../reducer/data_reducer";
 import Project from "../Project/Project";
 import ProjectList from "../ProjectList/ProjectList";
@@ -49,7 +49,7 @@ export default function App() {
     const project = getProject(state, projectId);
     dispatch({
       type: SET_PROJECT,
-      project,
+      project
     });
   };
 
@@ -59,7 +59,7 @@ export default function App() {
     console.log("setFile: ", file);
     dispatch({
       type: SET_FILE,
-      file,
+      file
     });
   };
 
@@ -80,7 +80,7 @@ export default function App() {
         <nav className="App-nav">
           <div className="directional-links">
             <Link className="nav-logo" to="/">
-              JamSpace
+              ♫))) JamSpace
             </Link>
             {user && (
               <Link className="nav-link" to="/projects">
@@ -99,14 +99,19 @@ export default function App() {
                 Login
               </Link>
             ) : (
-              <p>You are logged in as {user.full_name}</p>
+              <p className="nav-user">Welcome, {user.full_name}</p>
             )}
             {!user ? (
               <Link className="nav-link" to="/register">
                 Register
               </Link>
             ) : (
-              <Link onClick={handleLogout} className="nav-link" to="/">
+              <Link
+                onClick={handleLogout}
+                className="nav-link"
+                id="logout"
+                to="/"
+              >
                 Logout
               </Link>
             )}

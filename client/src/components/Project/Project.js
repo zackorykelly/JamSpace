@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import File from "../File/File";
 import User from "../User/User";
-import classNames from "classnames";
 import AddUser from "../AddUser/AddUser";
 import Media from "../Media/Media";
+import "./Project.scss";
 
 export default function Project(props) {
-  let projectClass = classNames("project__item");
   let [addUserSelected, setAddUserSelected] = useState(false);
   let [recordFile, setRecordFile] = useState(false);
 
@@ -27,10 +26,12 @@ export default function Project(props) {
 
   return (
     <>
-      <h1>Project: {props.project.name}</h1>
-      <button className="btn btn-primary" onClick={props.closeProject}>
-        Close
-      </button>
+      <div className="container">
+        <h1 className="project__title">{props.project.name}</h1>
+        <button className="btn btn-dark" onClick={props.closeProject}>
+          Close
+        </button>
+      </div>
       <div>
         <h4>Files</h4>
         {!recordFile && (

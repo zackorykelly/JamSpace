@@ -1,6 +1,13 @@
 @import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
 
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
 .project {
   &__item {
     @include fade;
@@ -9,8 +16,7 @@
     height: 5rem;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+
     &:hover {
       background-color: #888787;
       cursor: pointer;
@@ -29,6 +35,12 @@
     &--full {
       opacity: $inactive-opacity;
     }
+  }
+
+  &__title {
+    justify-content: left;
+    color: white;
+    padding: 10px;
   }
 
   &__description {

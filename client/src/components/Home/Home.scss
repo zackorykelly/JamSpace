@@ -1,11 +1,13 @@
 .home-page {
-  background-image: url('/background.jpeg');
+  background-image: url("https://images.unsplash.com/photo-1610716632061-f76783ec35c9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1826&q=80");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   overflow: hidden;
-  // background-repeat: no-repeat;
   background-size: 100%;
   text-align: left;
   h1 {
     padding-left: 1em;
+    margin-top: 150px;
   }
   p {
     font-size: 1.5em;
@@ -14,54 +16,50 @@
     margin: 5em 0 10em 2.5em;
     padding: 1em;
     border-radius: 10px;
-    background-color:#1a1a1a;
-
+    background-color: #1a1a1a;
   }
 }
 #title {
   color: #e6e6e6;
 }
-#drum {
-  height: 80vh;
-  filter: brightness(.8) contrast(1.2);
-}
+
 #audio {
   border-radius: 10px;
   height: 30vw;
   float: right;
   margin: 2.5em 2.5em 1em 0.5em;
-  filter: brightness(.8) contrast(1.2);
+  filter: brightness(0.8) contrast(1.2);
 }
 #intro {
   margin: 5em 0 5em 2.5em;
   padding: 1em;
   border-radius: 10px;
-  background-color:#1a1a1a;
+  background-color: #1a1a1a;
 }
 #guitar {
   border-radius: 10px;
   height: 30vw;
   margin: 2.5em 2.5em 1em 0.5em;
-  filter: brightness(.8) contrast(1.2);
+  filter: brightness(0.8) contrast(1.2);
 }
 #simplicity {
   margin: 5em 0 5em 2.5em;
   padding: 1em;
   border-radius: 10px;
-  background-color:#1a1a1a;
+  background-color: #1a1a1a;
 }
 #sing {
   border-radius: 10px;
   float: right;
   height: 25vw;
   margin: 2.5em 2.5em 1em 0.5em;
-  filter: brightness(.8) contrast(1.2);
+  filter: brightness(0.8) contrast(1.2);
 }
 #instructions {
   margin: 5em 5em 5em 2.5em;
   padding: 1em;
   width: 60vw;
   border-radius: 10px;
-  background-color:#1a1a1a;
+  background-color: #1a1a1a;
   align-self: flex-end;
 }

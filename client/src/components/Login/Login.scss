@@ -3,17 +3,27 @@ $primary-text-color: #a6a6a6;
 $hover-primary-text-color: #d9d9d9;
 $main-bg-color: #35363a;
 
+body {
+  background-image: url("https://images.unsplash.com/photo-1610716632061-f76783ec35c9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1826&q=80");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+}
+
 .login-form {
-  background-color: $main-bg-color;
-  margin: auto;
-  width: 30%;
-  margin-top: 30vh;
+  display: flex;
+  background-color: transparent;
+  // position: fixed;
+}
+
+.login-center {
+  margin-top: 250px;
 }
 #float-email {
   display: flex;
   flex-direction: column;
   min-width: 350px;
-  position: relative;
+  // position: relative;
   margin: 1em;
   input {
     width: 100%;
@@ -65,7 +75,7 @@ $main-bg-color: #35363a;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
   }
-  
+
   label {
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
@@ -93,8 +103,8 @@ $main-bg-color: #35363a;
   height: 2.5em;
   background-color: #0f0f0f;
   color: #a6a6a6;
-  &:hover{
-    background-color:#1c1c1c;
+  &:hover {
+    background-color: #1c1c1c;
     color: #b8b8b8;
   }
 }
