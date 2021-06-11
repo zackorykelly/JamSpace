@@ -10,26 +10,30 @@ export default function AddUser(props) {
   const onSubmit = (data) => {
     console.log(props);
     data["id"] = props.currentProject.id;
-    data["user_id"] = getUserByEmail(props.state, data["user_email"]).id;
-    console.log("data", data);
-    fetch("/api/users_projects", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then(async (res) => {
-        if (res.status === 200) {
-          const userProject = await res.json();
-          console.log(userProject);
-          props.dispatch({
-            type: ADD_USER_PROJECT,
-            newUserProject: userProject,
-          });
-        } else {
-          alert("could not create users_projects link");
-        }
+    if (getUserByEmail(props.state, data["user_email"]) === null) {
+      return alert('There are no users with that email')
+    } else {
+      data["user_id"] = getUserByEmail(props.state, data["user_email"]).id;
+      console.log("data in add users--------------", data);
+      fetch("/api/users_projects", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       })
-      .catch((error) => console.error(error.message));
+        .then(async (res) => {
+          if (res.status === 200) {
+            const userProject = await res.json();
+            console.log(userProject);
+            props.dispatch({
+              type: ADD_USER_PROJECT,
+              newUserProject: userProject,
+            });
+          } else {
+            alert("could not create users_projects link");
+          }
+        })
+        .catch((error) => console.error(error.message));
+    }
   };
 
   return (
