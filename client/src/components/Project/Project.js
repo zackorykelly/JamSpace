@@ -94,7 +94,7 @@ export default function Project(props) {
         <section
           id="add-user"
           className="file__item"
-          onClick={() => setAddUserSelected(!addUserSelected)}
+          onClick={() => setAddUserSelected(true)}
         >
           Add User
         </section>
@@ -108,6 +108,7 @@ export default function Project(props) {
             currentProject={props.project}
             state={props.state}
             dispatch={props.dispatch}
+            setAddUserSelected={setAddUserSelected}
           />
         </section>
       )}

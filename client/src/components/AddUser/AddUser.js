@@ -34,6 +34,7 @@ export default function AddUser(props) {
 
   return (
     <>
+      <button onClick={() => props.setAddUserSelected(false)}>Cancel</button>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>User Email: </label>
         <input {...register("user_email")} type="email" />
