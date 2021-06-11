@@ -44,7 +44,11 @@ export default function Project(props) {
         )}
         {recordFile && (
           <section>
-            <Media />
+            <Media
+              currentProject={props.project.id}
+              currentUser={props.user}
+              dispatch={props.dispatch}
+            />
           </section>
         )}
         <section id="play-all" className="file__item" onClick={() => playAll()}>
