@@ -37,8 +37,6 @@ export default function App() {
       state.users.find((user) => {
         return user.id === loggedInUser;
       });
-    console.log("WHAT IS STATE DOT USERS", state.users);
-    console.log("WHAT IS U", u);
     setUser(u);
   }, [state]);
 
@@ -138,6 +136,7 @@ export default function App() {
                 user={state.user}
                 setFile={setFile}
                 state={state}
+                dispatch={dispatch}
               />
             )}
           </Route>

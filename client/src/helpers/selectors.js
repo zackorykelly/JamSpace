@@ -25,6 +25,7 @@ export function getProjectsForUser(state, user) {
 }
 
 export function getUsersForProject(state, project) {
+  console.log("HI IM BEING CALED ---------------------");
   let usersForProject = [];
   const projectFound = state.projects.find((el) => el.id === project.id);
   if (!projectFound) {

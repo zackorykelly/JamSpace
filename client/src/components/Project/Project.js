@@ -28,6 +28,9 @@ export default function Project(props) {
   return (
     <>
       <h1>Project: {props.project.name}</h1>
+      <button className="btn btn-primary" onClick={props.closeProject}>
+        Close
+      </button>
       <div>
         <h4>Files</h4>
         {!recordFile && (
@@ -68,7 +71,11 @@ export default function Project(props) {
           className="file__item"
           // onClick={() => setAddUserSelected(!addUserSelected)}
         >
-          <AddUser currentProject={props.project} state={props.state} />
+          <AddUser
+            currentProject={props.project}
+            state={props.state}
+            dispatch={props.dispatch}
+          />
         </section>
       )}
       <button onClick={props.closeProject}>Close</button>

@@ -10,6 +10,7 @@ export default function useApplicationData() {
     projects: [],
     file: null,
     files: [],
+    users_projects: [],
     remarks: [],
     loading: true
   });

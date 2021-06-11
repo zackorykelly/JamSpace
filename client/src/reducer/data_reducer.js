@@ -6,7 +6,7 @@ export const ADD_USER = "ADD_USER";
 export const ADD_FILE = "ADD_FILE";
 export const SET_FILE = "SET_FILE";
 export const CLOSE_FILE = "CLOSE_FILE";
-export const ADD_USERS_PROJECTS = "ADD_USERS_PROJECTS";
+export const ADD_USER_PROJECT = "ADD_USER_PROJECT";
 
 const dataReducer = (state, action) => {
   switch (action.type) {
@@ -56,10 +56,10 @@ const dataReducer = (state, action) => {
         ...state,
         project: null,
       };
-    case ADD_USERS_PROJECTS:
+    case ADD_USER_PROJECT:
       return {
         ...state,
-        users_projects: [...state.users_projects, action.newUsersProjects],
+        users_projects: [...state.users_projects, action.newUserProject],
       };
     default:
       return state;

@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { getPostsByUsers } = require("../helpers/dataHelpers");
 
 module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
   /* GET users listing. */
@@ -47,11 +46,9 @@ module.exports = ({ getUsers, getUserByEmail, addUser, getUsersPosts }) => {
       .catch((err) => {
         res.status(501).json({
           error: err.message
-        })
-      }
-      );
+        });
+      });
   });
-
 
   return router;
 };

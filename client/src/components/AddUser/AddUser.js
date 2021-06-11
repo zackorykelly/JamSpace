@@ -1,7 +1,7 @@
 import React from "react";
 import "./AddUser.scss";
 import { useForm } from "react-hook-form";
-import { ADD_USERS_PROJECTS } from "../../reducer/data_reducer";
+import { ADD_USER_PROJECT } from "../../reducer/data_reducer";
 import { getUserByEmail } from "../../helpers/selectors";
 
 export default function AddUser(props) {
@@ -9,7 +9,7 @@ export default function AddUser(props) {
 
   const onSubmit = (data) => {
     console.log(props);
-    data["project_id"] = props.currentProject.id;
+    data["id"] = props.currentProject.id;
     data["user_id"] = getUserByEmail(props.state, data["user_email"]).id;
     console.log("data", data);
     fetch("/api/users_projects", {
@@ -19,10 +19,11 @@ export default function AddUser(props) {
     })
       .then(async (res) => {
         if (res.status === 200) {
-          const usersProjects = await res.json();
+          const userProject = await res.json();
+          console.log(userProject);
           props.dispatch({
-            type: ADD_USERS_PROJECTS,
-            newUsersProjects: usersProjects,
+            type: ADD_USER_PROJECT,
+            newUserProject: userProject,
           });
         } else {
           alert("could not create users_projects link");
