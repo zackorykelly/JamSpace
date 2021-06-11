@@ -21,6 +21,15 @@ export default function Media(props) {
       });
   };
 
+  const startWithPlayback = (e) => {
+    start(e);
+    const players = document.getElementsByClassName("file-audio-player");
+    for (const player of players) {
+      player.currentTime = 0;
+      player.play();
+    }
+  };
+
   const stop = (e) => {
     recorder
       .stop()
@@ -97,12 +106,30 @@ export default function Media(props) {
 
   return (
     <div className="submit-file-form">
+      <button type="button" onClick={() => props.setRecordFile(false)}>
+        Cancel
+      </button>
       <form onSubmit={handleSubmit(save)}>
         <div className="recorder-player">
-          <audio controls className="playback" type="audio/mp3"></audio>
+          <audio
+            controls
+            className="playback file-audio-player"
+            type="audio/mp3"
+          ></audio>
           <br></br>
-          <button type="button" onClick={(e) => start(e)}>
-            Start
+          <button
+            className="start-button"
+            type="button"
+            onClick={(e) => start(e)}
+          >
+            Record
+          </button>
+          <button
+            className="start-with-playback-button"
+            type="button"
+            onClick={(e) => startWithPlayback(e)}
+          >
+            Record With Playback
           </button>
           <button type="button" onClick={(e) => stop(e)}>
             Stop
