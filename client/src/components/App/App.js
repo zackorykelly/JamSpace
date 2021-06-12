@@ -119,8 +119,7 @@ export default function App() {
         </nav>
         <Switch>
           <Route path="/" exact>
-            <Home />
-            {/* <pre>{JSON.stringify(state.users, null, "\t")}</pre> */}
+            {!user && <Home />}
           </Route>
           <Route path="/projects" exact>
             {!user && <Login users={state.users} setUser={setUser} />}

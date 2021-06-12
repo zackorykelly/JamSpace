@@ -52,26 +52,6 @@ export default function Project(props) {
         </button>
         <h1 className="project__title">{props.project.name}</h1>
 
-        {!recordFile && (
-          <section
-            id="record"
-            className="file__item"
-            onClick={() => setRecordFile(true)}
-          >
-            <IoRecording />
-            Record new track
-          </section>
-        )}
-        {recordFile && (
-          <section>
-            <Media
-              currentProject={props.project.id}
-              currentUser={props.user}
-              dispatch={props.dispatch}
-              setRecordFile={setRecordFile}
-            />
-          </section>
-        )}
         <h4>Files</h4>
         <div className="controls">
           <section
@@ -99,6 +79,26 @@ export default function Project(props) {
 
         {listFiles}
         <div>
+          {!recordFile && (
+            <section
+              id="record"
+              className="file__item"
+              onClick={() => setRecordFile(true)}
+            >
+              <IoRecording />
+              Record new track
+            </section>
+          )}
+          {recordFile && (
+            <section>
+              <Media
+                currentProject={props.project.id}
+                currentUser={props.user}
+                dispatch={props.dispatch}
+                setRecordFile={setRecordFile}
+              />
+            </section>
+          )}
           <h4 className="users__title">Users in {props.project.name}</h4>
           {listUsers}
         </div>
