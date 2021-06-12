@@ -51,7 +51,7 @@ export default function Project(props) {
 
   return (
     <>
-      <div className="container">
+      <div className="container" id="project-page">
         <h1 className="project__title">
           {props.project.name}
           <button className="close btn" onClick={props.closeProject}>
