@@ -22,7 +22,7 @@ module.exports = ({
 
   router.post("/", (req, res) => {
     const { project_name, project_description, user_id } = req.body;
-    getProjectByName(project_name)
+    getProjectByName(project_name, user_id)
       .then(async (project) => {
         if (project.length !== 0) {
           res.status(501).json({

@@ -90,17 +90,22 @@ export default function Media(props) {
       formData.append("file", blob);
       formData.append("userID", props.currentUser);
       formData.append("projectID", props.currentProject);
-      axios
-        .post("/api/files", formData)
-        .then((res) => {
+      fetch("/api/files", {
+        method: "POST",
+        body: formData,
+      })
+        .then(async (res) => {
           if (res.status === 200) {
+            const file = await res.json();
             props.dispatch({
               type: ADD_FILE,
-              newFile: res.data,
+              newFile: file,
             });
             alert("File saved successfully.");
           } else {
-            alert("Error! The file could not be saved.");
+            alert(
+              "The file could not be saved. Does this project already have a file with the same name?"
+            );
           }
         })
         .catch((err) => console.log(err));
