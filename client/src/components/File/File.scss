@@ -37,12 +37,36 @@
 
 #play-all {
   color: greenyellow;
+  &:hover {
+    background-color: transparent;
+    cursor: pointer;
+    color: rgb(203, 241, 146);
+  }
 }
 
 #pause-all {
   color: greenyellow;
+  &:hover {
+    background-color: transparent;
+    cursor: pointer;
+    color: rgb(203, 241, 146);
+  }
 }
 
 #reset-all {
   color: greenyellow;
+  &:hover {
+    background-color: transparent;
+    cursor: pointer;
+    color: rgb(203, 241, 146);
+  }
+}
+
+#record {
+  color: greenyellow;
+  &:hover {
+    background-color: transparent;
+    cursor: pointer;
+    color: rgb(203, 241, 146);
+  }
 }

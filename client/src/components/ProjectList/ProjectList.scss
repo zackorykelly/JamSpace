@@ -7,4 +7,18 @@
     padding: 10%;
     color: #dce2e9;
   }
+
+  &__title {
+    display: flex;
+  }
+}
+
+#new-project {
+  max-width: 70px;
+  color: green;
+  padding-top: 15px;
+  &:hover {
+    color: rgb(203, 241, 146);
+    background-color: transparent;
+  }
 }

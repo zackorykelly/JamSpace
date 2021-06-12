@@ -9,7 +9,16 @@
 
 .controls {
   display: flex;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+.close {
+  color: red;
+  padding-bottom: 15px;
+  &:hover {
+    cursor: pointer;
+    color: rgb(241, 129, 129);
+  }
 }
 
 .project {
@@ -44,7 +53,7 @@
   &__title {
     justify-content: left;
     color: white;
-    padding: 10px;
+    padding-bottom: 20px;
   }
 
   &__description {

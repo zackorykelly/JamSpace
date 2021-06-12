@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { IoAddCircleOutline } from "react-icons/io5";
 import ProjectListItem from "../ProjectListItem/ProjectListItem";
 import AddProject from "../AddProject/AddProject";
 import "./ProjectList.scss";
@@ -19,15 +20,18 @@ export default function ProjectList(props) {
   return (
     <>
       <div className="project-list__container">
-        <h1>Your Projects</h1>
-        {!addProject && (
-          <section
-            className="project-list__item"
-            onClick={() => setAddProject(true)}
-          >
-            New Project
-          </section>
-        )}
+        <h1 className="project-list__title">
+          Your Projects
+          {!addProject && (
+            <section
+              id="new-project"
+              className="project-list__item"
+              onClick={() => setAddProject(true)}
+            >
+              <IoAddCircleOutline size={25} />
+            </section>
+          )}
+        </h1>
         {addProject && (
           <section className="project-list__item">
             <AddProject
