@@ -3,7 +3,7 @@ import {
   IoRecording,
   IoPlayCircleOutline,
   IoPauseCircleOutline,
-  IoArrowBackCircleOutline
+  IoArrowBackCircleOutline,
 } from "react-icons/io5";
 import File from "../File/File";
 import User from "../User/User";
@@ -121,7 +121,9 @@ export default function Project(props) {
             />
           </section>
         )}
-        <button onClick={props.closeProject}>Close</button>
+        <button className="btn btn-primary" onClick={props.closeProject}>
+          Back
+        </button>
       </div>
     </>
   );

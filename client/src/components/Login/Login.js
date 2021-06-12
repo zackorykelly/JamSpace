@@ -12,7 +12,6 @@ export default function Login(props) {
     const user = props.users.find((user) => {
       return user.email === data.email && user.password === data.password;
     });
-    console.log("_____", user);
     if (!user) {
       alert("not a user");
       return;

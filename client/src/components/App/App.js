@@ -7,13 +7,13 @@ import {
   getFile,
   getProjectsForUser,
   getUsersForProject,
-  getFilesForProject
+  getFilesForProject,
 } from "../../helpers/selectors";
 import {
   SET_PROJECT,
   CLOSE_PROJECT,
   SET_FILE,
-  CLOSE_FILE
+  CLOSE_FILE,
 } from "../../reducer/data_reducer";
 import Project from "../Project/Project";
 import ProjectList from "../ProjectList/ProjectList";
@@ -49,17 +49,16 @@ export default function App() {
     const project = getProject(state, projectId);
     dispatch({
       type: SET_PROJECT,
-      project
+      project,
     });
   };
 
   const setFile = (fileId) => {
     closeFile();
     const file = getFile(state, fileId);
-    console.log("setFile: ", file);
     dispatch({
       type: SET_FILE,
-      file
+      file,
     });
   };
 
@@ -170,16 +169,6 @@ export default function App() {
               <Register {...props} users={state.users} dispatch={dispatch} />
             )}
           ></Route>
-          <Route path="/recorder" exact>
-            {!user && <Login users={state.users} setUser={setUser} />}
-            {user && (
-              <Media
-                currentProject={1}
-                currentUser={user}
-                dispatch={dispatch}
-              />
-            )}
-          </Route>
         </Switch>
       </div>
     </Router>

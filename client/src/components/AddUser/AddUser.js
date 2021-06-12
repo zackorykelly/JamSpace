@@ -8,13 +8,11 @@ export default function AddUser(props) {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    console.log(props);
     data["id"] = props.currentProject.id;
     if (getUserByEmail(props.state, data["user_email"]) === null) {
-      return alert('There are no users with that email')
+      return alert("There are no users with that email");
     } else {
       data["user_id"] = getUserByEmail(props.state, data["user_email"]).id;
-      console.log("data in add users--------------", data);
       fetch("/api/users_projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -23,7 +21,6 @@ export default function AddUser(props) {
         .then(async (res) => {
           if (res.status === 200) {
             const userProject = await res.json();
-            console.log(userProject);
             props.dispatch({
               type: ADD_USER_PROJECT,
               newUserProject: userProject,

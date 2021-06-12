@@ -18,7 +18,6 @@ module.exports = ({ getFiles, addFile }) => {
   router.get("/", (req, res) => {
     getFiles()
       .then((files) => {
-        console.log(files);
         res.json(files);
       })
       .catch((err) =>
@@ -29,7 +28,6 @@ module.exports = ({ getFiles, addFile }) => {
   });
 
   router.post("/", upload.single("file"), (req, res) => {
-    console.log(req.body);
     const filePath = req.file.filename;
     const { userID, projectID, title, description } = req.body;
     addFile(projectID, title, description, filePath)
