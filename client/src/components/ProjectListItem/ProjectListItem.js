@@ -7,6 +7,7 @@ export default function ProjectListItem(props) {
   let projectClass = classNames("project-list__item");
 
   const deleteProject = (e) => {
+    e.stopPropagation();
     const project = {
       projectId: props.projectId
     };
@@ -38,10 +39,10 @@ export default function ProjectListItem(props) {
       >
         <h4>{props.name}: </h4>
         <p>{props.description}</p>
+        <button type="button" onClick={(e) => deleteProject(e)}>
+          Delete
+        </button>
       </section>
-      <button type="button" onClick={(e) => deleteProject(e)}>
-        Delete
-      </button>
     </>
   );
 }
