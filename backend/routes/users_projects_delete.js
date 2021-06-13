@@ -7,11 +7,11 @@ module.exports = ({deleteUserProject}) => {
     console.log('delete user reqbody', req.body)
     console.log('delete useredrtfvybguhnijm reqbody', projectId, userId)
 
-    deleteUserProject(projectId, userId)
-    .then((res) => {
+    return deleteUserProject(projectId, userId)
+    .then(async (res) => {
       console.log('im here and res is', res)
-      res.status(200)
-      res.json(res);
+      await res.status(200)
+      await res.json(res);
     })
     .catch((err) => {
       console.log('im in the catch and err is', err)

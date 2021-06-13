@@ -102,11 +102,17 @@ module.exports = (db) => {
   };
 
   const deleteUserProject = (projectId, userId) => {
+    console.log('in the query')
     const query = {
       text: `DELETE FROM users_projects WHERE project_id = $1 AND user_id = $2 RETURNING *`,
       values: [projectId, userId]
     };
-    return db.query(query).then((result) => result.rows[0]);
+    return db.query(query).then((result) => {
+      console.log('THE QUERY IS', query)
+      console.log('result is', result)
+      console.log('result row 0 is', result.rows[0])
+      result.rows[0]
+    });
   };
 
   const getFiles = () => {
