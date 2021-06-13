@@ -3,14 +3,13 @@ import classNames from "classnames";
 import "./ProjectListItem.scss";
 import { DELETE_PROJECT } from "../../reducer/data_reducer";
 
-
 export default function ProjectListItem(props) {
   let projectClass = classNames("project-list__item");
 
   const deleteProject = (e) => {
     const project = {
       projectId: props.projectId
-    }
+    };
     fetch("/api/projects_delete", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -28,19 +27,21 @@ export default function ProjectListItem(props) {
       })
       .catch((error) => console.error(error.message));
   };
-  
-  return (<>
-    <section
-      className={projectClass}
-      // onClick={() => {
-      //   props.setProject(props.projectId);
-      // }}
-    >
-      <h4>{props.name}: </h4>
-      <p>{props.description}</p>
 
-    </section>
-      <button type="button" onClick={(e) => deleteProject(e)}>Delete</button>
+  return (
+    <>
+      <section
+        className={projectClass}
+        onClick={() => {
+          props.setProject(props.projectId);
+        }}
+      >
+        <h4>{props.name}: </h4>
+        <p>{props.description}</p>
+      </section>
+      <button type="button" onClick={(e) => deleteProject(e)}>
+        Delete
+      </button>
     </>
   );
 }
