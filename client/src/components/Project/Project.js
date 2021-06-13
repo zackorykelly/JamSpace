@@ -126,9 +126,6 @@ export default function Project(props) {
             />
           </section>
         )}
-        <button className="btn btn-primary" onClick={props.closeProject}>
-          Back
-        </button>
       </div>
     </>
   );
