@@ -6,31 +6,27 @@ module.exports = ({
   getProjectsByUser,
   getProjectByName,
   addProject,
-  addUserProject
+  addUserProject,
 }) => {
   router.get("/", (req, res) => {
     getProjects()
       .then((projects) => {
-        console.log(projects);
         res.json(projects);
       })
       .catch((err) =>
         res.json({
-          error: err.message
+          error: err.message,
         })
       );
   });
 
   router.post("/", (req, res) => {
     const { project_name, project_description, user_id } = req.body;
-    // const userId = req.cookies.userAuth
-    console.log("WHAT IS REQ BODY", req.body);
-
-    getProjectByName(project_name)
+    getProjectByName(project_name, user_id)
       .then(async (project) => {
         if (project.length !== 0) {
           res.status(501).json({
-            msg: "A project with this name already exists"
+            msg: "A project with this name already exists",
           });
         } else {
           return await addProject(project_name, project_description);
@@ -39,7 +35,7 @@ module.exports = ({
       .then((newProject) => res.json(newProject))
       .catch((err) =>
         res.json({
-          error: err.message
+          error: err.message,
         })
       );
   });
@@ -52,7 +48,6 @@ module.exports = ({
 
 //   getUserByEmail(email)
 //     .then(async (user) => {
-//       // console.log('WHAT IS USER', user)
 //       if (user) {
 //         res.status(501).json({
 //           msg: "Sorry, a user account with this email already exists"

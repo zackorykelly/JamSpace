@@ -25,7 +25,6 @@ export function getProjectsForUser(state, user) {
 }
 
 export function getUsersForProject(state, project) {
-  console.log("HI IM BEING CALED ---------------------");
   let usersForProject = [];
   const projectFound = state.projects.find((el) => el.id === project.id);
   if (!projectFound) {
@@ -58,9 +57,7 @@ export function getFilesForProject(state, project) {
 }
 
 export function getUserByEmail(state, email) {
-  console.log(email);
   const foundUser = state.users.find((el) => el.email === email);
-  console.log("FOUNDUSER", foundUser);
   if (!foundUser) {
     return null;
   }

@@ -8,12 +8,11 @@ export default function AddProject(props) {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     if (data.project_name.trim().length === 0) {
-      return alert("Please enter a project name")
+      return alert("Please enter a project name");
     } else if (data.project_description.trim().length === 0) {
-      return alert("Please enter a project description")
+      return alert("Please enter a project description");
     } else {
       data.user_id = getCookie("userAuth");
-      console.log("data---------", data.project_name);
       fetch("/api/projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -28,7 +27,7 @@ export default function AddProject(props) {
             });
             return project;
           } else {
-            alert("could not create project");
+            alert("Could not create project. Is this a duplicate name?");
           }
         })
         .then((project) => {
@@ -40,17 +39,15 @@ export default function AddProject(props) {
           });
         })
         .then(async (res) => {
-          console.log("res: ", res);
           if (res.status === 200) {
             const userProject = await res.json();
-            console.log("userProject: ", userProject);
             props.dispatch({
               type: ADD_USER_PROJECT,
               newUserProject: userProject,
             });
             return userProject;
           } else {
-            alert("could not create userProject");
+            alert("Could not add user to project.");
           }
         })
         .catch((error) => console.error(error.message));

@@ -10,19 +10,17 @@ export default function Register(props) {
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    console.log("data", data);
     fetch("/api/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
       .then(async (res) => {
         if (res.status === 200) {
-          console.log(res);
           const user = await res.json();
           props.dispatch({
             type: ADD_USER,
-            newUser: user
+            newUser: user,
           });
           setCookie("userAuth", `${user.id}`, 20);
           props.setUser(user);

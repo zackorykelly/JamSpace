@@ -59,11 +59,12 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getProjectByName = (projectName) => {
+  const getProjectByName = (projectName, userId) => {
     const query = {
-      text: `SELECT * FROM projects
-      WHERE projects.name = $1`,
-      values: [projectName]
+      //For future: add  AND users_projects.owner_stretch = true; to below query to only check for duplicates created by the same user.
+      text: `SELECT * FROM users_projects LEFT JOIN users ON users_projects.user_id = users.id LEFT JOIN projects ON users_projects.project_id = projects.id
+      WHERE users_projects.user_id = $2 AND projects.name = $1`,
+      values: [projectName, userId]
     };
 
     return db
@@ -102,18 +103,20 @@ module.exports = (db) => {
   };
 
   const deleteUserProject = (projectId, userId) => {
-    console.log('in the query')
+    console.log("in the query");
     const query = {
       text: `DELETE FROM users_projects WHERE project_id = $1 AND user_id = $2 RETURNING *`,
       values: [projectId, userId]
     };
-    return db.query(query).then((result) => {
-      console.log('THE QUERY IS', query)
-      console.log('result is', result)
-      console.log('result row 0 is', result.rows[0])
-      return result.rows[0]
-    })
-    .catch((err) => err);
+    return db
+      .query(query)
+      .then((result) => {
+        console.log("THE QUERY IS", query);
+        console.log("result is", result);
+        console.log("result row 0 is", result.rows[0]);
+        return result.rows[0];
+      })
+      .catch((err) => err);
   };
 
   const deleteProject = (projectId) => {
@@ -121,13 +124,13 @@ module.exports = (db) => {
       text: `DELETE FROM projects WHERE id = $1 RETURNING *`,
       values: [projectId]
     };
-    return db.query(query).then((result) => {
-      return result.rows[0]
-    })
-    .catch((err) => err);
+    return db
+      .query(query)
+      .then((result) => {
+        return result.rows[0];
+      })
+      .catch((err) => err);
   };
-
-
 
   const getFiles = () => {
     const query = {
@@ -138,6 +141,16 @@ module.exports = (db) => {
       .query(query)
       .then((result) => result.rows)
       .catch((err) => err);
+  };
+
+  const getFileByNameAndProject = (projectId, name) => {
+    const query = {
+      text: "SELECT * FROM files WHERE project_id = $1 AND name = $2",
+      values: [projectId, name]
+    };
+    console.log(query);
+
+    return db.query(query).then((res) => res.rows);
   };
 
   const addFile = (projectID, name, description, filePath) => {
@@ -182,6 +195,7 @@ module.exports = (db) => {
     getProjectByName,
     addProject,
     getFiles,
+    getFileByNameAndProject,
     addFile,
     getUsersProjects,
     getUsersProjectsByUser,

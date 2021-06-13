@@ -8,28 +8,27 @@ export default function AddUser(props) {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    console.log(props);
     data["id"] = props.currentProject.id;
     if (getUserByEmail(props.state, data["user_email"]) === null) {
-      return alert('There are no users with that email')
+      return alert("There are no users with that email");
     } else {
       data["user_id"] = getUserByEmail(props.state, data["user_email"]).id;
-      console.log("data in add users--------------", data);
       fetch("/api/users_projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
       })
         .then(async (res) => {
           if (res.status === 200) {
             const userProject = await res.json();
-            console.log(userProject);
             props.dispatch({
               type: ADD_USER_PROJECT,
-              newUserProject: userProject,
+              newUserProject: userProject
             });
           } else {
-            alert("could not create users_projects link");
+            alert(
+              "Could not assign user. Are they already a part of the project?"
+            );
           }
         })
         .catch((error) => console.error(error.message));
@@ -38,11 +37,16 @@ export default function AddUser(props) {
 
   return (
     <>
-      <button onClick={() => props.setAddUserSelected(false)}>Cancel</button>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label>User Email: </label>
+        <label className="user-email">User Email: </label>
         <input {...register("user_email")} type="email" />
-        <input type="submit" className="create-users_projects-button" />
+        <button
+          className="btn btn-danger"
+          onClick={() => props.setAddUserSelected(false)}
+        >
+          Cancel
+        </button>
+        <input type="submit" className="btn btn-success" />
       </form>
     </>
   );

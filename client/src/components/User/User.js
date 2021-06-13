@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { DELETE_USER_PROJECT } from "../../reducer/data_reducer";
+import { IoCloseCircleOutline } from "react-icons/io5";
 import "./User.scss";
 
 export default function User(props) {
@@ -14,7 +15,7 @@ export default function User(props) {
     const projectData = {
       userId: props.userId,
       projectId: props.projectId
-    }
+    };
     // console.log('FORM DATA', formData);
     fetch("/api/users_projects_delete", {
       method: "POST",
@@ -41,9 +42,13 @@ export default function User(props) {
     <section className={userClass}>
       <h4>{props.name}: </h4>
       <p className={"user__email"}>{props.email}</p>
-        <button type="button" >Delete</button>
+      <button
+        type="button"
+        className="close btn"
         onClick={(e) => deleteUserFromProject(e)}
+      >
+        <IoCloseCircleOutline size={25} />
+      </button>
     </section>
   );
 }
-

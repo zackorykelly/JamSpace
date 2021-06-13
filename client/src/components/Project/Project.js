@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import {
-  IoRecording,
+  IoAddCircleOutline,
   IoPlayCircleOutline,
   IoPauseCircleOutline,
-  IoArrowBackCircleOutline
+  IoArrowBackCircleOutline,
+  IoCloseCircleOutline
 } from "react-icons/io5";
+import { RiRecordCircleLine } from "react-icons/ri";
 import File from "../File/File";
 import User from "../User/User";
 import AddUser from "../AddUser/AddUser";
@@ -14,6 +16,9 @@ import "./Project.scss";
 export default function Project(props) {
   let [addUserSelected, setAddUserSelected] = useState(false);
   let [recordFile, setRecordFile] = useState(false);
+
+  const CTRL_SIZE = 40;
+  const CLOSE_SIZE = 25;
 
   const listFiles = props.files.map((file) => (
     <File key={file.id} file={file} setFile={props.setFile}></File>
@@ -46,82 +51,84 @@ export default function Project(props) {
 
   return (
     <>
-      <div className="container">
-        <button className="btn btn-dark" onClick={props.closeProject}>
-          Close
-        </button>
-        <h1 className="project__title">{props.project.name}</h1>
+      <div className="container" id="project-page">
+        <h1 className="project__title">
+          {props.project.name}
+          <button className="close btn" onClick={props.closeProject}>
+            <IoCloseCircleOutline size={CLOSE_SIZE} />
+          </button>
+        </h1>
 
-        {!recordFile && (
-          <section
-            id="record"
-            className="file__item"
-            onClick={() => setRecordFile(true)}
-          >
-            <IoRecording />
-            Record new track
-          </section>
-        )}
-        {recordFile && (
-          <section>
-            <Media
-              currentProject={props.project.id}
-              currentUser={props.user}
-              dispatch={props.dispatch}
-              setRecordFile={setRecordFile}
-            />
-          </section>
-        )}
-        <h4>Files</h4>
         <div className="controls">
           <section
             id="play-all"
             className="file__item"
             onClick={() => playAll()}
           >
-            <IoPlayCircleOutline />
+            <IoPlayCircleOutline size={CTRL_SIZE} />
           </section>
           <section
             id="pause-all"
             className="file__item"
             onClick={() => pauseAll()}
           >
-            <IoPauseCircleOutline />
+            <IoPauseCircleOutline size={CTRL_SIZE} />
           </section>
           <section
             id="reset-all"
             className="file__item"
             onClick={() => resetAll()}
           >
-            <IoArrowBackCircleOutline />
+            <IoArrowBackCircleOutline size={CTRL_SIZE} />
           </section>
+          {!recordFile && (
+            <section
+              id="record"
+              className="file__item"
+              onClick={() => setRecordFile(true)}
+            >
+              <RiRecordCircleLine size={CTRL_SIZE} />
+            </section>
+          )}
+          {recordFile && (
+            <section>
+              <Media
+                currentProject={props.project.id}
+                currentUser={props.user}
+                dispatch={props.dispatch}
+                setRecordFile={setRecordFile}
+              />
+            </section>
+          )}
         </div>
 
         {listFiles}
-        <div>
-          <h4 className="users__title">Users in {props.project.name}</h4>
+        <div className="users">
+          <h4 className="users__title">
+            Users in {props.project.name}
+            {!addUserSelected && (
+              <section
+                id="add-user"
+                className="file__item add"
+                onClick={() => setAddUserSelected(true)}
+              >
+                <IoAddCircleOutline size={CLOSE_SIZE} />
+              </section>
+            )}
+            {addUserSelected && (
+              <section className="file__item">
+                <AddUser
+                  currentProject={props.project}
+                  state={props.state}
+                  dispatch={props.dispatch}
+                  setAddUserSelected={setAddUserSelected}
+                />
+              </section>
+            )}
+          </h4>
           {listUsers}
         </div>
-        {!addUserSelected && (
-          <section
-            id="add-user"
-            className="file__item"
-            onClick={() => setAddUserSelected(true)}
-          >
-            Add User
-          </section>
-        )}
-        {addUserSelected && (
-          <section className="file__item">
-            <AddUser
-              currentProject={props.project}
-              state={props.state}
-              dispatch={props.dispatch}
-              setAddUserSelected={setAddUserSelected}
-            />
-          </section>
-        )}
-        <button onClick={props.closeProject}>Close</button>
+        <div></div>
       </div>
     </>
   );
