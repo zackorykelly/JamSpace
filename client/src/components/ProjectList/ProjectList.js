@@ -6,8 +6,9 @@ import "./ProjectList.scss";
 export default function ProjectList(props) {
   let [addProject, setAddProject] = useState(false);
 
-  const listProjects = props.projects.map((proj) => (
-    <ProjectListItem
+  const listProjects = props.projects.map((proj) => {
+    console.log('this is proj---------------', props.projects);
+return (<ProjectListItem
       key={proj.id}
       projectId={proj.id}
       name={proj.name}
@@ -15,7 +16,7 @@ export default function ProjectList(props) {
       setProject={props.setProject}
       dispatch={props.dispatch}
     ></ProjectListItem>
-  ));
+  )});
 
   return (
     <>

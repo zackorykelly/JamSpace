@@ -41,7 +41,8 @@ export default function User(props) {
     <section className={userClass}>
       <h4>{props.name}: </h4>
       <p className={"user__email"}>{props.email}</p>
-        <button type="button" onClick={(e) => deleteUserFromProject(e)}>Delete</button>
+        <button type="button" >Delete</button>
+        onClick={(e) => deleteUserFromProject(e)}
     </section>
   );
 }

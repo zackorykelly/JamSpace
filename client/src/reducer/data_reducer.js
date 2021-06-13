@@ -73,13 +73,16 @@ const dataReducer = (state, action) => {
         users_projects: user_projects_copy2
       };
     case DELETE_PROJECT:
+      console.log('state.project up here', state.projects)
       const projectsCopy = [...state.projects]
       const projectsCopy2 = projectsCopy.filter(item => {
         return item.id !== action.deleteProject.id
       })
+      console.log('its in the reducer----------------------', projectsCopy2)
+      console.log('state.project down here', state.projects)
       return {
         ...state,
-        project: projectsCopy2
+        projects: projectsCopy2
       };
     default:
       return state;
