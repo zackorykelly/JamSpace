@@ -103,29 +103,31 @@ export default function Project(props) {
         </div>
 
         {listFiles}
-        <div>
+        <div className="users">
           <h4 className="users__title">Users in {props.project.name}</h4>
           {listUsers}
         </div>
-        {!addUserSelected && (
-          <section
-            id="add-user"
-            className="file__item"
-            onClick={() => setAddUserSelected(true)}
-          >
-            Add User
-          </section>
-        )}
-        {addUserSelected && (
-          <section className="file__item">
-            <AddUser
-              currentProject={props.project}
-              state={props.state}
-              dispatch={props.dispatch}
-              setAddUserSelected={setAddUserSelected}
-            />
-          </section>
-        )}
+        <div>
+          {!addUserSelected && (
+            <section
+              id="add-user"
+              className="file__item"
+              onClick={() => setAddUserSelected(true)}
+            >
+              Add User
+            </section>
+          )}
+          {addUserSelected && (
+            <section className="file__item">
+              <AddUser
+                currentProject={props.project}
+                state={props.state}
+                dispatch={props.dispatch}
+                setAddUserSelected={setAddUserSelected}
+              />
+            </section>
+          )}
+        </div>
       </div>
     </>
   );

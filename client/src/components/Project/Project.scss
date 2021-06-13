@@ -67,8 +67,11 @@
 }
 
 .users {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
   &__title {
-    justify-content: left;
     color: white;
     padding: 10px;
   }

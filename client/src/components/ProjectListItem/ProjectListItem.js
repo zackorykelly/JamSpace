@@ -12,8 +12,10 @@ export default function ProjectListItem(props) {
         props.setProject(props.projectId);
       }}
     >
-      <h4>{props.name}: </h4>
-      <p>{props.description}</p>
+      <p>
+        <h5>{props.name}: </h5>
+        {props.description}
+      </p>
     </section>
   );
 }
