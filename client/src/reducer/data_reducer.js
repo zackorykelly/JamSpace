@@ -64,14 +64,22 @@ const dataReducer = (state, action) => {
         users_projects: [...state.users_projects, action.newUserProject],
       };
     case DELETE_USER_PROJECT:
+      const user_projects_copy = [...state.users_projects]
+      const user_projects_copy2 = user_projects_copy.filter(item => {
+        return item.id !== action.deleteUserProject.id
+      })
       return {
         ...state,
-        users_projects: [...state.users_projects, action.deleteUserProject],
+        users_projects: user_projects_copy2
       };
     case DELETE_PROJECT:
+      const projectsCopy = [...state.projects]
+      const projectsCopy2 = projectsCopy.filter(item => {
+        return item.id !== action.deleteProject.id
+      })
       return {
         ...state,
-        project: [...state.projects, action.newProject],
+        project: projectsCopy2
       };
     default:
       return state;

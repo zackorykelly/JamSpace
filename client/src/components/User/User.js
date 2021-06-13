@@ -24,7 +24,6 @@ export default function User(props) {
       body: JSON.stringify(projectData)
     })
       .then(async (res) => {
-        console.log('res.status is', res.status);
         if (res.status === 200) {
           // console.log(res);
           props.dispatch({

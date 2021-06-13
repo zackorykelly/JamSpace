@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = ({deleteUserProject}) => {
-  router.post("/", (req, res) => {
+  router.post("/", async (req, res) => {
     const {projectId, userId} = req.body
     console.log('delete user reqbody', req.body)
     console.log('delete useredrtfvybguhnijm reqbody', projectId, userId)
 
-    return deleteUserProject(projectId, userId)
+    return await deleteUserProject(projectId, userId)
     .then((response) => {
       console.log('im here and res is', response);
       res.status(200);

@@ -111,7 +111,7 @@ module.exports = (db) => {
       console.log('THE QUERY IS', query)
       console.log('result is', result)
       console.log('result row 0 is', result.rows[0])
-      result
+      return result.rows[0]
     })
     .catch((err) => err);
   };
@@ -122,7 +122,7 @@ module.exports = (db) => {
       values: [projectId]
     };
     return db.query(query).then((result) => {
-      result
+      return result.rows[0]
     })
     .catch((err) => err);
   };

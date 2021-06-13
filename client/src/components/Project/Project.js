@@ -20,7 +20,7 @@ export default function Project(props) {
   ));
 
   const listUsers = props.users.map((user) => (
-    <User key={user.id} userId={user.id} projectId={props.project.id} name={user.full_name} email={user.email}></User>
+    <User key={user.id} userId={user.id} projectId={props.project.id} name={user.full_name} email={user.email} dispatch={props.dispatch}></User>
   ));
 
   const playAll = () => {

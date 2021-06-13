@@ -6,7 +6,8 @@ import { DELETE_PROJECT } from "../../reducer/data_reducer";
 
 export default function ProjectListItem(props) {
   let projectClass = classNames("project-list__item");
-  const deleteProject = () => {
+  const deleteProject = (e) => {
+    e.stopPropagation()
     const project = {
       projectId: props.projectId
     }
@@ -19,7 +20,7 @@ export default function ProjectListItem(props) {
         if (res.status === 200) {
           props.dispatch({
             type: DELETE_PROJECT,
-            deleteUserProject: await res.json()
+            deleteProject: await res.json()
           });
         } else {
           alert("could delete project");
@@ -27,7 +28,8 @@ export default function ProjectListItem(props) {
       })
       .catch((error) => console.error(error.message));
   };
-  return (
+  return (<>
+    <div>
     <section
       className={projectClass}
       onClick={() => {
@@ -37,7 +39,9 @@ export default function ProjectListItem(props) {
       <h4>{props.name}: </h4>
       <p>{props.description}</p>
 
-      <button type="button" onClick={(e) => deleteProject(e)}>Delete</button>
     </section>
+      <button type="button" onClick={(e) => deleteProject(e)}>Delete</button>
+    </div>
+    </>
   );
 }

@@ -13,6 +13,7 @@ export default function ProjectList(props) {
       name={proj.name}
       description={proj.description}
       setProject={props.setProject}
+      dispatch={props.dispatch}
     ></ProjectListItem>
   ));
 
