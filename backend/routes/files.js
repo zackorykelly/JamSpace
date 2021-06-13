@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-module.exports = ({ getFiles, addFile }) => {
+module.exports = ({ getFiles, addFile, getFileByNameAndProject }) => {
   router.get("/", (req, res) => {
     getFiles()
       .then((files) => {
@@ -30,7 +30,17 @@ module.exports = ({ getFiles, addFile }) => {
   router.post("/", upload.single("file"), (req, res) => {
     const filePath = req.file.filename;
     const { userID, projectID, title, description } = req.body;
-    addFile(projectID, title, description, filePath)
+    getFileByNameAndProject(projectID, title)
+      .then(async (file) => {
+        console.log(file.length);
+        if (file.length !== 0) {
+          res.status(501).json({
+            msg: "A file with this name already exists",
+          });
+        } else {
+          return await addFile(projectID, title, description, filePath);
+        }
+      })
       .then((response) => {
         res.status(200);
         res.json(response);

@@ -27,7 +27,7 @@ export default function AddProject(props) {
             });
             return project;
           } else {
-            alert("could not create project");
+            alert("Could not create project. Is this a duplicate name?");
           }
         })
         .then((project) => {
@@ -47,7 +47,7 @@ export default function AddProject(props) {
             });
             return userProject;
           } else {
-            alert("could not create userProject");
+            alert("Could not add user to project.");
           }
         })
         .catch((error) => console.error(error.message));

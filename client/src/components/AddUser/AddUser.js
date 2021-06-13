@@ -26,7 +26,9 @@ export default function AddUser(props) {
               newUserProject: userProject,
             });
           } else {
-            alert("could not create users_projects link");
+            alert(
+              "Could not assign user. Are they already a part of the project?"
+            );
           }
         })
         .catch((error) => console.error(error.message));
