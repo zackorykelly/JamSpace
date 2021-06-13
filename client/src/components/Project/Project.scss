@@ -25,6 +25,15 @@
   }
 }
 
+.add {
+  color: greenyellow;
+  &:hover {
+    background-color: transparent;
+    cursor: pointer;
+    color: rgb(203, 241, 146);
+  }
+}
+
 .project {
   &__item {
     @include fade;
@@ -74,5 +83,9 @@
   &__title {
     color: white;
     padding: 10px;
+  }
+
+  &:hover {
+    background-color: transparent;
   }
 }

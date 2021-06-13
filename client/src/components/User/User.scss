@@ -11,15 +11,6 @@
     flex-direction: row;
     align-items: baseline;
     justify-content: center;
-    // &:hover {
-    //   background-color: #888787;
-    //   cursor: pointer;
-    //   color: $dark-background;
-    // }
-
-    &--full {
-      opacity: $inactive-opacity;
-    }
   }
 
   &__description {

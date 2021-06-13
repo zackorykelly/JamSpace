@@ -25,7 +25,7 @@ export default function ProjectList(props) {
           {!addProject && (
             <section
               id="new-project"
-              className="project-list__item"
+              className="project-list__item add"
               onClick={() => setAddProject(true)}
             >
               <IoAddCircleOutline size={25} />

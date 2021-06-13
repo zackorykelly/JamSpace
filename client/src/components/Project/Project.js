@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  IoRecording,
+  IoAddCircleOutline,
   IoPlayCircleOutline,
   IoPauseCircleOutline,
   IoArrowBackCircleOutline,
@@ -104,30 +104,31 @@ export default function Project(props) {
 
         {listFiles}
         <div className="users">
-          <h4 className="users__title">Users in {props.project.name}</h4>
+          <h4 className="users__title">
+            Users in {props.project.name}
+            {!addUserSelected && (
+              <section
+                id="add-user"
+                className="file__item add"
+                onClick={() => setAddUserSelected(true)}
+              >
+                <IoAddCircleOutline size={CLOSE_SIZE} />
+              </section>
+            )}
+            {addUserSelected && (
+              <section className="file__item">
+                <AddUser
+                  currentProject={props.project}
+                  state={props.state}
+                  dispatch={props.dispatch}
+                  setAddUserSelected={setAddUserSelected}
+                />
+              </section>
+            )}
+          </h4>
           {listUsers}
         </div>
-        <div>
-          {!addUserSelected && (
-            <section
-              id="add-user"
-              className="file__item"
-              onClick={() => setAddUserSelected(true)}
-            >
-              Add User
-            </section>
-          )}
-          {addUserSelected && (
-            <section className="file__item">
-              <AddUser
-                currentProject={props.project}
-                state={props.state}
-                dispatch={props.dispatch}
-                setAddUserSelected={setAddUserSelected}
-              />
-            </section>
-          )}
-        </div>
+        <div></div>
       </div>
     </>
   );
