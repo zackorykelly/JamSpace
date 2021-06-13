@@ -38,3 +38,12 @@
     font-size: 14px;
   }
 }
+
+.close {
+  color: red;
+  padding-bottom: 15px;
+  &:hover {
+    cursor: pointer;
+    color: rgb(241, 129, 129);
+  }
+}
