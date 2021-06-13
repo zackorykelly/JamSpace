@@ -111,9 +111,23 @@ module.exports = (db) => {
       console.log('THE QUERY IS', query)
       console.log('result is', result)
       console.log('result row 0 is', result.rows[0])
-      result.rows[0]
-    });
+      result
+    })
+    .catch((err) => err);
   };
+
+  const deleteProject = (projectId) => {
+    const query = {
+      text: `DELETE FROM projects WHERE id = $1 RETURNING *`,
+      values: [projectId]
+    };
+    return db.query(query).then((result) => {
+      result
+    })
+    .catch((err) => err);
+  };
+
+
 
   const getFiles = () => {
     const query = {
@@ -172,6 +186,7 @@ module.exports = (db) => {
     getUsersProjects,
     getUsersProjectsByUser,
     addUserProject,
-    deleteUserProject
+    deleteUserProject,
+    deleteProject
   };
 };

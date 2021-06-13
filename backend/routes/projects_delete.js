@@ -1,20 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = ({deleteUserProject}) => {
+module.exports = ({deleteProject}) => {
   router.post("/", (req, res) => {
-    const {projectId, userId} = req.body
+    const {projectId} = req.body
     console.log('delete user reqbody', req.body)
-    console.log('delete useredrtfvybguhnijm reqbody', projectId, userId)
-
-    return deleteUserProject(projectId, userId)
+    console.log('delete useredrtfvybguhnijm reqbody', projectId)
+    return deleteProject(projectId)
     .then((response) => {
-      console.log('im here and res is', response);
       res.status(200);
       res.json(response);
     })
     .catch((err) => {
-      console.log('im in the catch and err is', err);
       res.status(501).json({
         error: err.message,
       });

@@ -1,10 +1,32 @@
 import React from "react";
 import classNames from "classnames";
 import "./ProjectListItem.scss";
+import { DELETE_PROJECT } from "../../reducer/data_reducer";
+
 
 export default function ProjectListItem(props) {
   let projectClass = classNames("project-list__item");
-
+  const deleteProject = () => {
+    const project = {
+      projectId: props.projectId
+    }
+    fetch("/api/projects_delete", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(project)
+    })
+      .then(async (res) => {
+        if (res.status === 200) {
+          props.dispatch({
+            type: DELETE_PROJECT,
+            deleteUserProject: await res.json()
+          });
+        } else {
+          alert("could delete project");
+        }
+      })
+      .catch((error) => console.error(error.message));
+  };
   return (
     <section
       className={projectClass}
@@ -14,6 +36,8 @@ export default function ProjectListItem(props) {
     >
       <h4>{props.name}: </h4>
       <p>{props.description}</p>
+
+      <button type="button" onClick={(e) => deleteProject(e)}>Delete</button>
     </section>
   );
 }
