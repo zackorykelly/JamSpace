@@ -36,12 +36,25 @@ export default function Media(props) {
   };
 
   const startWithPlayback = (e) => {
-    start(e);
-    const players = document.getElementsByClassName("file-audio-player");
-    for (const player of players) {
-      player.currentTime = 0;
-      player.play();
-    }
+    //Reset player to empty so it doesn't play during a re-record
+    const playback = document.getElementsByClassName("playback")[0];
+    playback.src = "";
+    setSaveButton(true);
+    setStopButton(false);
+    setRecordButtons(true);
+    recorder
+      .start()
+      .then(() => {
+        const players = document.getElementsByClassName("file-audio-player");
+        for (const player of players) {
+          player.currentTime = 0;
+          player.play();
+        }
+        console.log("recording started");
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   const stop = (e) => {
