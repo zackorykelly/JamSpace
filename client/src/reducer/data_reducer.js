@@ -9,6 +9,7 @@ export const CLOSE_FILE = "CLOSE_FILE";
 export const ADD_USER_PROJECT = "ADD_USER_PROJECT";
 export const DELETE_USER_PROJECT = "DELETE_USER_PROJECT";
 export const DELETE_PROJECT = "DELETE_PROJECT";
+export const DELETE_FILE = "DELETE_FILE";
 
 const dataReducer = (state, action) => {
   switch (action.type) {
@@ -83,6 +84,18 @@ const dataReducer = (state, action) => {
       return {
         ...state,
         projects: projectsCopy2
+      };
+    case DELETE_FILE:
+      console.log('state.project up here', state.projects)
+      const filesCopy = [...state.files]
+      const filesCopy2 = filesCopy.filter(item => {
+        return item.id !== action.deleteFile.id
+      })
+      console.log('its in the reducer----------------------', filesCopy2)
+      console.log('state.project down here', state.files)
+      return {
+        ...state,
+        projects: filesCopy2
       };
     default:
       return state;
