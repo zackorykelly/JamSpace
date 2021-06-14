@@ -4,7 +4,7 @@ import {
   IoPlayCircleOutline,
   IoPauseCircleOutline,
   IoArrowBackCircleOutline,
-  IoCloseCircleOutline
+  IoCloseCircleOutline,
 } from "react-icons/io5";
 import { RiRecordCircleLine } from "react-icons/ri";
 import File from "../File/File";
@@ -25,7 +25,14 @@ export default function Project(props) {
   ));
 
   const listUsers = props.users.map((user) => (
-    <User key={user.id} userId={user.id} projectId={props.project.id} name={user.full_name} email={user.email} dispatch={props.dispatch}></User>
+    <User
+      key={user.id}
+      userId={user.id}
+      projectId={props.project.id}
+      name={user.full_name}
+      email={user.email}
+      dispatch={props.dispatch}
+    ></User>
   ));
 
   const playAll = () => {
@@ -105,27 +112,26 @@ export default function Project(props) {
         {listFiles}
         <div className="users">
           <h4 className="users__title">
-            Users in {props.project.name}
             {!addUserSelected && (
-              <section
+              <IoAddCircleOutline
+                size={CLOSE_SIZE}
                 id="add-user"
                 className="file__item add"
                 onClick={() => setAddUserSelected(true)}
-              >
-                <IoAddCircleOutline size={CLOSE_SIZE} />
-              </section>
+              />
             )}
-            {addUserSelected && (
-              <section className="file__item">
-                <AddUser
-                  currentProject={props.project}
-                  state={props.state}
-                  dispatch={props.dispatch}
-                  setAddUserSelected={setAddUserSelected}
-                />
-              </section>
-            )}
+            {props.project.name} Contributors:
           </h4>
+          {addUserSelected && (
+            <section>
+              <AddUser
+                currentProject={props.project}
+                state={props.state}
+                dispatch={props.dispatch}
+                setAddUserSelected={setAddUserSelected}
+              />
+            </section>
+          )}
           {listUsers}
         </div>
         <div></div>

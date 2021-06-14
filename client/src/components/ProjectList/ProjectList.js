@@ -38,7 +38,7 @@ export default function ProjectList(props) {
           )}
         </h1>
         {addProject && (
-          <section className="project-list__item">
+          <section>
             <AddProject
               user={props.user}
               dispatch={props.dispatch}
