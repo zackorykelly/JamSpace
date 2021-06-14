@@ -23,6 +23,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Media from "../Media/Media";
 import Player from "../Player/Player";
+import HowItWorks from "../HowItWorks/HowItWorks";
 
 export default function App() {
   const { state, dispatch } = useApplicationData();
@@ -114,6 +115,7 @@ export default function App() {
         <Switch>
           <Route path="/" exact>
             {!user && <Home />}
+            {user && <HowItWorks />}
           </Route>
           <Route path="/projects" exact>
             {!user && <Login users={state.users} setUser={setUser} />}
