@@ -4,7 +4,7 @@ import {
   IoPlayCircleOutline,
   IoPauseCircleOutline,
   IoArrowBackCircleOutline,
-  IoCloseCircleOutline,
+  IoCloseCircleOutline
 } from "react-icons/io5";
 import { RiRecordCircleLine } from "react-icons/ri";
 import File from "../File/File";
@@ -21,7 +21,12 @@ export default function Project(props) {
   const CLOSE_SIZE = 25;
 
   const listFiles = props.files.map((file) => (
-    <File key={file.id} file={file} setFile={props.setFile} dispatch={props.dispatch}></File>
+    <File
+      key={file.id}
+      file={file}
+      setFile={props.setFile}
+      dispatch={props.dispatch}
+    ></File>
   ));
 
   const listUsers = props.users.map((user) => (
@@ -62,7 +67,7 @@ export default function Project(props) {
         <h1 className="project__title">
           {props.project.name}
           <button className="close btn" onClick={props.closeProject}>
-            <IoCloseCircleOutline size={CLOSE_SIZE} />
+            <IoArrowBackCircleOutline size={CLOSE_SIZE} />
           </button>
         </h1>
 
