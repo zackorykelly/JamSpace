@@ -3,6 +3,8 @@ import classNames from "classnames";
 import "./File.scss";
 import Player from "../Player/Player";
 import { DELETE_FILE } from "../../reducer/data_reducer";
+import { IoCloseCircleOutline } from "react-icons/io5";
+
 
 
 export default function File(props) {
@@ -10,19 +12,19 @@ export default function File(props) {
   let [selectedFile, setSelectedFile] = useState(false);
   const deleteFile = (e) => {
     e.stopPropagation();
-    const project = {
-      fileId: props.fileId
+    const file = {
+      fileId: props.file.id
     };
     fetch("/api/files_delete", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(project)
+      body: JSON.stringify(file)
     })
       .then(async (res) => {
         if (res.status === 200) {
           props.dispatch({
             type: DELETE_FILE,
-            deleteProject: await res.json()
+            deleteFile: await res.json()
           });
         } else {
           alert("could not delete file");
@@ -40,7 +42,9 @@ export default function File(props) {
         >
           <h4>{props.file.name}: </h4>
           <p className={"file__description"}>{props.file.description}</p>
-          <button type="button" className="close btn" onClick={(e) => deleteFile(e)}>DELETE</button>
+          <button type="button" className="close btn" onClick={(e) => deleteFile(e)}>
+          <IoCloseCircleOutline size={25} />
+          </button>
         </section>
       )}
       {selectedFile && (

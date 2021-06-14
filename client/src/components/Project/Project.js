@@ -21,7 +21,7 @@ export default function Project(props) {
   const CLOSE_SIZE = 25;
 
   const listFiles = props.files.map((file) => (
-    <File key={file.id} file={file} setFile={props.setFile}></File>
+    <File key={file.id} file={file} setFile={props.setFile} dispatch={props.dispatch}></File>
   ));
 
   const listUsers = props.users.map((user) => (

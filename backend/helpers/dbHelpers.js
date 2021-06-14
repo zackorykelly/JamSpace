@@ -131,6 +131,18 @@ module.exports = (db) => {
       })
       .catch((err) => err);
   };
+  const deleteFile = (fileId) => {
+    const query = {
+      text: `DELETE FROM files WHERE id = $1 RETURNING *`,
+      values: [fileId]
+    };
+    return db
+      .query(query)
+      .then((result) => {
+        return result.rows[0];
+      })
+      .catch((err) => err);
+  };
 
   const getFiles = () => {
     const query = {
@@ -201,6 +213,7 @@ module.exports = (db) => {
     getUsersProjectsByUser,
     addUserProject,
     deleteUserProject,
-    deleteProject
+    deleteProject,
+    deleteFile
   };
 };

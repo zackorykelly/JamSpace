@@ -86,16 +86,13 @@ const dataReducer = (state, action) => {
         projects: projectsCopy2
       };
     case DELETE_FILE:
-      console.log('state.project up here', state.projects)
       const filesCopy = [...state.files]
       const filesCopy2 = filesCopy.filter(item => {
         return item.id !== action.deleteFile.id
       })
-      console.log('its in the reducer----------------------', filesCopy2)
-      console.log('state.project down here', state.files)
       return {
         ...state,
-        projects: filesCopy2
+        files: filesCopy2
       };
     default:
       return state;
