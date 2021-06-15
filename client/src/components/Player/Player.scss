@@ -5,13 +5,16 @@
   background-color: rgb(161, 183, 204);
   border: 2px solid black;
   border-radius: 5px;
-  max-height: 5rem;
+  // max-height: 5rem;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #444;
   audio {
+    height: 35px;
+    width: 600px;
+    margin: 3px 0;
     border: black solid 3px;
     box-sizing: border-box;
     border-radius: 30px;
