@@ -45,12 +45,14 @@ export default function Media(props) {
     recorder
       .start()
       .then(() => {
-        const players = document.getElementsByClassName("file-audio-player");
-        for (const player of players) {
-          player.currentTime = 0;
-          player.play();
-        }
         console.log("recording started");
+        setTimeout(() => {
+          const players = document.getElementsByClassName("file-audio-player");
+          for (const player of players) {
+            player.currentTime = 0;
+            player.play();
+          }
+        }, 100);
       })
       .catch((e) => {
         console.error(e);
