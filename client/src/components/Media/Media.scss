@@ -1,2 +1,29 @@
 @import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
+
+.submit-file-form {
+  border: 1px #999 dashed;
+  padding: 10px;
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.recorder-label {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0 12px;
+  color: #eee;
+}
+
+.recorder-player {
+  margin-left: 225px;
+  margin-top: 10px;
+
+  audio {
+    margin-left: 50px;
+  }
+
+  button {
+    margin: 5px 5px;
+  }
+}

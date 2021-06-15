@@ -151,14 +151,34 @@ export default function Media(props) {
 
   return (
     <div className="submit-file-form">
-      <button
-        className="btn btn-danger"
-        type="button"
-        onClick={() => props.setRecordFile(false)}
-      >
-        Cancel
-      </button>
       <form onSubmit={handleSubmit(save)}>
+        <button
+          className="btn btn-danger"
+          type="button"
+          onClick={() => props.setRecordFile(false)}
+        >
+          Cancel
+        </button>
+        <label className="recorder-label" for="title">
+          Title:{" "}
+        </label>
+        <input
+          {...register("title")}
+          id="title"
+          name="title"
+          type="text"
+          placeholder="Title"
+        ></input>
+        <label className="recorder-label" for="description">
+          Description:{" "}
+        </label>
+        <input
+          {...register("description")}
+          id="description"
+          name="description"
+          type="text"
+          placeholder="Description"
+        ></input>
         <div className="recorder-player">
           <audio controls className="playback" type="audio/mp3"></audio>
           <br></br>
@@ -189,26 +209,14 @@ export default function Media(props) {
           >
             Stop
           </button>
+          <button
+            className="btn btn-primary"
+            type="submit"
+            disabled={saveButton}
+          >
+            Save
+          </button>
         </div>
-        <label for="title">Title: </label>
-        <input
-          {...register("title")}
-          id="title"
-          name="title"
-          type="text"
-          placeholder="Title"
-        ></input>
-        <label for="description">Description: </label>
-        <input
-          {...register("description")}
-          id="description"
-          name="description"
-          type="text"
-          placeholder="Description"
-        ></input>
-        <button className="btn btn-primary" type="submit" disabled={saveButton}>
-          Save
-        </button>
       </form>
       {/* Below is sample of how we could allow file uploads */}
       {/* <br></br> */}
