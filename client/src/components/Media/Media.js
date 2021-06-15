@@ -117,6 +117,7 @@ export default function Media(props) {
               newFile: file,
             });
             alert("File saved successfully.");
+            document.getElementById("recorder-form").reset();
           } else {
             alert(
               "The file could not be saved. Does this project already have a file with the same name?"
@@ -151,9 +152,9 @@ export default function Media(props) {
 
   return (
     <div className="submit-file-form">
-      <form onSubmit={handleSubmit(save)}>
+      <form id="recorder-form" onSubmit={handleSubmit(save)}>
         <button
-          className="btn btn-danger"
+          className="btn btn-danger cancel-record-button"
           type="button"
           onClick={() => props.setRecordFile(false)}
         >
