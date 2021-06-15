@@ -44,6 +44,7 @@ export default function App() {
   const handleLogout = () => {
     eraseCookie("userAuth");
     setUser(null);
+    closeProject();
   };
 
   const setProject = (projectId) => {
