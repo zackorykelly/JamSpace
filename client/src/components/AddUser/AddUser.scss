@@ -1,15 +1,29 @@
-@import "../../styles/variables.scss";
-@import "../../styles/mixins.scss";
-
-section {
-  font-size: 14px;
-  &:hover {
-    background-color: transparent;
-  }
+.new-user-form {
+  margin-left: 35px;
+  margin-bottom: 30px;
+  border: 1px #999 dashed;
+  padding: 10px;
+  border-radius: 8px;
+  width: fit-content;
 }
 
-form {
-  &:hover {
-    background-color: transparent;
-  }
+.add-user-label {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0 12px;
+  color: #eee;
+  pointer-events: none;
+}
+
+.cancel-add-user {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  padding: 2px 4px;
+}
+
+.add-user-button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  margin-left: 10px;
+  padding: 2px 4px;
 }

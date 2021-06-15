@@ -55,14 +55,41 @@ export default function AddProject(props) {
   };
   return (
     <>
-      <button onClick={() => props.setAddProject(false)}>Cancel</button>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Project Name</label>
-        <input {...register("project_name")} type="text" />
-        <label>Project Description</label>
-        <input {...register("project_description")} type="text" />
-        <input type="submit" className="create-project-button" />
-      </form>
+      <div>
+        <form className="new-project-form" onSubmit={handleSubmit(onSubmit)}>
+          <button
+            className="btn btn-danger cancel-create-project"
+            type="button"
+            onClick={() => props.setAddProject(false)}
+          >
+            Cancel
+          </button>
+          <label className="add-proj-label" for="project-name">
+            Project Name:
+          </label>
+          <input
+            id="project-name"
+            {...register("project_name")}
+            type="text"
+            placeholder="Name"
+          />
+          <label className="add-proj-label" for="project-description">
+            Project Description:
+          </label>
+          <input
+            id="project-description"
+            {...register("project_description")}
+            type="text"
+            placeholder="Description"
+          />
+          <button
+            type="submit"
+            className="btn btn-secondary create-project-button"
+          >
+            Create Project
+          </button>
+        </form>
+      </div>
     </>
   );
 }
