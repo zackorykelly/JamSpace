@@ -9,10 +9,12 @@ export default function Player(props) {
 
   return (
     <div className="file-player">
-      <span>{props.currentFile.name}</span>
+      <span className="player-title">{props.currentFile.name}</span>
       {/* <input type="checkbox" /> */}
       <audio className="file-audio-player" controls src={path} type="mp3" />
-      <span>{props.currentFile.description}</span>
+      <span className="player-description">
+        {props.currentFile.description}
+      </span>
     </div>
   );
 }

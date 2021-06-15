@@ -45,12 +45,14 @@ export default function Media(props) {
     recorder
       .start()
       .then(() => {
-        const players = document.getElementsByClassName("file-audio-player");
-        for (const player of players) {
-          player.currentTime = 0;
-          player.play();
-        }
         console.log("recording started");
+        setTimeout(() => {
+          const players = document.getElementsByClassName("file-audio-player");
+          for (const player of players) {
+            player.currentTime = 0;
+            player.play();
+          }
+        }, 100);
       })
       .catch((e) => {
         console.error(e);
@@ -115,6 +117,7 @@ export default function Media(props) {
               newFile: file
             });
             alert("File saved successfully.");
+            document.getElementById("recorder-form").reset();
           } else {
             alert(
               "The file could not be saved. Does this project already have a file with the same name?"
@@ -149,14 +152,34 @@ export default function Media(props) {
 
   return (
     <div className="submit-file-form">
-      <button
-        className="btn btn-danger"
-        type="button"
-        onClick={() => props.setRecordFile(false)}
-      >
-        Cancel
-      </button>
-      <form onSubmit={handleSubmit(save)}>
+      <form id="recorder-form" onSubmit={handleSubmit(save)}>
+        <button
+          className="btn btn-danger cancel-record-button"
+          type="button"
+          onClick={() => props.setRecordFile(false)}
+        >
+          Cancel
+        </button>
+        <label className="recorder-label" for="title">
+          Title:{" "}
+        </label>
+        <input
+          {...register("title")}
+          id="title"
+          name="title"
+          type="text"
+          placeholder="Title"
+        ></input>
+        <label className="recorder-label" for="description">
+          Description:{" "}
+        </label>
+        <input
+          {...register("description")}
+          id="description"
+          name="description"
+          type="text"
+          placeholder="Description"
+        ></input>
         <div className="recorder-player">
           <audio controls className="playback" type="audio/mp3"></audio>
           <br></br>
@@ -187,26 +210,14 @@ export default function Media(props) {
           >
             Stop
           </button>
+          <button
+            className="btn btn-primary"
+            type="submit"
+            disabled={saveButton}
+          >
+            Save
+          </button>
         </div>
-        <label for="title">Title: </label>
-        <input
-          {...register("title")}
-          id="title"
-          name="title"
-          type="text"
-          placeholder="Title"
-        ></input>
-        <label for="description">Description: </label>
-        <input
-          {...register("description")}
-          id="description"
-          name="description"
-          type="text"
-          placeholder="Description"
-        ></input>
-        <button className="btn btn-primary" type="submit" disabled={saveButton}>
-          Save
-        </button>
       </form>
       {/* Below is sample of how we could allow file uploads */}
       {/* <br></br> */}
