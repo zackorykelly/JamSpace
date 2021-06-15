@@ -1,19 +1,19 @@
 import "./App.scss";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { getCookie, eraseCookie } from "../../helpers/cookie";
 import {
   getProject,
   getFile,
   getProjectsForUser,
   getUsersForProject,
-  getFilesForProject,
+  getFilesForProject
 } from "../../helpers/selectors";
 import {
   SET_PROJECT,
   CLOSE_PROJECT,
   SET_FILE,
-  CLOSE_FILE,
+  CLOSE_FILE
 } from "../../reducer/data_reducer";
 import Project from "../Project/Project";
 import ProjectList from "../ProjectList/ProjectList";
@@ -50,7 +50,7 @@ export default function App() {
     const project = getProject(state, projectId);
     dispatch({
       type: SET_PROJECT,
-      project,
+      project
     });
   };
 
@@ -59,7 +59,7 @@ export default function App() {
     const file = getFile(state, fileId);
     dispatch({
       type: SET_FILE,
-      file,
+      file
     });
   };
 

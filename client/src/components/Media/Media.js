@@ -13,7 +13,7 @@ export default function Media(props) {
 
   useEffect(() => {
     const newRecorder = new MicRecorder({
-      bitRate: 128,
+      bitRate: 320
     });
     setRecorder(newRecorder);
   }, []);
@@ -69,7 +69,7 @@ export default function Media(props) {
         console.log("recording stopped");
         const file = new File(buffer, "my-recording.mp3", {
           type: blob.type,
-          lastModified: Date.now(),
+          lastModified: Date.now()
         });
 
         const playback = document.getElementsByClassName("playback")[0];
@@ -87,7 +87,7 @@ export default function Media(props) {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors }
   } = useForm();
 
   const save = async (data) => {
@@ -107,14 +107,14 @@ export default function Media(props) {
       formData.append("projectID", props.currentProject);
       fetch("/api/files", {
         method: "POST",
-        body: formData,
+        body: formData
       })
         .then(async (res) => {
           if (res.status === 200) {
             const file = await res.json();
             props.dispatch({
               type: ADD_FILE,
-              newFile: file,
+              newFile: file
             });
             alert("File saved successfully.");
             document.getElementById("recorder-form").reset();
