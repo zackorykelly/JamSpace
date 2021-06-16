@@ -1,7 +1,7 @@
 @import "../../styles/variables.scss";
 @import "../../styles/mixins.scss";
 
-.container {
+.containerP {
   background-color: rgba(46, 46, 46, 0.8);
   padding: 10%;
   color: #dce2e9;
@@ -14,6 +14,7 @@
 .controls {
   display: flex;
   padding-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .close {
@@ -95,3 +96,8 @@
     background-color: transparent;
   }
 }
+
+// .file-list {
+//   display: flex;
+//   flex-direction: column;
+// }

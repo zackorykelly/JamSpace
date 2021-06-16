@@ -4,7 +4,7 @@ import {
   IoPlayCircleOutline,
   IoPauseCircleOutline,
   IoArrowBackCircleOutline,
-  IoCloseCircleOutline
+  IoCloseCircleOutline,
 } from "react-icons/io5";
 import { RiRecordCircleLine } from "react-icons/ri";
 import File from "../File/File";
@@ -63,7 +63,7 @@ export default function Project(props) {
 
   return (
     <>
-      <div className="container" id="project-page">
+      <div className="containerP" id="project-page">
         <h1 className="project__title">
           {props.project.name}
           <button className="close btn" onClick={props.closeProject}>
@@ -113,8 +113,7 @@ export default function Project(props) {
             </section>
           )}
         </div>
-
-        {listFiles}
+        <div className="file-list">{listFiles}</div>
         <div className="users">
           <h4 className="users__title">
             {!addUserSelected && (
