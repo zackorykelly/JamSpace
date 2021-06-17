@@ -8,9 +8,9 @@ No expensive recording software? No audio engineering degree? No problem.
 
 ### Screenshots
 
-- !["Some text"](https://github.com/zackorykelly/JamSpace)
-- !["Some text"](https://github.com/zackorykelly/JamSpace)
-- !["Some text"](https://github.com/zackorykelly/JamSpace)
+- !["Home Screen"](https://github.com/zackorykelly/JamSpace)
+- !["Project List"](https://github.com/zackorykelly/JamSpace)
+- !["Recording UI"](https://github.com/zackorykelly/JamSpace)
 
 ### Usage
 
