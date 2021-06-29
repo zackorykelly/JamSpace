@@ -8,9 +8,10 @@ No expensive recording software? No audio engineering degree? No problem.
 
 ### Screenshots
 
-- !["Home Screen"](https://github.com/zackorykelly/JamSpace)
-- !["Project List"](https://github.com/zackorykelly/JamSpace)
-- !["Recording UI"](https://github.com/zackorykelly/JamSpace)
+- !["Home Screen"](https://github.com/zackorykelly/JamSpace/blob/master/client/public/screenshots/JamSpace0.png?raw=true)
+- !["Project List"](https://github.com/zackorykelly/JamSpace/blob/master/client/public/screenshots/JamSpace2.png?raw=true)
+- !["Project Screen/Add User"](https://github.com/zackorykelly/JamSpace/blob/master/client/public/screenshots/JamSpace4.png?raw=true)
+- !["Recording UI"](https://github.com/zackorykelly/JamSpace/blob/master/client/public/screenshots/JamSpace3.png?raw=true)
 
 ### Usage
 
