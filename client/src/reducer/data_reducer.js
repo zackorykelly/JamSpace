@@ -21,75 +21,72 @@ const dataReducer = (state, action) => {
         files: action.response[2].data,
         users_projects: action.response[3].data,
         //remarks: action.response[4].data,
-        loading: false,
+        loading: false
       };
     case ADD_FILE:
       return {
         ...state,
-        files: [...state.files, action.newFile],
+        files: [...state.files, action.newFile]
       };
     case SET_FILE:
       return {
         ...state,
-        file: action.file,
+        file: action.file
       };
     case CLOSE_FILE:
       return {
         ...state,
-        file: null,
+        file: null
       };
     case ADD_USER:
       return {
         ...state,
         users: [...state.users, action.newUser],
-        user: action.newUser.id,
+        user: action.newUser.id
       };
     case ADD_PROJECT:
       return {
         ...state,
-        projects: [...state.projects, action.newProject],
+        projects: [...state.projects, action.newProject]
       };
     case SET_PROJECT:
       return {
         ...state,
-        project: action.project,
+        project: action.project
       };
     case CLOSE_PROJECT:
       return {
         ...state,
-        project: null,
+        project: null
       };
     case ADD_USER_PROJECT:
       return {
         ...state,
-        users_projects: [...state.users_projects, action.newUserProject],
+        users_projects: [...state.users_projects, action.newUserProject]
       };
     case DELETE_USER_PROJECT:
-      const user_projects_copy = [...state.users_projects]
-      const user_projects_copy2 = user_projects_copy.filter(item => {
-        return item.id !== action.deleteUserProject.id
-      })
+      const user_projects_copy = [...state.users_projects];
+      const user_projects_copy2 = user_projects_copy.filter((item) => {
+        return item.id !== action.deleteUserProject.id;
+      });
       return {
         ...state,
         users_projects: user_projects_copy2
       };
     case DELETE_PROJECT:
-      console.log('state.project up here', state.projects)
-      const projectsCopy = [...state.projects]
-      const projectsCopy2 = projectsCopy.filter(item => {
-        return item.id !== action.deleteProject.id
-      })
-      console.log('its in the reducer----------------------', projectsCopy2)
-      console.log('state.project down here', state.projects)
+      const projectsCopy = [...state.projects];
+      const projectsCopy2 = projectsCopy.filter((item) => {
+        return item.id !== action.deleteProject.id;
+      });
       return {
         ...state,
         projects: projectsCopy2
       };
     case DELETE_FILE:
-      const filesCopy = [...state.files]
-      const filesCopy2 = filesCopy.filter(item => {
-        return item.id !== action.deleteFile.id
-      })
+      const filesCopy = [...state.files];
+      const filesCopy2 = filesCopy.filter((item) => {
+        return item.id !== action.deleteFile.id;
+      });
       return {
         ...state,
         files: filesCopy2

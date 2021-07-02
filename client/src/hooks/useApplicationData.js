@@ -12,7 +12,7 @@ export default function useApplicationData() {
     files: [],
     users_projects: [],
     remarks: [],
-    loading: true,
+    loading: true
   });
 
   useEffect(() => {
@@ -20,13 +20,13 @@ export default function useApplicationData() {
       axios.get(`/api/users`),
       axios.get(`/api/projects`),
       axios.get(`/api/files`),
-      axios.get(`/api/users_projects`),
+      axios.get(`/api/users_projects`)
       //axios.get(`/api/remarks`)
     ])
       .then((response) => {
         dispatch({
           type: SET_DATA,
-          response,
+          response
         });
       })
       .catch((err) => console.log(err));
@@ -34,6 +34,6 @@ export default function useApplicationData() {
 
   return {
     state,
-    dispatch,
+    dispatch
   };
 }
